@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <id>ecodevice</id>
+    <name>Eco-device</name>
+    <description>Plugin pour gerer les cartes ecodevice GCE</description>
+    <icon>fa fa-sitemap</icon>
+    <licence>AGPL</licence>
+    <author>Thomas Guenneguez</author>
+    <installation>Nécessite firmware 1.05.06 minimum</installation>
+    <require>1.124.0</require>
+    <version>1.7</version>
+    <category>automation protocol</category>
+</info>
+
