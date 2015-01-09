@@ -65,7 +65,9 @@ class ecodevice_teleinfo extends eqLogic {
 				$cmd->save();
 			}
 		}
+	}
 
+	public function postUpdate() {
 	}
 
     public static function event() {

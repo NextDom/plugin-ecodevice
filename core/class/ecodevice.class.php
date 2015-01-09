@@ -78,6 +78,19 @@ class ecodevice extends eqLogic {
 			$ecodeviceCmd->setEventOnly(1);
 			$ecodeviceCmd->save();		
 		}
+
+		$cmd = $this->getCmd(null, 'status');
+		if ( ! is_object($cmd) ) {
+			$cmd = new ecodeviceCmd();
+			$cmd->setName('Etat');
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setType('info');
+			$cmd->setSubType('binary');
+			$cmd->setLogicalId('status');
+			$cmd->setIsVisible(1);
+			$cmd->setEventOnly(1);
+			$cmd->save();
+		}
 		for ($compteurId = 0; $compteurId <= 1; $compteurId++) {
 			if ( ! is_object(self::byLogicalId($this->getId()."_C".$compteurId, 'ecodevice_compteur')) ) {
 				log::add('ecodevice','debug','Creation compteur : '.$this->getId().'_C'.$compteurId);
@@ -107,6 +120,18 @@ class ecodevice extends eqLogic {
 
 	public function postUpdate()
 	{
+		$cmd = $this->getCmd(null, 'status');
+		if ( ! is_object($cmd) ) {
+			$cmd = new ecodeviceCmd();
+			$cmd->setName('Etat');
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->setType('info');
+			$cmd->setSubType('binary');
+			$cmd->setLogicalId('status');
+			$cmd->setIsVisible(1);
+			$cmd->setEventOnly(1);
+			$cmd->save();
+		}
 	}
 
 	public function preRemove()
@@ -155,9 +180,19 @@ class ecodevice extends eqLogic {
 
 	public function pull() {
 		if ( $this->getIsEnable() ) {
+			$statuscmd = $this->getCmd(null, 'status');
 			$this->xmlstatus = simplexml_load_file($this->getUrl(). 'status.xml');
-			if ( $this->xmlstatus === false )
-				throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__));
+			if ( $this->xmlstatus === false ) {
+				if ($statuscmd->execCmd() != 0) {
+					$statuscmd->setCollectDate('');
+					$statuscmd->event(0);
+				}
+				throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
+			}
+			if ($statuscmd->execCmd() != 1) {
+				$statuscmd->setCollectDate('');
+				$statuscmd->event(1);
+			}
 			$eqLogic_cmd = $this->getCmd(null, 'updatetime');
 			$eqLogic_cmd->event(time());
 			foreach (self::byType('ecodevice_compteur') as $eqLogicCompteur) {
@@ -169,7 +204,11 @@ class ecodevice extends eqLogic {
 					if ( count($status) != 0 )
 					{
 						$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
-						$eqLogic_cmd->event($status[0]);
+						if ($status[0] != $eqLogic_cmd->execCmd()) {
+							log::add('ecodevice', 'debug', $eqLogic_cmd->getName().' Change '.$status[0]);
+							$eqLogic_cmd->setCollectDate('');
+							$eqLogic_cmd->event($status[0]);
+						}
 					}
 				}
 			}
@@ -177,8 +216,17 @@ class ecodevice extends eqLogic {
 				if ( $eqLogicTeleinfo->getIsEnable() && substr($eqLogicTeleinfo->getLogicalId(), 0, strpos($eqLogicTeleinfo->getLogicalId(),"_")) == $this->getId() ) {
 					$gceid = substr($eqLogicTeleinfo->getLogicalId(), strpos($eqLogicTeleinfo->getLogicalId(),"_")+2, 1);
 					$this->xmlstatus = simplexml_load_file($this->getUrl(). 'protect/settings/teleinfo'.$gceid.'.xml');
-					if ( $this->xmlstatus === false )
+					if ( $this->xmlstatus === false ) {
+						if ($statuscmd->execCmd() != 0) {
+							$statuscmd->setCollectDate('');
+							$statuscmd->event(0);
+						}
 						throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
+					}
+					if ($statuscmd->execCmd() != 1) {
+						$statuscmd->setCollectDate('');
+						$statuscmd->event(1);
+					}
 					$xpathModele = '//response';
 					$status = $this->xmlstatus->xpath($xpathModele);
 					
@@ -188,7 +236,11 @@ class ecodevice extends eqLogic {
 							if ( substr($item, 0, 3) == "T".$gceid."_" ) {
 								$eqLogic_cmd = $eqLogicTeleinfo->getCmd(null, substr($item, 3));
 								if ( is_object($eqLogic_cmd) ) {
-									$eqLogic_cmd->event($data);
+									if ($data != $eqLogic_cmd->execCmd()) {
+										log::add('ecodevice', 'debug', $eqLogic_cmd->getName().' Change '.$data);
+										$eqLogic_cmd->setCollectDate('');
+										$eqLogic_cmd->event($data);
+									}
 								}
 							}
 						}
@@ -196,7 +248,6 @@ class ecodevice extends eqLogic {
 				}
 			}
 		}
-		// /protect/settings/teleinfo1.xml
 	}
     /*     * **********************Getteur Setteur*************************** */
 }

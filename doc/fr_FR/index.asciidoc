@@ -24,3 +24,13 @@ Puis définir :
 * '''Port'''
 * '''Compte'''
 * '''Mot de passe'''
+
+== Change log ==
+
+1.9 : Ajout d'une information status
+
+1.8 : Ne pas mettre a jour les données si elles ne changent pas.
+
+1.1 : Problème de ZIP
+
+1.0 : Initialisation
