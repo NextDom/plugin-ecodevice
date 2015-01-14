@@ -187,7 +187,7 @@ class ecodevice extends eqLogic {
 					$statuscmd->setCollectDate('');
 					$statuscmd->event(0);
 				}
-				throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
+				return false;
 			}
 			if ($statuscmd->execCmd() != 1) {
 				$statuscmd->setCollectDate('');
@@ -221,7 +221,7 @@ class ecodevice extends eqLogic {
 							$statuscmd->setCollectDate('');
 							$statuscmd->event(0);
 						}
-						throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
+						return false;
 					}
 					if ($statuscmd->execCmd() != 1) {
 						$statuscmd->setCollectDate('');
