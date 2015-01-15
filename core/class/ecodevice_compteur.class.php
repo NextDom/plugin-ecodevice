@@ -33,7 +33,7 @@ class ecodevice_compteur extends eqLogic {
         $nbimpulsion = $this->getCmd(null, 'nbimpulsion');
         if ( ! is_object($nbimpulsion) ) {
             $nbimpulsion = new ecodevice_compteurCmd();
-			$nbimpulsion->setName('Nombre d\'impulsion');
+			$nbimpulsion->setName('Nombre d impulsion');
 			$nbimpulsion->setEqLogic_id($this->getId());
 			$nbimpulsion->setType('info');
 			$nbimpulsion->setSubType('numeric');
@@ -41,10 +41,40 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsion->setEventOnly(1);
 			$nbimpulsion->save();
 		}
+        $nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+        if ( ! is_object($nbimpulsionminute) ) {
+            $nbimpulsionminute = new ecodevice_compteurCmd();
+			$nbimpulsionminute->setName('Nombre d impulsion par minute');
+			$nbimpulsionminute->setEqLogic_id($this->getId());
+			$nbimpulsionminute->setType('info');
+			$nbimpulsionminute->setSubType('numeric');
+			$nbimpulsionminute->setLogicalId('nbimpulsionminute');
+			$nbimpulsionminute->setUnite("Imp/min");
+			$nbimpulsionminute->setEventOnly(1);
+			$nbimpulsionminute->setConfiguration('calcul', '#' . $nbimpulsion->getId() . '#');
+			$nbimpulsionminute->save();
+		}
 	}
 
+	public function postUpdate()
+	{
+        $nbimpulsion = $this->getCmd(null, 'nbimpulsion');
+        $nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+        if ( ! is_object($nbimpulsionminute) ) {
+            $nbimpulsionminute = new ecodevice_compteurCmd();
+			$nbimpulsionminute->setName('Nombre d impulsion par minute');
+			$nbimpulsionminute->setEqLogic_id($this->getId());
+			$nbimpulsionminute->setType('info');
+			$nbimpulsionminute->setSubType('numeric');
+			$nbimpulsionminute->setLogicalId('nbimpulsionminute');
+			$nbimpulsionminute->setUnite("Imp/min");
+			$nbimpulsionminute->setConfiguration('calcul', '#' . $nbimpulsion->getId() . '#');
+			$nbimpulsionminute->setEventOnly(1);
+			$nbimpulsionminute->save();
+		}
+	}
     public static function event() {
-        $cmd = ecodevice_teleinfoCmd::byId(init('id'));
+        $cmd = ecodevice_compteurCmd::byId(init('id'));
         if (!is_object($cmd)) {
             throw new Exception('Commande ID virtuel inconnu : ' . init('id'));
         }
@@ -62,14 +92,32 @@ class ecodevice_compteur extends eqLogic {
 
 class ecodevice_compteurCmd extends cmd 
 {
-    /*     * *************************Attributs****************************** */
+    public function preSave() {
+        if ( $this->getLogicalId() == 'nbimpulsionminute' ) {
+            $calcul = $this->getConfiguration('calcul');
+            if ( ! preg_match("/#brut#/", $calcul) ) {
+				throw new Exception(__('La formule doit contenir une référecence à #brut#.',__FILE__));
+			}
+        }
+    }
 
-
-    /*     * ***********************Methode static*************************** */
-
-
-    /*     * *********************Methode d'instance************************* */
-
-    /*     * **********************Getteur Setteur*************************** */
+    public function event($_value, $_loop = 1) {
+        if ($this->getLogicalId() == 'nbimpulsionminute') {
+			try {
+				$calcul = $this->getConfiguration('calcul');
+				$calcul = preg_replace("/#brut#/", $_value, $calcul);
+				$calcul = scenarioExpression::setTags($calcul);
+				$test = new evaluate();
+				$result = $test->Evaluer($calcul);
+				parent::event($result, $_loop);
+			} catch (Exception $e) {
+				$EqLogic = $this->getEqLogic();
+				log::add('ipx800', 'error', $EqLogic->getName()." error in ".$this->getConfiguration('calcul')." : ".$e->getMessage());
+				return scenarioExpression::setTags(str_replace('"', '', cmd::cmdToValue($this->getConfiguration('calcul'))));
+			}
+		} else {
+			parent::event($_value, $_loop);
+		}
+    }
 }
 ?>

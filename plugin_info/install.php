@@ -54,6 +54,15 @@ function ecodevice_update() {
         $cron->setSchedule('* * * * *');
         $cron->save();
 	}
+	foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
+		$SubeqLogic->save();
+	}
+	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
+		$SubeqLogic->save();
+	}
+	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
+		$eqLogic->save();
+	}
 }
 
 function ecodevice_remove() {

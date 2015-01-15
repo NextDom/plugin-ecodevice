@@ -27,6 +27,9 @@ Puis définir :
 
 == Change log ==
 
+1.10 : Ajout du nombre d'impulsion par minute
+Redéclanchement jusqu'à 3 fois en cas d'indispo de l'ecodevice
+
 1.9 : Ajout d'une information status
 
 1.8 : Ne pas mettre a jour les données si elles ne changent pas.

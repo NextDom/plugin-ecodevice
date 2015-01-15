@@ -28,8 +28,9 @@ function addCmdToTable(_cmd) {
         tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>';
         tr += '</td>';
         tr += '<td>';
-        tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="returnStateValue" disabled placeholder="{{Valeur retour d\'Ã©tat}}" style="margin : 5px;width : 30%;display : inline-block;">';
-        tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="returnStateTime" disabled placeholder="{{DurÃ©e avant retour d\'Ã©tat (min)}}" style="margin : 5px;width : 30%;display : inline-block;">';
+        if (init(_cmd.logicalId) == 'nbimpulsionminute') {
+			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="calcul" style="height : 33px;" placeholder="{{Calcul}}"></textarea> (utiliser #brut# dans la formule)';
+		}
         tr += '</td>';
         tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}"></td>';
         tr += '<td>';

@@ -182,11 +182,17 @@ class ecodevice extends eqLogic {
 		if ( $this->getIsEnable() ) {
 			$statuscmd = $this->getCmd(null, 'status');
 			$this->xmlstatus = simplexml_load_file($this->getUrl(). 'status.xml');
+			$count = 0;
+			while ( $this->xmlstatus === false && $count < 3 ) {
+				$this->xmlstatus = simplexml_load_file($this->getUrl(). 'status.xml');
+				$count++;
+			}
 			if ( $this->xmlstatus === false ) {
 				if ($statuscmd->execCmd() != 0) {
 					$statuscmd->setCollectDate('');
 					$statuscmd->event(0);
 				}
+				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
 				return false;
 			}
 			if ($statuscmd->execCmd() != 1) {
@@ -203,11 +209,26 @@ class ecodevice extends eqLogic {
 					
 					if ( count($status) != 0 )
 					{
-						$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
-						if ($status[0] != $eqLogic_cmd->execCmd()) {
-							log::add('ecodevice', 'debug', $eqLogic_cmd->getName().' Change '.$status[0]);
-							$eqLogic_cmd->setCollectDate('');
-							$eqLogic_cmd->event($status[0]);
+						$nbimpulsion_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
+						$nbimpulsion = $nbimpulsion_cmd->execCmd(null, 2);
+						$nbimpulsionminute_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionminute');
+						if ($nbimpulsion != $status[0]) {
+							if ( $nbimpulsion_cmd->getCollectDate() == '' ) {
+								$nbimpulsionminute = 0;
+							} else {
+								if ( $status[0] > $nbimpulsion ) {
+									$nbimpulsionminute = round (($status[0] - $nbimpulsion)/(time() - strtotime($nbimpulsion_cmd->getCollectDate()))*60, 6);
+								} else {
+									$nbimpulsionminute = round ($status[0]/(time() - strtotime($nbimpulsionminute_cmd->getCollectDate())*60), 6);
+								}
+							}
+							$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$nbimpulsionminute_cmd->event($nbimpulsionminute);
+							$nbimpulsion_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$nbimpulsion_cmd->event($status[0]);
+						} else {
+							$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$nbimpulsionminute_cmd->event(0);
 						}
 					}
 				}
@@ -221,6 +242,7 @@ class ecodevice extends eqLogic {
 							$statuscmd->setCollectDate('');
 							$statuscmd->event(0);
 						}
+						log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'protect/settings/teleinfo'.$gceid.'.xml');
 						return false;
 					}
 					if ($statuscmd->execCmd() != 1) {
