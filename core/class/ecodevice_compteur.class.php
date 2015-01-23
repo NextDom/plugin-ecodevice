@@ -51,7 +51,7 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionminute->setLogicalId('nbimpulsionminute');
 			$nbimpulsionminute->setUnite("Imp/min");
 			$nbimpulsionminute->setEventOnly(1);
-			$nbimpulsionminute->setConfiguration('calcul', '#' . $nbimpulsion->getId() . '#');
+			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
 			$nbimpulsionminute->save();
 		}
 	}
@@ -68,7 +68,7 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionminute->setSubType('numeric');
 			$nbimpulsionminute->setLogicalId('nbimpulsionminute');
 			$nbimpulsionminute->setUnite("Imp/min");
-			$nbimpulsionminute->setConfiguration('calcul', '#' . $nbimpulsion->getId() . '#');
+			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
 			$nbimpulsionminute->setEventOnly(1);
 			$nbimpulsionminute->save();
 		}

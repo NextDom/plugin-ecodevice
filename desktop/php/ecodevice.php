@@ -11,7 +11,8 @@ sendVarToJS('eqType', 'ecodevice');
             <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un Ecodev}}</a>
                 <?php
-                foreach (eqLogic::byType('ecodevice') as $eqLogic) {
+				$eqLogics = eqLogic::byType('ecodevice');
+                foreach ($eqLogics as $eqLogic) {
                        echo '<li>';
 						echo '<i class="fa fa-sitemap cursor eqLogicAction" data-action="hide" data-eqLogic_id="' . $eqLogic->getId() . '"></i>';
 						echo '<a class="cursor li_eqLogic" style="display: inline;" data-eqLogic_id="' . $eqLogic->getId() . '" data-eqLogic_type="ecodevice">' . $eqLogic->getName() . '</a>';
@@ -45,11 +46,34 @@ sendVarToJS('eqType', 'ecodevice');
             </ul>
         </div>
     </div>
+    <div class="col-lg-9 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+        <legend>{{Mes Ecodevices}}
+        </legend>
+        <?php
+        if (count($eqLogics) == 0) {
+            echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore d'ecodevice, cliquez sur Ajouter un équipement pour commencer}}</span></center>";
+        } else {
+            ?>
+            <div class="eqLogicThumbnailContainer">
+                <?php
+                foreach ($eqLogics as $eqLogic) {
+                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
+                    echo "<center>";
+                    echo '<img src="plugins/ecodevice/doc/images/ecodevice.jpg" height="105" width="95" />';
+                    echo "</center>";
+                    echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+        <?php } ?>
+    </div>
     <div class="col-lg-9 eqLogic ecodevice" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
         <form class="form-horizontal">
             <fieldset>
                 <legend>
-                    {{Général}}
+                    <i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}
+				   <i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i>
                 </legend>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">{{Nom de l'ecodevice}}</label>

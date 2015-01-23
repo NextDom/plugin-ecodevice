@@ -19,16 +19,6 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 function ecodevice_install() {
-    $cron = cron::byClassAndFunction('ecodevice', 'pull');
-    if (!is_object($cron)) {
-        $cron = new cron();
-        $cron->setClass('ecodevice');
-        $cron->setFunction('pull');
-        $cron->setEnable(1);
-        $cron->setDeamon(0);
-        $cron->setSchedule('* * * * *');
-        $cron->save();
-    }
 }
 
 function ecodevice_update() {
@@ -38,21 +28,9 @@ function ecodevice_update() {
 		$cron->remove();
 	}
     $cron = cron::byClassAndFunction('ecodevice', 'cron');
-    if (!is_object($cron)) {
-        $cron = new cron();
-        $cron->setClass('ecodevice');
-        $cron->setFunction('pull');
-        $cron->setEnable(1);
-        $cron->setDeamon(0);
-        $cron->setSchedule('* * * * *');
-        $cron->save();
-    }
-	else
-	{
-        $cron->setEnable(1);
-        $cron->setDeamon(0);
-        $cron->setSchedule('* * * * *');
-        $cron->save();
+	if (is_object($cron)) {
+		$cron->stop();
+		$cron->remove();
 	}
 	foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
 		$SubeqLogic->save();

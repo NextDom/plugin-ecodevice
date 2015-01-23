@@ -27,6 +27,10 @@ Puis définir :
 
 == Change log ==
 
+1.12 : Ajout de lien vers les options d'affichage
+
+1.11 : Correction de double cron
+
 1.10 : Ajout du nombre d'impulsion par minute
 Redéclanchement jusqu'à 3 fois en cas d'indispo de l'ecodevice
 

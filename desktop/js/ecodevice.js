@@ -37,6 +37,11 @@ function addCmdToTable(_cmd) {
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isHistorized"/> {{Historiser}}<br/></span>';
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/> {{Afficher}}<br/></span>';
         tr += '</td>';
+        tr += '<td>';
+        if (is_numeric(_cmd.id)) {
+            tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
+        }
+        tr += '</td>';
 		table_cmd = '#table_cmd';
 		if ( $(table_cmd+'_'+_cmd.eqType ).length ) {
 			table_cmd+= '_'+_cmd.eqType;

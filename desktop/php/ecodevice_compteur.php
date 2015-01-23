@@ -2,7 +2,8 @@
         <form class="form-horizontal">
             <fieldset>
                 <legend>
-                    {{Général}}
+                    <i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}
+				   <i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i>
                 </legend>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">{{Nom du compteur}}</label>
