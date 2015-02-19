@@ -48,6 +48,18 @@
                         <input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>
                     </div>
                 </div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">{{Tarification :}}</label>
+					<div class="col-sm-5">
+						<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tarification">
+							<option value="">Sans</option>
+							<option value="BASE">Base</option>
+							<option value="HC">Heure creuse/Heure pleine</option>
+							<option value="BBRH">Tempo</option>
+							<option value="EJP">EJP</option>
+						</select>
+					</div>
+				</div>
             </fieldset> 
         </form>
 

@@ -28,46 +28,91 @@ class ecodevice_teleinfo extends eqLogic {
 		return substr($this->getLogicalId(), strpos($this->getLogicalId(),"_")+2, 1)." - ".parent::getName();
 	}
 
+	private function getListeDefaultCommandes()
+	{
+		return array("BASE" => array('Index (base)', 'numeric', 'W', 1, "BASE"),
+		"HCHC" => array('Index (heures creuses)', 'numeric', 'W', 1, "HC"),
+		"HCHP" => array('Index (heures pleines)', 'numeric', 'W', 1, "HC"),
+		"BBRHCJB" => array('Index (heures creuses jours bleus Tempo)', 'numeric', 'W', 0, "BBRH"),
+		"BBRHPJB" => array('Index (heures pleines jours bleus Tempo)', 'numeric', 'W', 0, "BBRH"),
+		"BBRHCJW" => array('Index (heures creuses jours blancs Tempo)', 'numeric', 'W', 0, "BBRH"),
+		"BBRHPJW" => array('Index (heures pleines jours blancs Tempo)', 'numeric', 'W', 0, "BBRH"),
+		"BBRHCJR" => array('Index (heures creuses jours rouges Tempo)', 'numeric', 'W', 0, "BBRH"),
+		"BBRHPJR" => array('Index (heures pleines jours rouges Tempo)', 'numeric', 'W', 0, "BBRH"),
+		"EJPHN" => array('Index (normal EJP)', 'numeric', 'W', 0, "EJP"),
+		"EJPHPM" => array('Index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP"),
+		"IINST" => array('Intensité instantanée', 'numeric', 'ampere', 1, ""),
+		"IINST1" => array('Intensité instantanée 1', 'numeric', 'ampere', 0, ""),
+		"IINST2" => array('Intensité instantanée 2', 'numeric', 'ampere', 0, ""),
+		"IINST3" => array('Intensité instantanée 3', 'numeric', 'ampere', 0, ""),
+		"PPAP" => array('Puissance Apparente', 'numeric', 'W', 1, ""),
+		"OPTARIF" => array('Option tarif', 'string', '', 1, ""),
+		"DEMAIN" => array('Couleur demain', 'string', '', 0, "BBRH"),
+		"PTEC" => array('Tarif en cours', 'string', '', 1, ""),
+		"BASE_evolution" => array('Evolution index (base)', 'numeric', 'W/min', 1, "BASE"),
+		"HCHC_evolution" => array('Evolution index (heures creuses)', 'numeric', 'W/min', 1, "HC"),
+		"HCHP_evolution" => array('Evolution index (heures pleines)', 'numeric', 'W/min', 1, "HC"),
+		"BBRHCJB_evolution" => array('Evolution index (heures creuses jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH"),
+		"BBRHPJB_evolution" => array('Evolution index (heures pleines jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH"),
+		"BBRHCJW_evolution" => array('Evolution index (heures creuses jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH"),
+		"BBRHPJW_evolution" => array('Evolution index (heures pleines jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH"),
+		"BBRHCJR_evolution" => array('Evolution index (heures creuses jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH"),
+		"BBRHPJR_evolution" => array('Evolution index (heures pleines jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH"),
+		"EJPHN_evolution" => array('Evolution index (normal EJP)', 'numeric', 'W', 0, "EJP"),
+		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP"));
+	}
+
 	public function postInsert()
 	{
-		$commandes = array("BASE" => array('Index (base)', 'numeric', 'kwatt-heure', 1),
-		"HCHC" => array('Index (heures creuses)', 'numeric', 'kwatt-heure', 1),
-		"HCHP" => array('Index (heures pleines)', 'numeric', 'kwatt-heure', 1),
-		"BBRHCJB" => array('Index (heures creuses jours bleus Tempo)', 'numeric', 'kwatt-heure', 0),
-		"BBRHPJB" => array('Index (heures pleines jours bleus Tempo)', 'numeric', 'kwatt-heure', 0),
-		"BBRHCJW" => array('Index (heures creuses jours blancs Tempo)', 'numeric', 'kwatt-heure', 0),
-		"BBRHPJW" => array('Index (heures pleines jours blancs Tempo)', 'numeric', 'kwatt-heure', 0),
-		"BBRHCJR" => array('Index (heures creuses jours rouges Tempo)', 'numeric', 'kwatt-heure', 0),
-		"BBRHPJR" => array('Index (heures pleines jours rouges Tempo)', 'numeric', 'kwatt-heure', 0),
-		"EJPHN" => array('Index (normal EJP)', 'numeric', 'kwatt-heure', 0),
-		"EJPHPM" => array('Index (pointe mobile EJP)', 'numeric', 'kwatt-heure', 0),
-		"IINST" => array('Intensité instantanée', 'numeric', 'ampere', 1),
-		"IINST1" => array('Intensité instantanée 1', 'numeric', 'ampere', 0),
-		"IINST2" => array('Intensité instantanée 2', 'numeric', 'ampere', 0),
-		"IINST3" => array('Intensité instantanée 3', 'numeric', 'ampere', 0),
-		"PPAP" => array('Puissance Apparente', 'numeric', 'watt', 1),
-		"OPTARIF" => array('Option tarif', 'string', '', 1),
-		"DEMAIN" => array('Couleur demain', 'string', '', 0),
-		"PTEC" => array('Tarif en cours', 'string', '', 1));
-		foreach( $commandes as $label => $data)
+		foreach( $this->getListeDefaultCommandes() as $label => $data)
 		{
-			$cmd = $this->getCmd(null, $label);
-			if ( ! is_object($cmd) ) {
-				$cmd = new ecodevice_teleinfoCmd();
-				$cmd->setName($data[0]);
-				$cmd->setEqLogic_id($this->getId());
-				$cmd->setType('info');
-				$cmd->setSubType($data[1]);
-				$cmd->setLogicalId($label);
-				$cmd->setUnite($data[2]);
-				$cmd->setIsVisible($data[3]);
-				$cmd->setEventOnly(1);
-				$cmd->save();
+			if ( $this->getConfiguration('tarification') == $data[4] || $data[4] == "" ) {
+				$cmd = $this->getCmd(null, $label);
+				if ( ! is_object($cmd) ) {
+					$cmd = new ecodevice_teleinfoCmd();
+					$cmd->setName($data[0]);
+					$cmd->setEqLogic_id($this->getId());
+					$cmd->setType('info');
+					$cmd->setSubType($data[1]);
+					$cmd->setLogicalId($label);
+					$cmd->setUnite($data[2]);
+					$cmd->setIsVisible($data[3]);
+					$cmd->setEventOnly(1);
+					$cmd->save();
+				}
+			} else {
+				$cmd = $this->getCmd(null, $label);
+				if ( is_object($cmd) ) {
+					$cmd->remove();
+				}
 			}
 		}
 	}
 
 	public function postUpdate() {
+		foreach( $this->getListeDefaultCommandes() as $label => $data)
+		{
+			if ( $this->getConfiguration('tarification') == "" || $this->getConfiguration('tarification') == $data[4] || $data[4] == "" ) {
+				$cmd = $this->getCmd(null, $label);
+				if ( ! is_object($cmd) ) {
+					$cmd = new ecodevice_teleinfoCmd();
+					$cmd->setName($data[0]);
+					$cmd->setEqLogic_id($this->getId());
+					$cmd->setType('info');
+					$cmd->setSubType($data[1]);
+					$cmd->setLogicalId($label);
+					$cmd->setUnite($data[2]);
+					$cmd->setIsVisible($data[3]);
+					$cmd->setEventOnly(1);
+					$cmd->save();
+				}
+			} else {
+				$cmd = $this->getCmd(null, $label);
+				if ( is_object($cmd) ) {
+					$cmd->remove();
+				}
+			}
+		}
 	}
 
     public static function event() {

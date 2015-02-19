@@ -7,6 +7,9 @@ Initialement, ce plugin a été créé pour connecter les Ecodevices de GCE.
 * '''les compteurs de Téléinformation '''
 * '''les compteurs d'impulsions'''
 
+=== Frequence de rafraichissement ===
+Les données récupéré par le plugin le sont toutes les minutes. Impossible de faire plus fréquent.
+
 == Installation/Paramétrage ==
 Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur '''Plugins / Protocole domotique / Eco-device'''
 
@@ -25,19 +28,5 @@ Puis définir :
 * '''Compte'''
 * '''Mot de passe'''
 
-== Change log ==
-
-1.12 : Ajout de lien vers les options d'affichage
-
-1.11 : Correction de double cron
-
-1.10 : Ajout du nombre d'impulsion par minute
-Redéclanchement jusqu'à 3 fois en cas d'indispo de l'ecodevice
-
-1.9 : Ajout d'une information status
-
-1.8 : Ne pas mettre a jour les données si elles ne changent pas.
-
-1.1 : Problème de ZIP
-
-1.0 : Initialisation
+=== Changelog ===
+include::changelog.asciidoc[]

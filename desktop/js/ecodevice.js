@@ -22,20 +22,26 @@ function addCmdToTable(_cmd) {
         tr += '<span class="cmdAttr" data-l1key="id"></span>';
         tr += '</td>';
         tr += '<td>';
-        tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}"></td>';
+        tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 200px;" placeholder="{{Nom}}"></td>';
 		tr += '<td class="expertModeVisible">';
         tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="margin-bottom : 5px;" />';
         tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>';
         tr += '</td>';
         tr += '<td>';
-        if (init(_cmd.logicalId) == 'nbimpulsionminute') {
-			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="calcul" style="height : 33px;" placeholder="{{Calcul}}"></textarea> (utiliser #brut# dans la formule)';
+        if (init(_cmd.logicalId) == 'nbimpulsionminute' || init(_cmd.logicalId) == 'tempsfonctionnementminute') {
+			tr += '<textarea class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="calcul" style="height : 33px;" placeholder="{{Calcul}}"></textarea> {{(utiliser #brut# dans la formule)}}';
 		}
         tr += '</td>';
-        tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}"></td>';
+        tr += '<td>';
+        tr += '<input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}">';
+        if (init(_cmd.logicalId) == 'tempsfonctionnement' || init(_cmd.logicalId) == 'tempsfonctionnementminute') {
+			tr += '{{Mettre 1 dans Débit gicleur en L/h}})';
+		}
+        tr += '</td>';
         tr += '<td>';
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isHistorized"/> {{Historiser}}<br/></span>';
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/> {{Afficher}}<br/></span>';
+		tr += '<input class="cmdAttr" data-l1key="categorie" style="display : none;">';
         tr += '</td>';
         tr += '<td>';
         if (is_numeric(_cmd.id)) {

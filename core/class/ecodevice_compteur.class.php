@@ -54,11 +54,38 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
 			$nbimpulsionminute->save();
 		}
+
+        $tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+        if ( ! is_object($tempsfonctionnement) ) {
+            $tempsfonctionnement = new ecodevice_compteurCmd();
+			$tempsfonctionnement->setName('Temps de fonctionnement');
+			$tempsfonctionnement->setEqLogic_id($this->getId());
+			$tempsfonctionnement->setType('info');
+			$tempsfonctionnement->setSubType('numeric');
+			$tempsfonctionnement->setLogicalId('tempsfonctionnement');
+			$tempsfonctionnement->setUnite("sec");
+			$tempsfonctionnement->setEventOnly(1);
+			$tempsfonctionnement->setIsVisible(0);
+			$tempsfonctionnement->save();
+		}
+        $tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+        if ( ! is_object($tempsfonctionnementminute) ) {
+            $tempsfonctionnementminute = new ecodevice_compteurCmd();
+			$tempsfonctionnementminute->setName('Temps de fonctionnement par minute');
+			$tempsfonctionnementminute->setEqLogic_id($this->getId());
+			$tempsfonctionnementminute->setType('info');
+			$tempsfonctionnementminute->setSubType('numeric');
+			$tempsfonctionnementminute->setLogicalId('tempsfonctionnementminute');
+			$tempsfonctionnementminute->setUnite("sec/min");
+			$tempsfonctionnementminute->setConfiguration('calcul', '#brut#');
+			$tempsfonctionnementminute->setEventOnly(1);
+			$tempsfonctionnementminute->setIsVisible(0);
+			$tempsfonctionnementminute->save();
+		}
 	}
 
 	public function postUpdate()
 	{
-        $nbimpulsion = $this->getCmd(null, 'nbimpulsion');
         $nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
         if ( ! is_object($nbimpulsionminute) ) {
             $nbimpulsionminute = new ecodevice_compteurCmd();
@@ -72,7 +99,35 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionminute->setEventOnly(1);
 			$nbimpulsionminute->save();
 		}
+        $tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+        if ( ! is_object($tempsfonctionnement) ) {
+            $tempsfonctionnement = new ecodevice_compteurCmd();
+			$tempsfonctionnement->setName('Temps de fonctionnement');
+			$tempsfonctionnement->setEqLogic_id($this->getId());
+			$tempsfonctionnement->setType('info');
+			$tempsfonctionnement->setSubType('numeric');
+			$tempsfonctionnement->setLogicalId('tempsfonctionnement');
+			$tempsfonctionnement->setUnite("min");
+			$tempsfonctionnement->setEventOnly(1);
+			$tempsfonctionnement->setIsVisible(0);
+			$tempsfonctionnement->save();
+		}
+        $tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+        if ( ! is_object($tempsfonctionnementminute) ) {
+            $tempsfonctionnementminute = new ecodevice_compteurCmd();
+			$tempsfonctionnementminute->setName('Temps de fonctionnement par minute');
+			$tempsfonctionnementminute->setEqLogic_id($this->getId());
+			$tempsfonctionnementminute->setType('info');
+			$tempsfonctionnementminute->setSubType('numeric');
+			$tempsfonctionnementminute->setLogicalId('tempsfonctionnementminute');
+			$tempsfonctionnementminute->setUnite("min/min");
+			$tempsfonctionnementminute->setConfiguration('calcul', '#brut#');
+			$tempsfonctionnementminute->setEventOnly(1);
+			$tempsfonctionnementminute->setIsVisible(0);
+			$tempsfonctionnementminute->save();
+		}
 	}
+
     public static function event() {
         $cmd = ecodevice_compteurCmd::byId(init('id'));
         if (!is_object($cmd)) {
@@ -94,6 +149,12 @@ class ecodevice_compteurCmd extends cmd
 {
     public function preSave() {
         if ( $this->getLogicalId() == 'nbimpulsionminute' ) {
+            $calcul = $this->getConfiguration('calcul');
+            if ( ! preg_match("/#brut#/", $calcul) ) {
+				throw new Exception(__('La formule doit contenir une référecence à #brut#.',__FILE__));
+			}
+        }
+        if ( $this->getLogicalId() == 'tempsfonctionnementminute' ) {
             $calcul = $this->getConfiguration('calcul');
             if ( ! preg_match("/#brut#/", $calcul) ) {
 				throw new Exception(__('La formule doit contenir une référecence à #brut#.',__FILE__));
