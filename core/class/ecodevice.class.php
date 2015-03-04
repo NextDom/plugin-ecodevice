@@ -65,11 +65,6 @@ class ecodevice extends eqLogic {
 
 	public function postInsert()
 	{
-		$ecodeviceCmd = $this->getCmd(null, 'updatetime');
-		if ( is_object($ecodeviceCmd)) {
-			$ecodeviceCmd->remove();		
-		}
-
 		$cmd = $this->getCmd(null, 'status');
 		if ( ! is_object($cmd) ) {
 			$cmd = new ecodeviceCmd();
@@ -123,6 +118,12 @@ class ecodevice extends eqLogic {
 			$cmd->setEventOnly(1);
 			$cmd->save();
 		}
+
+		$ecodeviceCmd = $this->getCmd(null, 'updatetime');
+		if ( is_object($ecodeviceCmd)) {
+			$ecodeviceCmd->remove();		
+		}
+
 	}
 
 	public function preRemove()

@@ -1,4 +1,5 @@
 [horizontal]
+1.14:: Supression de l'info updatetime
 1.13:: Ajout de données évolution (variation par minute).
 Ajout d'un choix de tarification pour ne présenter que les commandes correspondantes à celle-ci
 1.12:: Ajout de lien vers les options d'affichage
