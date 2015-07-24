@@ -6,7 +6,7 @@ sendVarToJS('eqType', 'ecodevice');
 ?>
 
 <div class="row row-overflow">
-    <div class="col-lg-3">
+    <div class="col-lg-2 col-md-3 col-sm-4">
         <div class="bs-sidebar">
             <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un Ecodev}}</a>
@@ -46,7 +46,7 @@ sendVarToJS('eqType', 'ecodevice');
             </ul>
         </div>
     </div>
-    <div class="col-lg-9 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
+    <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes Ecodevices}}
         </legend>
         <?php
@@ -68,7 +68,7 @@ sendVarToJS('eqType', 'ecodevice');
             </div>
         <?php } ?>
     </div>
-    <div class="col-lg-9 eqLogic ecodevice" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+    <div class="col-lg-10 col-md-9 col-sm-8 ecodevice eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
         <form class="form-horizontal">
             <fieldset>
                 <legend>
@@ -178,8 +178,8 @@ sendVarToJS('eqType', 'ecodevice');
 	<?php include_file('desktop', 'ecodevice_teleinfo', 'php', 'ecodevice'); ?>
 </div>
 
-<?php include_file('desktop', 'ecodevice', 'js', 'ecodevice'); ?>
 <?php include_file('core', 'plugin.template', 'js'); ?>
+<?php include_file('desktop', 'ecodevice', 'js', 'ecodevice'); ?>
 <script type="text/javascript">
 if (getUrlVars('saveSuccessFull') == 1) {
     $('#div_alert').showAlert({message: '{{Sauvegarde effectuée avec succès}}<br>{{Utilisez sur l\icône suivant pour voir le détail de l\'élément <i class="fa fa-sitemap"></i>}}', level: 'success'});

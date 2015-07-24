@@ -1,12 +1,20 @@
 [horizontal]
-1.14:: Supression de l'info updatetime
+1.14:: Suppression de l'info `updatetime`.
+
 1.13:: Ajout de données évolution (variation par minute).
-Ajout d'un choix de tarification pour ne présenter que les commandes correspondantes à celle-ci
-1.12:: Ajout de lien vers les options d'affichage
-1.11:: Correction de double cron
-1.10:: Ajout du nombre d'impulsion par minute
-Redéclanchement jusqu'à 3 fois en cas d'indispo de l'ecodevice
-1.9:: Ajout d'une information status
+Ajout d'un choix de tarification pour ne présenter que les commandes correspondantes à celle-ci.
+
+1.12:: Ajout de lien vers les options d'affichage.
+
+1.11:: Correction de double cron.
+
+1.10:: Ajout du nombre d'impulsions par minute.
+Redéclenchement jusqu'à 3 fois en cas d'indisponibilité de l'ecodevice.
+
+1.9:: Ajout d'une information `status`.
+
 1.8:: Ne pas mettre a jour les données si elles ne changent pas.
-1.1:: Problème de ZIP
-1.0:: Initialisation
+
+1.1:: Problème de ZIP.
+
+1.0:: Initialisation.

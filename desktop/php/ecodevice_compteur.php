@@ -1,4 +1,4 @@
-    <div class="col-lg-9 eqLogic ecodevice_compteur" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
+    <div class="col-lg-10 col-md-9 col-sm-8 eqLogic ecodevice_compteur" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
         <form class="form-horizontal">
             <fieldset>
                 <legend>
@@ -52,7 +52,7 @@
         </form>
 
         <legend>{{Indicateurs}}</legend>
-        <table id="table_cmd_ecodevice_compteur" class="table table-bordered table-condensed ecodevice_compteur">
+        <table id="table_cmd_ecodevice_compteur" class="table table-bordered table-condensed">
             <thead>
                 <tr>
                     <th style="width: 50px;">#</th>
