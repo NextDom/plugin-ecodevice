@@ -1,4 +1,6 @@
 [horizontal]
+1.15:: Correction par rapport au nouveau core.
+
 1.14:: Suppression de l'info `updatetime`.
 
 1.13:: Ajout de données évolution (variation par minute).

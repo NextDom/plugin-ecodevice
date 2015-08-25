@@ -49,24 +49,28 @@ sendVarToJS('eqType', 'ecodevice');
     <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
         <legend>{{Mes Ecodevices}}
         </legend>
-        <?php
-        if (count($eqLogics) == 0) {
-            echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore d'ecodevice, cliquez sur Ajouter un équipement pour commencer}}</span></center>";
-        } else {
-            ?>
-            <div class="eqLogicThumbnailContainer">
-                <?php
+		<div class="eqLogicThumbnailContainer">
+		  <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
+				 <center>
+					<i class="fa fa-plus-circle" style="font-size : 7em;color:#94ca02;"></i>
+				</center>
+				<span style="font-size : 1.1em;position:relative; top : 23px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#94ca02"><center>Ajouter</center></span>
+			</div>
+			<?php
+			if (count($eqLogics) == 0) {
+				echo "<br/><br/><br/><center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez pas encore d'ecodevice, cliquez sur Ajouter un équipement pour commencer}}</span></center>";
+			} else {
                 foreach ($eqLogics as $eqLogic) {
                     echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
                     echo "<center>";
-                    echo '<img src="plugins/ecodevice/doc/images/ecodevice.jpg" height="105" width="95" />';
+                    echo '<img src="plugins/ecodevice/doc/images/ecodevice_icon.jpg" height="105" width="95" />';
                     echo "</center>";
                     echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
                     echo '</div>';
                 }
-                ?>
-            </div>
-        <?php } ?>
+			}
+			?>
+		</div>
     </div>
     <div class="col-lg-10 col-md-9 col-sm-8 ecodevice eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
         <form class="form-horizontal">
@@ -109,15 +113,12 @@ sendVarToJS('eqType', 'ecodevice');
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-2 control-label" >{{Activer}}</label>
-                    <div class="col-md-1">
-                        <input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>
-                    </div>
-					<a class="btn btn-default btn-sm tooltips" id="bt_configPush" title='{{Configurer push}}'><i class="fa fa-wrench"></i></a>
-                    <label class="col-lg-2 control-label" >{{Visible}}</label>
-                    <div class="col-lg-1">
-                        <input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>
-                    </div>
+                  <label class="col-sm-2 control-label" ></label>
+					<div class="col-sm-10">
+					<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>
+					<input type="checkbox" class="eqLogicAttr bootstrapSwitch" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>
+					</div>
+					<a class="btn btn-default" id="bt_goCarte" title='{{Accéder à la carte}}'><i class="fa fa-cogs"></i></a>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-2 control-label">{{IP de l'ecodevice}}</label>
@@ -182,6 +183,6 @@ sendVarToJS('eqType', 'ecodevice');
 <?php include_file('desktop', 'ecodevice', 'js', 'ecodevice'); ?>
 <script type="text/javascript">
 if (getUrlVars('saveSuccessFull') == 1) {
-    $('#div_alert').showAlert({message: '{{Sauvegarde effectuée avec succès}}<br>{{Utilisez sur l\icône suivant pour voir le détail de l\'élément <i class="fa fa-sitemap"></i>}}', level: 'success'});
+    $('#div_alert').showAlert({message: '{{Sauvegarde effectuée avec succès}}<br>{{Utilisez l\icône suivant pour voir le détail de l\'élément <i class="fa fa-sitemap"></i>}}', level: 'success'});
 }
 </script>

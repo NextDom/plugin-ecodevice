@@ -57,6 +57,11 @@ function addCmdToTable(_cmd) {
     }
 }
 
+$('#bt_goCarte').on('click', function() {
+    $('#md_modal').dialog({title: "{{Accèder à l'interface de l'Ecodevice}}"});
+	window.open('http://'+$('.eqLogicAttr[data-l2key=username]').value()+':'+$('.eqLogicAttr[data-l2key=password]').value()+'@'+$('.eqLogicAttr[data-l2key=ip]').value()+':'+$('.eqLogicAttr[data-l2key=port]').value()+'/');
+});
+
 $('#bt_configPush').on('click', function() {
     $.ajax({// fonction permettant de faire de l'ajax
         type: "POST", // methode de transmission des donnÃ©es au fichier php
