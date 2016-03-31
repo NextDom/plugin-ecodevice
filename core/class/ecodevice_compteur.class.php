@@ -54,6 +54,17 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
 			$nbimpulsionminute->save();
 		}
+        $nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+        if ( ! is_object($nbimpulsionjour) ) {
+            $nbimpulsionjour = new ecodevice_compteurCmd();
+			$nbimpulsionjour->setName('Nombre d impulsion jour');
+			$nbimpulsionjour->setEqLogic_id($this->getId());
+			$nbimpulsionjour->setType('info');
+			$nbimpulsionjour->setSubType('numeric');
+			$nbimpulsionjour->setLogicalId('nbimpulsionjour');
+			$nbimpulsionjour->setEventOnly(1);
+			$nbimpulsionjour->save();
+		}
 
         $tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
         if ( ! is_object($tempsfonctionnement) ) {
@@ -98,6 +109,17 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
 			$nbimpulsionminute->setEventOnly(1);
 			$nbimpulsionminute->save();
+		}
+        $nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+        if ( ! is_object($nbimpulsionjour) ) {
+            $nbimpulsionjour = new ecodevice_compteurCmd();
+			$nbimpulsionjour->setName('Nombre d impulsion jour');
+			$nbimpulsionjour->setEqLogic_id($this->getId());
+			$nbimpulsionjour->setType('info');
+			$nbimpulsionjour->setSubType('numeric');
+			$nbimpulsionjour->setLogicalId('nbimpulsionjour');
+			$nbimpulsionjour->setEventOnly(1);
+			$nbimpulsionjour->save();
 		}
         $tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
         if ( ! is_object($tempsfonctionnement) ) {
@@ -168,8 +190,7 @@ class ecodevice_compteurCmd extends cmd
 				$calcul = $this->getConfiguration('calcul');
 				$calcul = preg_replace("/#brut#/", $_value, $calcul);
 				$calcul = scenarioExpression::setTags($calcul);
-				$test = new evaluate();
-				$result = $test->Evaluer($calcul);
+				$result = evaluate($calcul);
 				parent::event($result, $_loop);
 			} catch (Exception $e) {
 				$EqLogic = $this->getEqLogic();

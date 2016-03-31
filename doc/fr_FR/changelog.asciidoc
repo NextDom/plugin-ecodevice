@@ -1,9 +1,25 @@
 [horizontal]
+1.19:: Mise a jour des entrées analogiques, même si la valeur ne change pas pour les graphiques.
+
+1.18:: Ajout de Intensité souscrite
++ Intensité maximale
+
+1.17::Ajout du compteur journalier en monde non fuel.
+
+1.16::Modification de cron pour plus d'autonomie.
++
+Modification de l'extension du logo.
++
+Compatibilité Imperihome
++
+Retrait de la suppression des équipements lors de la désactivation du plugin
+
 1.15:: Correction par rapport au nouveau core.
 
 1.14:: Suppression de l'info `updatetime`.
 
 1.13:: Ajout de données évolution (variation par minute).
++
 Ajout d'un choix de tarification pour ne présenter que les commandes correspondantes à celle-ci.
 
 1.12:: Ajout de lien vers les options d'affichage.
@@ -11,6 +27,7 @@ Ajout d'un choix de tarification pour ne présenter que les commandes correspond
 1.11:: Correction de double cron.
 
 1.10:: Ajout du nombre d'impulsions par minute.
++
 Redéclenchement jusqu'à 3 fois en cas d'indisponibilité de l'ecodevice.
 
 1.9:: Ajout d'une information `status`.

@@ -5,9 +5,13 @@ Initialement, ce plugin a été créé pour connecter les Ecodevices de GCE.
 
 === Données visibles sur le Dashboard : ===
 * '''les compteurs de Téléinformation '''
+
 image::../images/ecodevice_screenshot2.jpg[]
+
 * '''les compteurs d'impulsions'''
+
 image::../images/ecodevice_screenshot3.jpg[]
+
 
 === Frequence de rafraichissement ===
 Les données récupéré par le plugin le sont toutes les minutes. Impossible de faire plus fréquent.
@@ -32,5 +36,8 @@ Puis définir :
 
 image::../images/ecodevice_screenshot1.jpg[]
 
-=== Changelog ===
+== FAQ ==
+include::faq.asciidoc[]
+
+== Changelog ==
 include::changelog.asciidoc[]

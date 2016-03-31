@@ -22,7 +22,14 @@ function addCmdToTable(_cmd) {
         tr += '<span class="cmdAttr" data-l1key="id"></span>';
         tr += '</td>';
         tr += '<td>';
-        tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 200px;" placeholder="{{Nom}}"></td>';
+        tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 200px;" placeholder="{{Nom}}">';
+        if (init(_cmd.logicalId) == 'nbimpulsionjour') {
+			tr += ' Uniquement valable en mode non Fuel';
+		}
+        if (init(_cmd.logicalId) == 'tempsfonctionnement' || init(_cmd.logicalId) == 'tempsfonctionnementminute') {
+			tr += ' Uniquement valable en mode Fuel';
+		}
+		tr += '</td>';
 		tr += '<td class="expertModeVisible">';
         tr += '<input class="cmdAttr form-control type input-sm" data-l1key="type" value="info" disabled style="margin-bottom : 5px;" />';
         tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>';

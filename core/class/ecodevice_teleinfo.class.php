@@ -59,7 +59,13 @@ class ecodevice_teleinfo extends eqLogic {
 		"BBRHCJR_evolution" => array('Evolution index (heures creuses jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH"),
 		"BBRHPJR_evolution" => array('Evolution index (heures pleines jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH"),
 		"EJPHN_evolution" => array('Evolution index (normal EJP)', 'numeric', 'W', 0, "EJP"),
-		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP"));
+		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP"),
+		"ISOUSC" => array('Intensité souscrite', 'numeric', 'ampere', 1, ""),
+		"IMAX" => array('Intensité maximale', 'numeric', 'ampere', 1, ""),
+		"IMAX1" => array('Intensité maximale 1', 'numeric', 'ampere', 0, ""),
+		"IMAX2" => array('Intensité maximale 2', 'numeric', 'ampere', 0, ""),
+		"IMAX3" => array('Intensité maximale 3', 'numeric', 'ampere', 0, "")
+		);
 	}
 
 	public function postInsert()
