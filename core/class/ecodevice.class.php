@@ -199,32 +199,38 @@ class ecodevice extends eqLogic {
 					
 					if ( count($status) != 0 )
 					{
-						$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
-						$nbimpulsion = $eqLogic_cmd->execCmd(null, 2);
-						$eqLogic_cmd_evol = $eqLogicCompteur->getCmd(null, 'nbimpulsionminute');
+						$nbimpulsion_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
+						$nbimpulsion = $nbimpulsion_cmd->execCmd(null, 2);
+						$nbimpulsionminute_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionminute');
 						if ($nbimpulsion != $status[0]) {
-							if ( $eqLogic_cmd->getCollectDate() == '' ) {
+							log::add('ecodevice','debug',"Change nbimpulsion off ".$eqLogicCompteur->getName());
+							$lastCollectDate = $nbimpulsion_cmd->getCollectDate();
+							if ( $lastCollectDate == '' ) {
+								log::add('ecodevice','debug',"Change nbimpulsionminute 0");
 								$nbimpulsionminute = 0;
 							} else {
-								$DeltaSeconde = time() - strtotime($eqLogic_cmd->getCollectDate())*60;
-								if ( $DeltaSeconde == 0 )
+								$DeltaSeconde = (time() - strtotime($lastCollectDate))*60;
+								if ( $DeltaSeconde != 0 )
 								{
-								} else {
 									if ( $status[0] > $nbimpulsion ) {
-										$nbimpulsionminute = round (($status[0] - $nbimpulsion)/$DeltaSeconde, 6);
+										$DeltaValeur = $status[0] - $nbimpulsion;
 									} else {
-										$nbimpulsionminute = round ($status[0]/$DeltaSeconde, 6);
+										$DeltaValeur = $status[0];
 									}
+									$nbimpulsionminute = round (($status[0] - $nbimpulsion)/(time() - strtotime($lastCollectDate))*60, 6);
+								} else {
+									$nbimpulsionminute = 0;
 								}
 							}
-							$eqLogic_cmd_evol->setCollectDate(date('Y-m-d H:i:s'));
-							$eqLogic_cmd_evol->event($nbimpulsionminute);
+							log::add('ecodevice','debug',"Change nbimpulsionminute ".$nbimpulsionminute);
+							$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$nbimpulsionminute_cmd->event($nbimpulsionminute);
 						} else {
-							$eqLogic_cmd_evol->setCollectDate(date('Y-m-d H:i:s'));
-							$eqLogic_cmd_evol->event(0);
+							$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$nbimpulsionminute_cmd->event(0);
 						}
-						$eqLogic_cmd->setCollectDate(date('Y-m-d H:i:s'));
-						$eqLogic_cmd->event($status[0]);
+						$nbimpulsion_cmd->setCollectDate(date('Y-m-d H:i:s'));
+						$nbimpulsion_cmd->event($status[0]);
 					}
 					$xpathModele = '//c'.$gceid.'_fuel';
 					$status = $this->xmlstatus->xpath($xpathModele);
