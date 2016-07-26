@@ -36,6 +36,8 @@ Puis définir :
 
 image::../images/ecodevice_screenshot1.jpg[]
 
+Vous retrouverez l'ensemble des élements de la carte dans le menu à gauche en clickant sur l'icone de celle-ci.
+
 == FAQ ==
 include::faq.asciidoc[]
 
