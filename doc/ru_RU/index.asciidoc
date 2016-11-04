@@ -1,0 +1,45 @@
+== Présentation ==
+Ce plugin permet de gérer les cartes Ecodevice de GCE.
+
+Initialement, ce plugin a été créé pour connecter les Ecodevices de GCE.
+
+=== Données visibles sur le Dashboard : ===
+* '''les compteurs de Téléinformation '''
+
+image::../images/ecodevice_screenshot2.jpg[]
+
+* '''les compteurs d'impulsions'''
+
+image::../images/ecodevice_screenshot3.jpg[]
+
+
+=== Frequence de rafraichissement ===
+Les données récupéré par le plugin le sont toutes les minutes. Impossible de faire plus fréquent.
+
+== Installation/Paramétrage ==
+Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur '''Plugins / Protocole domotique / Eco-device'''
+
+Puis cliquer sur le bouton en haut à gauche "'''Ajouter un équipement'''"
+
+Puis saisir le nom de l'équipement (ex. Ecodevice 1)
+
+Puis définir :
+
+* '''Objet parent'''
+* '''Catégorie '''(optionnelle)
+* '''Activer '''(à cocher, sinon l’équipement ne sera pas utilisable)
+* '''Visible '''(optionel si vous ne désirez pas le rendre visible sur le Dashboard)
+* '''Adresse IP'''
+* '''Port'''
+* '''Compte'''
+* '''Mot de passe'''
+
+image::../images/ecodevice_screenshot1.jpg[]
+
+Vous retrouverez l'ensemble des élements de la carte dans le menu à gauche en clickant sur l'icone de celle-ci.
+
+== FAQ ==
+include::faq.asciidoc[]
+
+== Changelog ==
+include::changelog.asciidoc[]
