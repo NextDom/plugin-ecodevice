@@ -13,15 +13,15 @@ image::../images/ecodevice_screenshot2.jpg[]
 image::../images/ecodevice_screenshot3.jpg[]
 
 
-=== Frequence de rafraichissement ===
-Les données récupéré par le plugin le sont toutes les minutes. Impossible de faire plus fréquent.
+=== Fréquence de rafraichissement ===
+Les données sont récupérées par le plugin toutes les minutes. Il n'est pas possible d'avoir une fréquence plus élevée.
 
 == Installation/Paramétrage ==
-Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur '''Plugins / Protocole domotique / Eco-device'''
+Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur '''Plugins / Protocole domotique / Eco-device'''.
 
-Puis cliquer sur le bouton en haut à gauche "'''Ajouter un équipement'''"
+Puis cliquer sur le bouton en haut à gauche "'''Ajouter un équipement'''".
 
-Puis saisir le nom de l'équipement (ex. Ecodevice 1)
+Puis saisir le nom de l'équipement (ex. Ecodevice 1).
 
 Puis définir :
 

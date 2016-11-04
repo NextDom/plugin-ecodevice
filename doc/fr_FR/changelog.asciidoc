@@ -1,8 +1,13 @@
 [horizontal]
+1.21:: Ajout de commande pour reboot
+
+1.20:: Detection des xml corrompu.
+
 1.19:: Mise a jour des entrées analogiques, même si la valeur ne change pas pour les graphiques.
 
-1.18:: Ajout de Intensité souscrite
-+ Intensité maximale
+1.18:: Ajout de Intensité souscrite.
++
+Intensité maximale.
 
 1.17::Ajout du compteur journalier en monde non fuel.
 

@@ -52,7 +52,7 @@ class ecodevice extends eqLogic {
 		if ( $this->getIsEnable() )
 		{
 			log::add('ecodevice','debug','get '.$this->getUrl(). 'status.xml');
-			$this->xmlstatus = simplexml_load_file($this->getUrl(). 'status.xml');
+			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
 			if ( $this->xmlstatus === false )
 				throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
 		}
@@ -76,6 +76,19 @@ class ecodevice extends eqLogic {
 			$cmd->setIsVisible(1);
 			$cmd->setEventOnly(1);
 			$cmd->save();
+		}
+        $reboot = $this->getCmd(null, 'reboot');
+        if ( ! is_object($reboot) ) {
+            $reboot = new ipx800Cmd();
+			$reboot->setName('Reboot');
+			$reboot->setEqLogic_id($this->getId());
+			$reboot->setType('action');
+			$reboot->setSubType('other');
+			$reboot->setLogicalId('reboot');
+			$reboot->setEventOnly(1);
+			$reboot->setIsVisible(0);
+			$reboot->setDisplay('generic_type','GENERIC_ACTION');
+			$reboot->save();
 		}
 		for ($compteurId = 0; $compteurId <= 1; $compteurId++) {
 			if ( ! is_object(self::byLogicalId($this->getId()."_C".$compteurId, 'ecodevice_compteur')) ) {
@@ -124,6 +137,19 @@ class ecodevice extends eqLogic {
 			$ecodeviceCmd->remove();		
 		}
 
+        $reboot = $this->getCmd(null, 'reboot');
+        if ( ! is_object($reboot) ) {
+            $reboot = new ecodeviceCmd();
+			$reboot->setName('Reboot');
+			$reboot->setEqLogic_id($this->getId());
+			$reboot->setType('action');
+			$reboot->setSubType('other');
+			$reboot->setLogicalId('reboot');
+			$reboot->setEventOnly(1);
+			$reboot->setIsVisible(0);
+			$reboot->setDisplay('generic_type','GENERIC_ACTION');
+			$reboot->save();
+		}
 	}
 
 	public function preRemove()
@@ -148,7 +174,16 @@ class ecodevice extends eqLogic {
 		}
 		if ( $this->getIsEnable() ) {
 			throw new Exception('Configurer l\'URL suivante pour un rafraichissement plus rapide dans l\'ecodevice : page index=>notification :<br>http://'.config::byKey('internalAddr').'/jeedom/core/api/jeeApi.php?api='.config::byKey('api').'&type=ecodevice&id='.substr($this->getLogicalId(), 0, strpos($this->getLogicalId(),"_")).'&message=data_change<br>Attention surcharge possible importante.');
-			$this->xmlstatus = simplexml_load_file($this->getUrl(). 'status.xml');
+			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
+			$count = 0;
+			while ( $this->xmlstatus === false && $count < 3 ) {
+				$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
+				$count++;
+			}
+			if ( $this->xmlstatus === false ) {
+				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
+				return false;
+			}
 			foreach (self::byType('ecodevice_compteur') as $eqLogicCompteur) {
 				if ( $eqLogicCompteur->getIsEnable() && substr($eqLogicCompteur->getLogicalId(), 0, strpos($eqLogicCompteur->getLogicalId(),"_")) == $this->getId() ) {
 					$eqLogicCompteur->configPush($this->getUrl());
@@ -173,10 +208,10 @@ class ecodevice extends eqLogic {
 	public function scan() {
 		if ( $this->getIsEnable() ) {
 			$statuscmd = $this->getCmd(null, 'status');
-			$this->xmlstatus = simplexml_load_file($this->getUrl(). 'status.xml');
+			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
 			$count = 0;
 			while ( $this->xmlstatus === false && $count < 3 ) {
-				$this->xmlstatus = simplexml_load_file($this->getUrl(). 'status.xml');
+				$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
 				$count++;
 			}
 			if ( $this->xmlstatus === false ) {
@@ -187,10 +222,6 @@ class ecodevice extends eqLogic {
 				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
 				return false;
 			}
-			if ($statuscmd->execCmd() != 1) {
-				$statuscmd->setCollectDate(date('Y-m-d H:i:s'));
-				$statuscmd->event(1);
-			}
 			foreach (self::byType('ecodevice_compteur') as $eqLogicCompteur) {
 				if ( $eqLogicCompteur->getIsEnable() && substr($eqLogicCompteur->getLogicalId(), 0, strpos($eqLogicCompteur->getLogicalId(),"_")) == $this->getId() ) {
 					$gceid = substr($eqLogicCompteur->getLogicalId(), strpos($eqLogicCompteur->getLogicalId(),"_")+2, 1);
@@ -200,7 +231,7 @@ class ecodevice extends eqLogic {
 					if ( count($status) != 0 )
 					{
 						$nbimpulsion_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
-						$nbimpulsion = $nbimpulsion_cmd->execCmd(null, 2);
+						$nbimpulsion = $nbimpulsion_cmd->execCmd();
 						$nbimpulsionminute_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionminute');
 						if ($nbimpulsion != $status[0]) {
 							log::add('ecodevice','debug',"Change nbimpulsion off ".$eqLogicCompteur->getName());
@@ -241,7 +272,7 @@ class ecodevice extends eqLogic {
 						$status = $this->xmlstatus->xpath($xpathModele);
 						log::add('ecodevice','debug','duree fonctionnement '.$status[0]);
 						$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'tempsfonctionnement');
-						$tempsfonctionnement = $eqLogic_cmd->execCmd(null, 2);
+						$tempsfonctionnement = $eqLogic_cmd->execCmd();
 						$eqLogic_cmd_evol = $eqLogicCompteur->getCmd(null, 'tempsfonctionnementminute');
 						if ($tempsfonctionnement != $status[0] * 3.6) {
 							if ( $eqLogic_cmd->getCollectDate() == '' ) {
@@ -276,7 +307,7 @@ class ecodevice extends eqLogic {
 			foreach (self::byType('ecodevice_teleinfo') as $eqLogicTeleinfo) {
 				if ( $eqLogicTeleinfo->getIsEnable() && substr($eqLogicTeleinfo->getLogicalId(), 0, strpos($eqLogicTeleinfo->getLogicalId(),"_")) == $this->getId() ) {
 					$gceid = substr($eqLogicTeleinfo->getLogicalId(), strpos($eqLogicTeleinfo->getLogicalId(),"_")+2, 1);
-					$this->xmlstatus = simplexml_load_file($this->getUrl(). 'protect/settings/teleinfo'.$gceid.'.xml');
+					$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'protect/settings/teleinfo'.$gceid.'.xml');
 					if ( $this->xmlstatus === false ) {
 						if ($statuscmd->execCmd() != 0) {
 							$statuscmd->setCollectDate(date('Y-m-d H:i:s'));
@@ -284,10 +315,6 @@ class ecodevice extends eqLogic {
 						}
 						log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'protect/settings/teleinfo'.$gceid.'.xml');
 						return false;
-					}
-					if ($statuscmd->execCmd() != 1) {
-						$statuscmd->setCollectDate(date('Y-m-d H:i:s'));
-						$statuscmd->event(1);
 					}
 					$xpathModele = '//response';
 					$status = $this->xmlstatus->xpath($xpathModele);
@@ -330,6 +357,10 @@ class ecodevice extends eqLogic {
 					}
 				}
 			}
+			if ($statuscmd->execCmd() != 1) {
+				$statuscmd->setCollectDate(date('Y-m-d H:i:s'));
+				$statuscmd->event(1);
+			}
 		}
 	}
     /*     * **********************Getteur Setteur*************************** */
@@ -346,6 +377,33 @@ class ecodeviceCmd extends cmd
     /*     * *********************Methode d'instance************************* */
 
     /*     * **********************Getteur Setteur*************************** */
+    public function execute($_options = null) {
+		$eqLogic = $this->getEqLogic();
+        if (!is_object($eqLogic) || $eqLogic->getIsEnable() != 1) {
+            throw new Exception(__('Equipement desactivé impossible d\éxecuter la commande : ' . $this->getHumanName(), __FILE__));
+        }
+		$url = $eqLogic->getUrl();
+			
+		if ( $this->getLogicalId() == 'reboot' )
+		{
+			$url .= "protect/settings/reboot.htm";
+		}
+		else
+			return false;
+		log::add('ecodevice','debug','get '.preg_replace("/:[^:]*@/", ":XXXX@", $url).'?'.http_build_query($data));
+		$result = @file_get_contents($url.'?'.http_build_query($data));
+		$count = 0;
+		while ( $result === false )
+		{
+			$result = @file_get_contents($url.'?'.http_build_query($data));
+			if ( $count < 3 ) {
+				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $url)."?".http_build_query($data));
+				throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
+			}
+			$count ++;
+		}
+        return false;
+    }
 }
 include_file('core', 'ecodevice_compteur', 'class', 'ecodevice');
 include_file('core', 'ecodevice_teleinfo', 'class', 'ecodevice');
