@@ -23,16 +23,16 @@ Puis cliquer sur le bouton en haut à gauche "'''Ajouter un équipement'''".
 
 Puis saisir le nom de l'équipement (ex. Ecodevice 1).
 
-Puis définir :
+Then define :
 
-* '''Objet parent'''
-* '''Catégorie '''(optionnelle)
-* '''Activer '''(à cocher, sinon l’équipement ne sera pas utilisable)
-* '''Visible '''(optionel si vous ne désirez pas le rendre visible sur le Dashboard)
-* '''Adresse IP'''
+* '''Parent object'''
+* '''Category '''
+* '''Enable '''
+* *Visible*: makes your equipment visible on the dashboard.
+* '''IP Adress'''
 * '''Port'''
-* '''Compte'''
-* '''Mot de passe'''
+* '''Account'''
+* '''Password'''
 
 image::../images/ecodevice_screenshot1.jpg[]
 
