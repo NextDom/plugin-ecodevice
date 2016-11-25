@@ -1,27 +1,27 @@
-== Présentation ==
-Ce plugin permet de gérer les cartes Ecodevice de GCE.
+== Introduction ==
+This plugin is used to manage GCE Ecodevice cards.
 
-Initialement, ce plugin a été créé pour connecter les Ecodevices de GCE.
+Initially, this plugin was created to connect GCE Ecodevices.
 
-=== Données visibles sur le Dashboard : ===
-* '''les compteurs de Téléinformation '''
+=== Data visible on the Dashboard: ===
+* '' 'Teleinformation counters' ''
 
 image::../images/ecodevice_screenshot2.jpg[]
 
-* '''les compteurs d'impulsions'''
+* '' 'Pulse counters' ''
 
 image::../images/ecodevice_screenshot3.jpg[]
 
 
-=== Fréquence de rafraichissement ===
-Les données sont récupérées par le plugin toutes les minutes. Il n'est pas possible d'avoir une fréquence plus élevée.
+=== Refresh rate ===
+The data is retrieved by the plugin every minute. It is not possible to have a higher frequency.
 
-== Installation/Paramétrage ==
-Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur '''Plugins / Protocole domotique / Eco-device'''.
+== Installation / Setup ==
+We will now set up a device. To do so, click on "Plugins / Domotic protocol / Eco-device".
 
-Puis cliquer sur le bouton en haut à gauche "'''Ajouter un équipement'''".
+Then click on the button at the top left "Add Equipment".
 
-Puis saisir le nom de l'équipement (ex. Ecodevice 1).
+Then enter the equipment name (eg Ecodevice 1).
 
 Then define :
 
@@ -36,7 +36,7 @@ Then define :
 
 image::../images/ecodevice_screenshot1.jpg[]
 
-Vous retrouverez l'ensemble des élements de la carte dans le menu à gauche en clickant sur l'icone de celle-ci.
+You will find all the elements of the map in the menu on the left by clicking on the icon of it.
 
 == FAQ ==
 include::faq.asciidoc[]
