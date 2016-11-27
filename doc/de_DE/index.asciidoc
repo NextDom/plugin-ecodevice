@@ -1,34 +1,34 @@
 == Präsentation ==
-Ce plugin permet de gérer les cartes Ecodevice de GCE.
+Dieses Plugin ermöglicht es Ihnen die GCE Ecodevice Karte zu verwalten.
 
-Initialement, ce plugin a été créé pour connecter les Ecodevices de GCE.
+Ursprünglich wurde dieses Plugin erstellt, um sich mit der GCE Ecodevices zu verbinden.
 
-=== Données visibles sur le Dashboard : ===
-* '''les compteurs de Téléinformation '''
+=== Ersichtliche Daten auf dem Armaturenbrett : ===
+* '''Der Tele-Info Zähler'''
 
 image::../images/ecodevice_screenshot2.jpg[]
 
-* '''les compteurs d'impulsions'''
+* '''Der Impulszähler''''
 
 image::../images/ecodevice_screenshot3.jpg[]
 
 
 === Aktualisierungsrate ===
-Les données sont récupérées par le plugin toutes les minutes. Il n'est pas possible d'avoir une fréquence plus élevée.
+Die Daten werden vom Plugin jede Minute gesammelt. Es ist nicht möglich, eine höhere Frequenz zu haben.
 
 == Installation/Einrichtung ==
-Nous allons maintenant paramétrer un équipement. Pour se faire, cliquer sur '''Plugins / Protocole domotique / Eco-device'''.
+Wir werden jetzt ein Gerät einrichten. Um dort hin zu kommen, klicken Sie auf '''Plugins /  Automatisierungsprotokolle / Eco-device '''.
 
-Puis cliquer sur le bouton en haut à gauche "'''Ajouter un équipement'''".
+Dann auf die Schaltfläche oben links "'''Gerät hinzufügen'''" klicken
 
-Puis saisir le nom de l'équipement (ex. Ecodevice 1).
+Dann den Namen des Gerätes eingeben (z.B. Ecodevice 1)
 
-Puis définir :
+Dann definieren Sie :
 
 * '''Eltern-Objekt'''
 * ""Kategorie "'(optional)
-* '''Activer '''(à cocher, sinon l’équipement ne sera pas utilisable)
-* '''Visible '''(optionel si vous ne désirez pas le rendre visible sur le Dashboard)
+* '''Aktivieren''' (ankreuzen, andernfalls wird das Gerät nicht nutzbar sein)
+* '''Sichtbar''' (optional, wenn Sie nicht wünschen, dass es auf dem Armaturenbrett sichtbar ist)
 * '''IP Adresse'''
 * '''Port'''
 * '''Konto'''
@@ -36,7 +36,7 @@ Puis définir :
 
 image::../images/ecodevice_screenshot1.jpg[]
 
-Vous retrouverez l'ensemble des élements de la carte dans le menu à gauche en clickant sur l'icone de celle-ci.
+Alle Elemente der Karte finden Sie im Menü auf der linken Seite, durch Klicken auf dieses Symbol.  
 
 == FAQ ==
 include::faq.asciidoc[]
