@@ -194,7 +194,7 @@ class ecodevice_compteurCmd extends cmd
 				parent::event($result, $_loop);
 			} catch (Exception $e) {
 				$EqLogic = $this->getEqLogic();
-				log::add('ipx800', 'error', $EqLogic->getName()." error in ".$this->getConfiguration('calcul')." : ".$e->getMessage());
+				log::add('ecodevice', 'error', $EqLogic->getName()." error in ".$this->getConfiguration('calcul')." : ".$e->getMessage());
 				return scenarioExpression::setTags(str_replace('"', '', cmd::cmdToValue($this->getConfiguration('calcul'))));
 			}
 		} else {

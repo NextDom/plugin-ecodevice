@@ -79,7 +79,7 @@ class ecodevice extends eqLogic {
 		}
         $reboot = $this->getCmd(null, 'reboot');
         if ( ! is_object($reboot) ) {
-            $reboot = new ipx800Cmd();
+            $reboot = new ecodeviceCmd();
 			$reboot->setName('Reboot');
 			$reboot->setEqLogic_id($this->getId());
 			$reboot->setType('action');
@@ -131,6 +131,24 @@ class ecodevice extends eqLogic {
 			$cmd->setEventOnly(1);
 			$cmd->save();
 		}
+        $reboot = $this->getCmd(null, 'reboot');
+		if ( is_object($reboot) && get_class ($reboot) != "ecodeviceCmd" ) {
+			$reboot->remove();		
+		}
+        $reboot = $this->getCmd(null, 'reboot');
+			
+        if ( ! is_object($reboot) ) {
+            $reboot = new ecodeviceCmd();
+			$reboot->setName('Reboot');
+			$reboot->setEqLogic_id($this->getId());
+			$reboot->setType('action');
+			$reboot->setSubType('other');
+			$reboot->setLogicalId('reboot');
+			$reboot->setEventOnly(1);
+			$reboot->setIsVisible(0);
+			$reboot->setDisplay('generic_type','GENERIC_ACTION');
+			$reboot->save();
+		}
 
 		$ecodeviceCmd = $this->getCmd(null, 'updatetime');
 		if ( is_object($ecodeviceCmd)) {
@@ -149,6 +167,31 @@ class ecodevice extends eqLogic {
 			$reboot->setIsVisible(0);
 			$reboot->setDisplay('generic_type','GENERIC_ACTION');
 			$reboot->save();
+		}
+		for ($compteurId = 0; $compteurId <= 1; $compteurId++) {
+			if ( ! is_object(self::byLogicalId($this->getId()."_C".$compteurId, 'ecodevice_compteur')) ) {
+				log::add('ecodevice','debug','Creation compteur : '.$this->getId().'_C'.$compteurId);
+				$eqLogic = new ecodevice_compteur();
+				$eqLogic->setEqType_name('ecodevice_compteur');
+				$eqLogic->setIsEnable(0);
+				$eqLogic->setName('Compteur ' . $compteurId);
+				$eqLogic->setLogicalId($this->getId().'_C'.$compteurId);
+				$eqLogic->setIsVisible(0);
+				$eqLogic->save();
+			}
+		}
+		for ($compteurId = 1; $compteurId <= 2; $compteurId++) {
+			if ( ! is_object(self::byLogicalId($this->getId()."_T".$compteurId, 'ecodevice_teleinfo')) ) {
+				log::add('ecodevice','debug','Creation teleinfo : '.$this->getId().'_T'.$compteurId);
+				$eqLogic = new ecodevice_teleinfo();
+				$eqLogic->setEqType_name('ecodevice_teleinfo');
+				$eqLogic->setIsEnable(0);
+				$eqLogic->setName('Teleinfo ' . $compteurId);
+				$eqLogic->setLogicalId($this->getId().'_T'.$compteurId);
+				$eqLogic->setIsVisible(0);
+				$eqLogic->setCategory("energy", "Energie");
+				$eqLogic->save();
+			}
 		}
 	}
 

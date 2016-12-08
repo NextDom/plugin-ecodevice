@@ -1,4 +1,8 @@
 [horizontal]
+1.22:: Modification pour recréer les sous commande s'ils n'existent plus.
++
+Correction de la commande reboot
+
 1.21:: Ajout de commande pour reboot
 
 1.20:: Detection des xml corrompu.
