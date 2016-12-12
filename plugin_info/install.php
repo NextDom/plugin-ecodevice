@@ -29,6 +29,7 @@ function ecodevice_install() {
         $cron->setSchedule('* * * * *');
         $cron->save();
 	}
+	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 }
 
 function ecodevice_update() {
@@ -56,6 +57,7 @@ function ecodevice_update() {
 	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
 		$eqLogic->save();
 	}
+	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 }
 
 function ecodevice_remove() {
@@ -63,5 +65,6 @@ function ecodevice_remove() {
     if (is_object($cron)) {
         $cron->remove();
     }
+	config::remove('subClass', 'ecodevice');
 }
 ?>
