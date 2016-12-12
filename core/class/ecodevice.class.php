@@ -224,7 +224,7 @@ class ecodevice extends eqLogic {
 				$count++;
 			}
 			if ( $this->xmlstatus === false ) {
-				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
+				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
 				return false;
 			}
 			foreach (self::byType('ecodevice_compteur') as $eqLogicCompteur) {
@@ -262,7 +262,7 @@ class ecodevice extends eqLogic {
 					$statuscmd->setCollectDate(date('Y-m-d H:i:s'));
 					$statuscmd->event(0);
 				}
-				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
+				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
 				return false;
 			}
 			foreach (self::byType('ecodevice_compteur') as $eqLogicCompteur) {
@@ -356,7 +356,7 @@ class ecodevice extends eqLogic {
 							$statuscmd->setCollectDate(date('Y-m-d H:i:s'));
 							$statuscmd->event(0);
 						}
-						log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$eqLogic->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'protect/settings/teleinfo'.$gceid.'.xml');
+						log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'protect/settings/teleinfo'.$gceid.'.xml');
 						return false;
 					}
 					$xpathModele = '//response';
