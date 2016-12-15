@@ -1,7 +1,7 @@
 [panel,primary]
 .Quelle est la fréquence de rafraichissement des informations ?
 --
-Par défaut c'est toutes les minutes.
+The data is refreshed every minute.
 Il est possible de configurer manuellement du push sur l'ecodevice.
 --
 
