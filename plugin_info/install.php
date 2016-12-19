@@ -29,6 +29,19 @@ function ecodevice_install() {
         $cron->setSchedule('* * * * *');
         $cron->save();
 	}
+	$cron = cron::byClassAndFunction('ecodevice', 'daemon');
+	if (!is_object($cron)) {
+		$cron = new cron();
+		$cron->setClass('ecodevice');
+		$cron->setFunction('daemon');
+		$cron->setEnable(1);
+		$cron->setDeamon(1);
+		$cron->setTimeout(1440);
+		$cron->setSchedule('* * * * *');
+		$cron->save();
+	}
+	config::save('temporisation_lecture', 5, 'ecodevice');
+	$cron->start();
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 }
 
@@ -57,10 +70,30 @@ function ecodevice_update() {
 	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
 		$SubeqLogic->save();
 	}
+	$cron = cron::byClassAndFunction('ecodevice', 'daemon');
+	if (!is_object($cron)) {
+		$cron = new cron();
+		$cron->setClass('ecodevice');
+		$cron->setFunction('daemon');
+		$cron->setEnable(1);
+		$cron->setDeamon(1);
+		$cron->setTimeout(1440);
+		$cron->setSchedule('* * * * *');
+		$cron->save();
+	}
+	if ( config::byKey('temporisation_lecture', 'ecodevice', '') == "" )
+	{
+		config::save('temporisation_lecture', 5, 'ecodevice');
+	}
+	$cron->start();
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 }
 
 function ecodevice_remove() {
+    $cron = cron::byClassAndFunction('ecodevice', 'daemon');
+    if (is_object($cron)) {
+        $cron->remove();
+    }
     $cron = cron::byClassAndFunction('ecodevice', 'pull');
     if (is_object($cron)) {
         $cron->remove();

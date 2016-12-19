@@ -76,36 +76,31 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
 			$nbimpulsionjour->save();
 		}
-
-        $tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
-        if ( ! is_object($tempsfonctionnement) ) {
-            $tempsfonctionnement = new ecodevice_compteurCmd();
-			$tempsfonctionnement->setName('Temps de fonctionnement');
-			$tempsfonctionnement->setEqLogic_id($this->getId());
-			$tempsfonctionnement->setType('info');
-			$tempsfonctionnement->setSubType('numeric');
-			$tempsfonctionnement->setLogicalId('tempsfonctionnement');
-			$tempsfonctionnement->setUnite("sec");
-			$tempsfonctionnement->setEventOnly(1);
-			$tempsfonctionnement->setIsVisible(0);
-			$tempsfonctionnement->setDisplay('generic_type','GENERIC_INFO');
-			$tempsfonctionnement->save();
+		$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
+		if ( ! is_object($nbimpulsiontotal) ) {
+			$nbimpulsiontotal = new ecodevice_compteurCmd();
+			$nbimpulsiontotal->setName('Nombre d impulsion total');
+			$nbimpulsiontotal->setEqLogic_id($this->getId());
+			$nbimpulsiontotal->setType('info');
+			$nbimpulsiontotal->setSubType('numeric');
+			$nbimpulsiontotal->setLogicalId('nbimpulsiontotal');
+			$nbimpulsiontotal->setEventOnly(1);
+			$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
+			$nbimpulsiontotal->save();
 		}
-        $tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
-        if ( ! is_object($tempsfonctionnementminute) ) {
-            $tempsfonctionnementminute = new ecodevice_compteurCmd();
-			$tempsfonctionnementminute->setName('Temps de fonctionnement par minute');
-			$tempsfonctionnementminute->setEqLogic_id($this->getId());
-			$tempsfonctionnementminute->setType('info');
-			$tempsfonctionnementminute->setSubType('numeric');
-			$tempsfonctionnementminute->setLogicalId('tempsfonctionnementminute');
-			$tempsfonctionnementminute->setUnite("sec/min");
-			$tempsfonctionnementminute->setConfiguration('calcul', '#brut#');
-			$tempsfonctionnementminute->setEventOnly(1);
-			$tempsfonctionnementminute->setIsVisible(0);
-			$tempsfonctionnementminute->setDisplay('generic_type','GENERIC_INFO');
-			$tempsfonctionnementminute->save();
+		$debitinstantane = $this->getCmd(null, 'debitinstantane');
+		if ( ! is_object($debitinstantane) ) {
+			$debitinstantane = new ecodevice_compteurCmd();
+			$debitinstantane->setName('Debit instantané');
+			$debitinstantane->setEqLogic_id($this->getId());
+			$debitinstantane->setType('info');
+			$debitinstantane->setSubType('numeric');
+			$debitinstantane->setLogicalId('debitinstantane');
+			$debitinstantane->setEventOnly(1);
+			$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
+			$debitinstantane->save();
 		}
+		$this->setConfiguration('typecompteur', "Eau");
 	}
 
 	public function preUpdate()
@@ -173,6 +168,14 @@ class ecodevice_compteur extends eqLogic {
 			if ( is_object($nbimpulsionjour) ) {
 				#$nbimpulsionjour->remove();
 			}
+			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
+			if ( is_object($nbimpulsiontotal) ) {
+				#$nbimpulsiontotal->remove();
+			}
+			$debitinstantane = $this->getCmd(null, 'debitinstantane');
+			if ( is_object($debitinstantane) ) {
+				#$debitinstantane->remove();
+			}
 		}
 		else
 		{
@@ -224,6 +227,46 @@ class ecodevice_compteur extends eqLogic {
 				{
 					$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
 					$nbimpulsionjour->save();
+				}
+			}
+			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
+			if ( ! is_object($nbimpulsiontotal) ) {
+				$nbimpulsiontotal = new ecodevice_compteurCmd();
+				$nbimpulsiontotal->setName('Nombre d impulsion total');
+				$nbimpulsiontotal->setEqLogic_id($this->getId());
+				$nbimpulsiontotal->setType('info');
+				$nbimpulsiontotal->setSubType('numeric');
+				$nbimpulsiontotal->setLogicalId('nbimpulsiontotal');
+				$nbimpulsiontotal->setEventOnly(1);
+				$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
+				$nbimpulsiontotal->save();
+			}
+			else
+			{
+				if ( $nbimpulsiontotal->getDisplay('generic_type') == "" )
+				{
+					$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
+					$nbimpulsiontotal->save();
+				}
+			}
+			$debitinstantane = $this->getCmd(null, 'debitinstantane');
+			if ( ! is_object($debitinstantane) ) {
+				$debitinstantane = new ecodevice_compteurCmd();
+				$debitinstantane->setName('Debit instantané');
+				$debitinstantane->setEqLogic_id($this->getId());
+				$debitinstantane->setType('info');
+				$debitinstantane->setSubType('numeric');
+				$debitinstantane->setLogicalId('debitinstantane');
+				$debitinstantane->setEventOnly(1);
+				$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
+				$debitinstantane->save();
+			}
+			else
+			{
+				if ( $nbimpulsiontotal->getDisplay('generic_type') == "" )
+				{
+					$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
+					$nbimpulsiontotal->save();
 				}
 			}
 		}

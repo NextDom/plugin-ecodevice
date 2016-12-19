@@ -40,9 +40,13 @@ function addCmdToTable(_cmd) {
 		}
         tr += '</td>';
         tr += '<td>';
-        tr += '<input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}">';
-        if (init(_cmd.logicalId) == 'tempsfonctionnement' || init(_cmd.logicalId) == 'tempsfonctionnementminute') {
-			tr += '{{Mettre 1 dans Débit gicleur en L/h}})';
+		if (init(_cmd.subType) == 'numeric') {
+			tr += '<input class="cmdAttr form-control input-sm" data-l1key="unite" style="width : 90px;" placeholder="{{Unite}}">';
+			if (init(_cmd.logicalId) == 'tempsfonctionnement' || init(_cmd.logicalId) == 'tempsfonctionnementminute') {
+				tr += '{{Mettre 1 dans Débit gicleur en L/h}}<br>';
+			}
+			tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min}}" title="{{Min}}" style="width : 40%;display : inline-block;">';
+			tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="maxValue" placeholder="{{Max}}" title="{{Max}}" style="width : 40%;display : inline-block;"><br>';
 		}
         tr += '</td>';
         tr += '<td>';

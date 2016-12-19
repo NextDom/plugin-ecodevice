@@ -41,10 +41,10 @@ class ecodevice_teleinfo extends eqLogic {
 		"BBRHPJR" => array('Index (heures pleines jours rouges Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
 		"EJPHN" => array('Index (normal EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge'),
 		"EJPHPM" => array('Index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge'),
-		"IINST" => array('Intensité instantanée', 'numeric', 'ampere', 1, "", "POWER", 'badge'),
-		"IINST1" => array('Intensité instantanée 1', 'numeric', 'ampere', 0, "", "POWER", 'badge'),
-		"IINST2" => array('Intensité instantanée 2', 'numeric', 'ampere', 0, "", "POWER", 'badge'),
-		"IINST3" => array('Intensité instantanée 3', 'numeric', 'ampere', 0, "", "POWER", 'badge'),
+		"IINST" => array('Intensité instantanée', 'numeric', 'A', 1, "", "POWER", 'default'),
+		"IINST1" => array('Intensité instantanée 1', 'numeric', 'A', 0, "", "POWER", 'default'),
+		"IINST2" => array('Intensité instantanée 2', 'numeric', 'A', 0, "", "POWER", 'default'),
+		"IINST3" => array('Intensité instantanée 3', 'numeric', 'A', 0, "", "POWER", 'default'),
 		"PPAP" => array('Puissance Apparente', 'numeric', 'W', 1, "", "POWER", 'badge'),
 		"OPTARIF" => array('Option tarif', 'string', '', 1, "", "GENERIC_INFO", 'badge'),
 		"DEMAIN" => array('Couleur demain', 'string', '', 0, "BBRH", "GENERIC_INFO", 'badge'),
@@ -60,11 +60,11 @@ class ecodevice_teleinfo extends eqLogic {
 		"BBRHPJR_evolution" => array('Evolution index (heures pleines jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
 		"EJPHN_evolution" => array('Evolution index (normal EJP)', 'numeric', 'W', 0, "EJP", "", 'badge'),
 		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "", 'badge'),
-		"ISOUSC" => array('Intensité souscrite', 'numeric', 'ampere', 1, "", "", 'badge'),
-		"IMAX" => array('Intensité maximale', 'numeric', 'ampere', 1, "", "", 'badge'),
-		"IMAX1" => array('Intensité maximale 1', 'numeric', 'ampere', 0, "", "", 'badge'),
-		"IMAX2" => array('Intensité maximale 2', 'numeric', 'ampere', 0, "", "", 'badge'),
-		"IMAX3" => array('Intensité maximale 3', 'numeric', 'ampere', 0, "", "", 'badge')
+		"ISOUSC" => array('Intensité souscrite', 'numeric', 'A', 1, "", "", 'badge'),
+		"IMAX" => array('Intensité maximale', 'numeric', 'A', 1, "", "", 'badge'),
+		"IMAX1" => array('Intensité maximale 1', 'numeric', 'A', 0, "", "", 'badge'),
+		"IMAX2" => array('Intensité maximale 2', 'numeric', 'A', 0, "", "", 'badge'),
+		"IMAX3" => array('Intensité maximale 3', 'numeric', 'A', 0, "", "", 'badge')
 		);
 	}
 

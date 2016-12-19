@@ -30,3 +30,9 @@ C'est tout à fait possible via https://github.com/guenneguezt/plugin-ecodevice[
 --
 Il faut d'abord aller voir sur http://forum.gce-electronics.com/t/eco-devices-et-fuel-c-est-pour-quand/1198/10[forum GCE]
 --
+
+.Existe-t-il un tuto pour ce plugin ?
+--
+Oui, elle n'a pas été rédigé par mes soins, mais elle a le mérite d'exister. Merci au rédacteur.
+http://blog.domadoo.fr/guides/jeedom-guide-dutilisation-plugin-ecodevice/
+--

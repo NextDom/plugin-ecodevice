@@ -327,83 +327,137 @@ class ecodevice extends eqLogic {
 						{
 							throw new Exception(__('Le compteur '.$eqLogicCompteur->getName().' doit être configuré en mode fuel dans l\'ecodevice.',__FILE__));
 						}
-					}
-					$xpathModele = '//count'.$gceid;
-					$status = $this->xmlstatus->xpath($xpathModele);
-					
-					if ( count($status) != 0 )
-					{
-						$nbimpulsion_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
-						$nbimpulsion = $nbimpulsion_cmd->execCmd();
-						$nbimpulsionminute_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionminute');
-						if ($nbimpulsion != $status[0]) {
-							log::add('ecodevice','debug',"Change nbimpulsion off ".$eqLogicCompteur->getName());
-							$lastCollectDate = $nbimpulsion_cmd->getCollectDate();
-							if ( $lastCollectDate == '' ) {
-								log::add('ecodevice','debug',"Change nbimpulsionminute 0");
-								$nbimpulsionminute = 0;
-							} else {
-								$DeltaSeconde = (time() - strtotime($lastCollectDate))*60;
-								if ( $DeltaSeconde != 0 )
-								{
-									if ( $status[0] > $nbimpulsion ) {
-										$DeltaValeur = $status[0] - $nbimpulsion;
-									} else {
-										$DeltaValeur = $status[0];
-									}
-									$nbimpulsionminute = round (($status[0] - $nbimpulsion)/(time() - strtotime($lastCollectDate))*60, 6);
-								} else {
-									$nbimpulsionminute = 0;
-								}
-							}
-							log::add('ecodevice','debug',"Change nbimpulsionminute ".$nbimpulsionminute);
-							$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
-							$nbimpulsionminute_cmd->event($nbimpulsionminute);
-						} else {
-							$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
-							$nbimpulsionminute_cmd->event(0);
-						}
-						$nbimpulsion_cmd->setCollectDate(date('Y-m-d H:i:s'));
-						$nbimpulsion_cmd->event($status[0]);
-					}
-					$xpathModele = '//c'.$gceid.'_fuel';
-					$status = $this->xmlstatus->xpath($xpathModele);
-					
-					if ( count($status) != 0 && $status[0] != "" )
-					{
-						$xpathModele = '//c'.$gceid.'day';
+						$xpathModele = '//count'.$gceid;
 						$status = $this->xmlstatus->xpath($xpathModele);
-						log::add('ecodevice','debug','duree fonctionnement '.$status[0]);
-						$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'tempsfonctionnement');
-						$tempsfonctionnement = $eqLogic_cmd->execCmd();
-						$eqLogic_cmd_evol = $eqLogicCompteur->getCmd(null, 'tempsfonctionnementminute');
-						if ($tempsfonctionnement != $status[0] * 3.6) {
-							if ( $eqLogic_cmd->getCollectDate() == '' ) {
-								$tempsfonctionnementminute = 0;
-							} else {
-								if ( $status[0] * 3.6 > $tempsfonctionnement ) {
-									$tempsfonctionnementminute = round (($status[0] * 3.6 - $tempsfonctionnement)/(time() - strtotime($eqLogic_cmd->getCollectDate()))*60, 6);
+						
+						if ( count($status) != 0 )
+						{
+							$nbimpulsion_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
+							$nbimpulsion = $nbimpulsion_cmd->execCmd();
+							$nbimpulsionminute_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionminute');
+							if ($nbimpulsion != $status[0]) {
+								log::add('ecodevice','debug',"Change nbimpulsion off ".$eqLogicCompteur->getName());
+								$lastCollectDate = $nbimpulsion_cmd->getCollectDate();
+								if ( $lastCollectDate == '' ) {
+									log::add('ecodevice','debug',"Change nbimpulsionminute 0");
+									$nbimpulsionminute = 0;
 								} else {
-									$tempsfonctionnementminute = round ($status[0] * 3.6/(time() - strtotime($eqLogic_cmd_evol->getCollectDate())*60), 6);
+									$DeltaSeconde = (time() - strtotime($lastCollectDate))*60;
+									if ( $DeltaSeconde != 0 )
+									{
+										if ( $status[0] > $nbimpulsion ) {
+											$DeltaValeur = $status[0] - $nbimpulsion;
+										} else {
+											$DeltaValeur = $status[0];
+										}
+										$nbimpulsionminute = round (($status[0] - $nbimpulsion)/(time() - strtotime($lastCollectDate))*60, 6);
+									} else {
+										$nbimpulsionminute = 0;
+									}
 								}
+								log::add('ecodevice','debug',"Change nbimpulsionminute ".$nbimpulsionminute);
+								$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+								$nbimpulsionminute_cmd->event($nbimpulsionminute);
+							} else {
+								$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+								$nbimpulsionminute_cmd->event(0);
 							}
-							$eqLogic_cmd_evol->setCollectDate(date('Y-m-d H:i:s'));
-							$eqLogic_cmd_evol->event($tempsfonctionnementminute);
-						} else {
-							$eqLogic_cmd_evol->setCollectDate(date('Y-m-d H:i:s'));
-							$eqLogic_cmd_evol->event(0);
+							$nbimpulsion_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$nbimpulsion_cmd->event($status[0]);
 						}
-						$eqLogic_cmd->setCollectDate(date('Y-m-d H:i:s'));
-						$eqLogic_cmd->event($status[0] * 3.6);
+						$xpathModele = '//c'.$gceid.'_fuel';
+						$status = $this->xmlstatus->xpath($xpathModele);
+						
+						if ( count($status) != 0 && $status[0] != "" )
+						{
+							$xpathModele = '//c'.$gceid.'day';
+							$status = $this->xmlstatus->xpath($xpathModele);
+							log::add('ecodevice','debug','duree fonctionnement '.$status[0]);
+							$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'tempsfonctionnement');
+							$tempsfonctionnement = $eqLogic_cmd->execCmd();
+							$eqLogic_cmd_evol = $eqLogicCompteur->getCmd(null, 'tempsfonctionnementminute');
+							if ($tempsfonctionnement != $status[0] * 3.6) {
+								if ( $eqLogic_cmd->getCollectDate() == '' ) {
+									$tempsfonctionnementminute = 0;
+								} else {
+									if ( $status[0] * 3.6 > $tempsfonctionnement ) {
+										$tempsfonctionnementminute = round (($status[0] * 3.6 - $tempsfonctionnement)/(time() - strtotime($eqLogic_cmd->getCollectDate()))*60, 6);
+									} else {
+										$tempsfonctionnementminute = round ($status[0] * 3.6/(time() - strtotime($eqLogic_cmd_evol->getCollectDate())*60), 6);
+									}
+								}
+								$eqLogic_cmd_evol->setCollectDate(date('Y-m-d H:i:s'));
+								$eqLogic_cmd_evol->event($tempsfonctionnementminute);
+							} else {
+								$eqLogic_cmd_evol->setCollectDate(date('Y-m-d H:i:s'));
+								$eqLogic_cmd_evol->event(0);
+							}
+							$eqLogic_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$eqLogic_cmd->event($status[0] * 3.6);
+						}
+						else
+						{
+							$xpathModele = '//c'.$gceid.'day';
+							$status = $this->xmlstatus->xpath($xpathModele);
+							log::add('ecodevice','debug','nb impulsion jour '.$status[0]);
+							$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionjour');
+							$eqLogic_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$eqLogic_cmd->event($status[0]);
+						}
 					}
 					else
 					{
-						$xpathModele = '//c'.$gceid.'day';
+						# mode eau
+						$xpathModele = '//meter'.$gceid;
 						$status = $this->xmlstatus->xpath($xpathModele);
-						log::add('ecodevice','debug','nb impulsion jour '.$status[0]);
-						$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionjour');
-						$eqLogic_cmd->setCollectDate(date('Y-m-d H:i:s'));
-						$eqLogic_cmd->event($status[0]);
+						
+						if ( count($status) != 0 )
+						{
+							$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'debitinstantane');
+							if ($eqLogic_cmd->execCmd() != $eqLogic_cmd->formatValue($status[0])) {
+								log::add('ecodevice','debug',"Change debitinstantane off ".$eqLogicCompteur->getName());
+								$eqLogic_cmd->setCollectDate('');
+								$eqLogic_cmd->event($status[0]);
+							}
+						}
+						$xpathModele = '//count'.$gceid;
+						$status = $this->xmlstatus->xpath($xpathModele);
+						
+						if ( count($status) != 0 )
+						{
+							$nbimpulsion_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsion');
+							$nbimpulsion = $nbimpulsion_cmd->execCmd();
+							$nbimpulsionminute_cmd = $eqLogicCompteur->getCmd(null, 'nbimpulsionminute');
+							if ($nbimpulsion != $status[0]) {
+								log::add('ecodevice','debug',"Change nbimpulsion off ".$eqLogicCompteur->getName());
+								$lastCollectDate = $nbimpulsion_cmd->getCollectDate();
+								if ( $lastCollectDate == '' ) {
+									log::add('ecodevice','debug',"Change nbimpulsionminute 0");
+									$nbimpulsionminute = 0;
+								} else {
+									$DeltaSeconde = (time() - strtotime($lastCollectDate))*60;
+									if ( $DeltaSeconde != 0 )
+									{
+										if ( $status[0] > $nbimpulsion ) {
+											$DeltaValeur = $status[0] - $nbimpulsion;
+										} else {
+											$DeltaValeur = $status[0];
+										}
+										$nbimpulsionminute = round (($status[0] - $nbimpulsion)/(time() - strtotime($lastCollectDate))*60, 6);
+									} else {
+										$nbimpulsionminute = 0;
+									}
+								}
+								log::add('ecodevice','debug',"Change nbimpulsionminute ".$nbimpulsionminute);
+								$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+								$nbimpulsionminute_cmd->event($nbimpulsionminute);
+							} else {
+								$nbimpulsionminute_cmd->setCollectDate(date('Y-m-d H:i:s'));
+								$nbimpulsionminute_cmd->event(0);
+							}
+							$nbimpulsion_cmd->setCollectDate(date('Y-m-d H:i:s'));
+							$nbimpulsion_cmd->event($status[0]);
+						}
 					}
 				}
 			}
@@ -465,6 +519,130 @@ class ecodevice extends eqLogic {
 				$statuscmd->event(1);
 			}
 		}
+	}
+
+	public function scan_rapide() {
+		if ( $this->getIsEnable() ) {
+			$statuscmd = $this->getCmd(null, 'status');
+			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
+			$count = 0;
+			while ( $this->xmlstatus === false && $count < 3 ) {
+				$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
+				$count++;
+			}
+			if ( $this->xmlstatus === false ) {
+				if ($statuscmd->execCmd() != 0) {
+					$statuscmd->setCollectDate(date('Y-m-d H:i:s'));
+					$statuscmd->event(0);
+				}
+				log::add('ecodevice','error',__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName()." get ".preg_replace("/:[^:]*@/", ":XXXX@", $this->getUrl()). 'status.xml');
+				return false;
+			}
+			foreach (self::byType('ecodevice_compteur') as $eqLogicCompteur) {
+				if ( $eqLogicCompteur->getIsEnable() && substr($eqLogicCompteur->getLogicalId(), 0, strpos($eqLogicCompteur->getLogicalId(),"_")) == $this->getId() ) {
+					$gceid = substr($eqLogicCompteur->getLogicalId(), strpos($eqLogicCompteur->getLogicalId(),"_")+2, 1);
+					if ( $eqLogicCompteur->getConfiguration('typecompteur') == "Fuel" )
+					{
+					}
+					else
+					{
+						# mode eau
+						$xpathModele = '//meter'.($gceid+2);
+						$status = $this->xmlstatus->xpath($xpathModele);
+						
+						if ( count($status) != 0 )
+						{
+							$eqLogic_cmd = $eqLogicCompteur->getCmd(null, 'debitinstantane');
+							if ($eqLogic_cmd->execCmd() != $eqLogic_cmd->formatValue($status[0])) {
+								log::add('ecodevice','debug',"Change debitinstantane off ".$eqLogicCompteur->getName());
+								$eqLogic_cmd->setCollectDate('');
+								$eqLogic_cmd->event($status[0]);
+							}
+						}
+					}
+				}
+			}
+			foreach (self::byType('ecodevice_teleinfo') as $eqLogicTeleinfo) {
+				if ( $eqLogicTeleinfo->getIsEnable() && substr($eqLogicTeleinfo->getLogicalId(), 0, strpos($eqLogicTeleinfo->getLogicalId(),"_")) == $this->getId() ) {
+					$gceid = substr($eqLogicTeleinfo->getLogicalId(), strpos($eqLogicTeleinfo->getLogicalId(),"_")+2, 1);
+					$xpathModele = '//response';
+					$status = $this->xmlstatus->xpath($xpathModele);
+					
+					if ( count($status) != 0 )
+					{
+						foreach($status[0] as $item => $data) {
+							$xpathModele = "//T".$gceid."_PPAP";
+							$status = $this->xmlstatus->xpath($xpathModele);
+							if ( count($status) != 0 )
+							{
+								$eqLogic_cmd = $eqLogicTeleinfo->getCmd(null, "PPAP");
+								if ( $eqLogic_cmd->execCmd() != $eqLogic_cmd->formatValue($status[0])) {
+									log::add('ecodevice','debug',"Change PPAP off ".$eqLogicCompteur->getName());
+									$eqLogic_cmd->setCollectDate('');
+									$eqLogic_cmd->event($status[0]);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public static function daemon() {
+		$starttime = microtime (true);
+		log::add('ecodevice','debug','cron start');
+		foreach (self::byType('ecodevice') as $eqLogic) {
+			$eqLogic->scan_rapide();
+		}
+		log::add('ecodevice','debug','cron stop');
+		$endtime = microtime (true);
+		if ( $endtime - $starttime < config::byKey('temporisation_lecture', 'ecodevice', 60, true) )
+		{
+			usleep(floor((config::byKey('temporisation_lecture', 'ecodevice') + $starttime - $endtime)*1000000));
+		}
+	}
+
+	public static function deamon_info() {
+		$return = array();
+		$return['log'] = '';
+		$return['state'] = 'nok';
+		$cron = cron::byClassAndFunction('ecodevice', 'daemon');
+		if (is_object($cron) && $cron->running()) {
+			$return['state'] = 'ok';
+		}
+		$return['launchable'] = 'ok';
+		return $return;
+	}
+
+	public static function deamon_start($_debug = false) {
+		self::deamon_stop();
+		$deamon_info = self::deamon_info();
+		if ($deamon_info['launchable'] != 'ok') {
+			throw new Exception(__('Veuillez vérifier la configuration', __FILE__));
+		}
+		$cron = cron::byClassAndFunction('ecodevice', 'daemon');
+		if (!is_object($cron)) {
+			throw new Exception(__('Tâche cron introuvable', __FILE__));
+		}
+		$cron->run();
+	}
+
+	public static function deamon_stop() {
+		$cron = cron::byClassAndFunction('ecodevice', 'daemon');
+		if (!is_object($cron)) {
+			throw new Exception(__('Tâche cron introuvable', __FILE__));
+		}
+		$cron->halt();
+	}
+
+	public static function deamon_changeAutoMode($_mode) {
+		$cron = cron::byClassAndFunction('ecodevice', 'daemon');
+		if (!is_object($cron)) {
+			throw new Exception(__('Tâche cron introuvable', __FILE__));
+		}
+		$cron->setEnable($_mode);
+		$cron->save();
 	}
     /*     * **********************Getteur Setteur*************************** */
 }
