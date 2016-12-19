@@ -30,41 +30,41 @@ class ecodevice_teleinfo extends eqLogic {
 
 	private function getListeDefaultCommandes()
 	{
-		return array("BASE" => array('Index (base)', 'numeric', 'W', 1, "BASE"),
-		"HCHC" => array('Index (heures creuses)', 'numeric', 'W', 1, "HC"),
-		"HCHP" => array('Index (heures pleines)', 'numeric', 'W', 1, "HC"),
-		"BBRHCJB" => array('Index (heures creuses jours bleus Tempo)', 'numeric', 'W', 0, "BBRH"),
-		"BBRHPJB" => array('Index (heures pleines jours bleus Tempo)', 'numeric', 'W', 0, "BBRH"),
-		"BBRHCJW" => array('Index (heures creuses jours blancs Tempo)', 'numeric', 'W', 0, "BBRH"),
-		"BBRHPJW" => array('Index (heures pleines jours blancs Tempo)', 'numeric', 'W', 0, "BBRH"),
-		"BBRHCJR" => array('Index (heures creuses jours rouges Tempo)', 'numeric', 'W', 0, "BBRH"),
-		"BBRHPJR" => array('Index (heures pleines jours rouges Tempo)', 'numeric', 'W', 0, "BBRH"),
-		"EJPHN" => array('Index (normal EJP)', 'numeric', 'W', 0, "EJP"),
-		"EJPHPM" => array('Index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP"),
-		"IINST" => array('Intensité instantanée', 'numeric', 'ampere', 1, ""),
-		"IINST1" => array('Intensité instantanée 1', 'numeric', 'ampere', 0, ""),
-		"IINST2" => array('Intensité instantanée 2', 'numeric', 'ampere', 0, ""),
-		"IINST3" => array('Intensité instantanée 3', 'numeric', 'ampere', 0, ""),
-		"PPAP" => array('Puissance Apparente', 'numeric', 'W', 1, ""),
-		"OPTARIF" => array('Option tarif', 'string', '', 1, ""),
-		"DEMAIN" => array('Couleur demain', 'string', '', 0, "BBRH"),
-		"PTEC" => array('Tarif en cours', 'string', '', 1, ""),
-		"BASE_evolution" => array('Evolution index (base)', 'numeric', 'W/min', 1, "BASE"),
-		"HCHC_evolution" => array('Evolution index (heures creuses)', 'numeric', 'W/min', 1, "HC"),
-		"HCHP_evolution" => array('Evolution index (heures pleines)', 'numeric', 'W/min', 1, "HC"),
-		"BBRHCJB_evolution" => array('Evolution index (heures creuses jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH"),
-		"BBRHPJB_evolution" => array('Evolution index (heures pleines jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH"),
-		"BBRHCJW_evolution" => array('Evolution index (heures creuses jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH"),
-		"BBRHPJW_evolution" => array('Evolution index (heures pleines jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH"),
-		"BBRHCJR_evolution" => array('Evolution index (heures creuses jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH"),
-		"BBRHPJR_evolution" => array('Evolution index (heures pleines jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH"),
-		"EJPHN_evolution" => array('Evolution index (normal EJP)', 'numeric', 'W', 0, "EJP"),
-		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP"),
-		"ISOUSC" => array('Intensité souscrite', 'numeric', 'ampere', 1, ""),
-		"IMAX" => array('Intensité maximale', 'numeric', 'ampere', 1, ""),
-		"IMAX1" => array('Intensité maximale 1', 'numeric', 'ampere', 0, ""),
-		"IMAX2" => array('Intensité maximale 2', 'numeric', 'ampere', 0, ""),
-		"IMAX3" => array('Intensité maximale 3', 'numeric', 'ampere', 0, "")
+		return array("BASE" => array('Index (base)', 'numeric', 'W', 1, "BASE", "CONSUMPTION", 'badge'),
+		"HCHC" => array('Index (heures creuses)', 'numeric', 'W', 1, "HC", "CONSUMPTION", 'badge'),
+		"HCHP" => array('Index (heures pleines)', 'numeric', 'W', 1, "HC", "CONSUMPTION", 'badge'),
+		"BBRHCJB" => array('Index (heures creuses jours bleus Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
+		"BBRHPJB" => array('Index (heures pleines jours bleus Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
+		"BBRHCJW" => array('Index (heures creuses jours blancs Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
+		"BBRHPJW" => array('Index (heures pleines jours blancs Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
+		"BBRHCJR" => array('Index (heures creuses jours rouges Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
+		"BBRHPJR" => array('Index (heures pleines jours rouges Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
+		"EJPHN" => array('Index (normal EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge'),
+		"EJPHPM" => array('Index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge'),
+		"IINST" => array('Intensité instantanée', 'numeric', 'ampere', 1, "", "POWER", 'badge'),
+		"IINST1" => array('Intensité instantanée 1', 'numeric', 'ampere', 0, "", "POWER", 'badge'),
+		"IINST2" => array('Intensité instantanée 2', 'numeric', 'ampere', 0, "", "POWER", 'badge'),
+		"IINST3" => array('Intensité instantanée 3', 'numeric', 'ampere', 0, "", "POWER", 'badge'),
+		"PPAP" => array('Puissance Apparente', 'numeric', 'W', 1, "", "POWER", 'badge'),
+		"OPTARIF" => array('Option tarif', 'string', '', 1, "", "GENERIC_INFO", 'badge'),
+		"DEMAIN" => array('Couleur demain', 'string', '', 0, "BBRH", "GENERIC_INFO", 'badge'),
+		"PTEC" => array('Tarif en cours', 'string', '', 1, "", "GENERIC_INFO", 'badge'),
+		"BASE_evolution" => array('Evolution index (base)', 'numeric', 'W/min', 1, "BASE", "", 'badge'),
+		"HCHC_evolution" => array('Evolution index (heures creuses)', 'numeric', 'W/min', 1, "HC", "", 'badge'),
+		"HCHP_evolution" => array('Evolution index (heures pleines)', 'numeric', 'W/min', 1, "HC", "", 'badge'),
+		"BBRHCJB_evolution" => array('Evolution index (heures creuses jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
+		"BBRHPJB_evolution" => array('Evolution index (heures pleines jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
+		"BBRHCJW_evolution" => array('Evolution index (heures creuses jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
+		"BBRHPJW_evolution" => array('Evolution index (heures pleines jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
+		"BBRHCJR_evolution" => array('Evolution index (heures creuses jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
+		"BBRHPJR_evolution" => array('Evolution index (heures pleines jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
+		"EJPHN_evolution" => array('Evolution index (normal EJP)', 'numeric', 'W', 0, "EJP", "", 'badge'),
+		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "", 'badge'),
+		"ISOUSC" => array('Intensité souscrite', 'numeric', 'ampere', 1, "", "", 'badge'),
+		"IMAX" => array('Intensité maximale', 'numeric', 'ampere', 1, "", "", 'badge'),
+		"IMAX1" => array('Intensité maximale 1', 'numeric', 'ampere', 0, "", "", 'badge'),
+		"IMAX2" => array('Intensité maximale 2', 'numeric', 'ampere', 0, "", "", 'badge'),
+		"IMAX3" => array('Intensité maximale 3', 'numeric', 'ampere', 0, "", "", 'badge')
 		);
 	}
 
@@ -84,6 +84,9 @@ class ecodevice_teleinfo extends eqLogic {
 					$cmd->setUnite($data[2]);
 					$cmd->setIsVisible($data[3]);
 					$cmd->setEventOnly(1);
+					$cmd->setDisplay('generic_type',$data[5]);
+					$cmd->setTemplate('dashboard', $data[6]);
+					$cmd->setTemplate('mobile', $data[6]);  
 					$cmd->save();
 				}
 			} else {
@@ -110,7 +113,24 @@ class ecodevice_teleinfo extends eqLogic {
 					$cmd->setUnite($data[2]);
 					$cmd->setIsVisible($data[3]);
 					$cmd->setEventOnly(1);
+					$cmd->setDisplay('generic_type',$data[5]);
+					$cmd->setTemplate('dashboard', $data[6]);
+					$cmd->setTemplate('mobile', $data[6]);  
 					$cmd->save();
+				}
+				else
+				{
+					if ( $cmd->getDisplay('generic_type') == "" )
+					{
+						$cmd->setDisplay('generic_type',$data[5]);
+						$cmd->save();
+					}
+					if ( $cmd->getTemplate('dashboard') == "" )
+					{
+						$cmd->setTemplate('dashboard', $data[6]);
+						$cmd->setTemplate('mobile', $data[6]);  
+						$cmd->save();
+					}
 				}
 			} else {
 				$cmd = $this->getCmd(null, $label);

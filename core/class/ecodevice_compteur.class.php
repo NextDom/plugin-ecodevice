@@ -23,6 +23,14 @@ class ecodevice_compteur extends eqLogic {
     /*     * *************************Attributs****************************** */
 
     /*     * ***********************Methode static*************************** */
+	static function getTypeCompteur()
+	{
+		return array(	__('Eau',__FILE__),
+						__('Fuel',__FILE__),
+						__('Gaz',__FILE__),
+						__('Electricité',__FILE__));
+	}
+
 	public function getListeName()
 	{
 		return (substr($this->getLogicalId(), strpos($this->getLogicalId(),"_")+2, 1)+1)." - ".parent::getName();
@@ -39,6 +47,7 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsion->setSubType('numeric');
 			$nbimpulsion->setLogicalId('nbimpulsion');
 			$nbimpulsion->setEventOnly(1);
+			$nbimpulsion->setDisplay('generic_type','GENERIC_INFO');
 			$nbimpulsion->save();
 		}
         $nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
@@ -52,6 +61,7 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionminute->setUnite("Imp/min");
 			$nbimpulsionminute->setEventOnly(1);
 			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
+			$nbimpulsionminute->setDisplay('generic_type','GENERIC_INFO');
 			$nbimpulsionminute->save();
 		}
         $nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
@@ -63,6 +73,7 @@ class ecodevice_compteur extends eqLogic {
 			$nbimpulsionjour->setSubType('numeric');
 			$nbimpulsionjour->setLogicalId('nbimpulsionjour');
 			$nbimpulsionjour->setEventOnly(1);
+			$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
 			$nbimpulsionjour->save();
 		}
 
@@ -77,6 +88,7 @@ class ecodevice_compteur extends eqLogic {
 			$tempsfonctionnement->setUnite("sec");
 			$tempsfonctionnement->setEventOnly(1);
 			$tempsfonctionnement->setIsVisible(0);
+			$tempsfonctionnement->setDisplay('generic_type','GENERIC_INFO');
 			$tempsfonctionnement->save();
 		}
         $tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
@@ -91,62 +103,129 @@ class ecodevice_compteur extends eqLogic {
 			$tempsfonctionnementminute->setConfiguration('calcul', '#brut#');
 			$tempsfonctionnementminute->setEventOnly(1);
 			$tempsfonctionnementminute->setIsVisible(0);
+			$tempsfonctionnementminute->setDisplay('generic_type','GENERIC_INFO');
 			$tempsfonctionnementminute->save();
+		}
+	}
+
+	public function preUpdate()
+	{
+		if ( $this->getConfiguration('typecompteur') == "" )
+		{
+			throw new Exception(__('Le type de compteur pour '.$this->getName().' doit être définit.',__FILE__));
 		}
 	}
 
 	public function postUpdate()
 	{
-        $nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
-        if ( ! is_object($nbimpulsionminute) ) {
-            $nbimpulsionminute = new ecodevice_compteurCmd();
-			$nbimpulsionminute->setName('Nombre d impulsion par minute');
-			$nbimpulsionminute->setEqLogic_id($this->getId());
-			$nbimpulsionminute->setType('info');
-			$nbimpulsionminute->setSubType('numeric');
-			$nbimpulsionminute->setLogicalId('nbimpulsionminute');
-			$nbimpulsionminute->setUnite("Imp/min");
-			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
-			$nbimpulsionminute->setEventOnly(1);
-			$nbimpulsionminute->save();
+ 		if ( $this->getConfiguration('typecompteur') == "Fuel" )
+		{
+			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+			if ( ! is_object($tempsfonctionnement) ) {
+				$tempsfonctionnement = new ecodevice_compteurCmd();
+				$tempsfonctionnement->setName('Temps de fonctionnement');
+				$tempsfonctionnement->setEqLogic_id($this->getId());
+				$tempsfonctionnement->setType('info');
+				$tempsfonctionnement->setSubType('numeric');
+				$tempsfonctionnement->setLogicalId('tempsfonctionnement');
+				$tempsfonctionnement->setUnite("min");
+				$tempsfonctionnement->setEventOnly(1);
+				$tempsfonctionnement->setIsVisible(0);
+				$tempsfonctionnement->setDisplay('generic_type','GENERIC_INFO');
+				$tempsfonctionnement->save();
+			}
+			else
+			{
+				if ( $tempsfonctionnement->getDisplay('generic_type') == "" )
+				{
+					$tempsfonctionnement->setDisplay('generic_type','GENERIC_INFO');
+					$tempsfonctionnement->save();
+				}
+			}
+			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+			if ( ! is_object($tempsfonctionnementminute) ) {
+				$tempsfonctionnementminute = new ecodevice_compteurCmd();
+				$tempsfonctionnementminute->setName('Temps de fonctionnement par minute');
+				$tempsfonctionnementminute->setEqLogic_id($this->getId());
+				$tempsfonctionnementminute->setType('info');
+				$tempsfonctionnementminute->setSubType('numeric');
+				$tempsfonctionnementminute->setLogicalId('tempsfonctionnementminute');
+				$tempsfonctionnementminute->setUnite("min/min");
+				$tempsfonctionnementminute->setConfiguration('calcul', '#brut#');
+				$tempsfonctionnementminute->setEventOnly(1);
+				$tempsfonctionnementminute->setIsVisible(0);
+				$tempsfonctionnementminute->setDisplay('generic_type','GENERIC_INFO');
+				$tempsfonctionnementminute->save();
+			}
+			else
+			{
+				if ( $tempsfonctionnementminute->getDisplay('generic_type') == "" )
+				{
+					$tempsfonctionnementminute->setDisplay('generic_type','GENERIC_INFO');
+					$tempsfonctionnementminute->save();
+				}
+			}
+			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+			if ( is_object($nbimpulsionminute) ) {
+				#$nbimpulsionminute->remove();
+			}
+			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+			if ( is_object($nbimpulsionjour) ) {
+				#$nbimpulsionjour->remove();
+			}
 		}
-        $nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
-        if ( ! is_object($nbimpulsionjour) ) {
-            $nbimpulsionjour = new ecodevice_compteurCmd();
-			$nbimpulsionjour->setName('Nombre d impulsion jour');
-			$nbimpulsionjour->setEqLogic_id($this->getId());
-			$nbimpulsionjour->setType('info');
-			$nbimpulsionjour->setSubType('numeric');
-			$nbimpulsionjour->setLogicalId('nbimpulsionjour');
-			$nbimpulsionjour->setEventOnly(1);
-			$nbimpulsionjour->save();
-		}
-        $tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
-        if ( ! is_object($tempsfonctionnement) ) {
-            $tempsfonctionnement = new ecodevice_compteurCmd();
-			$tempsfonctionnement->setName('Temps de fonctionnement');
-			$tempsfonctionnement->setEqLogic_id($this->getId());
-			$tempsfonctionnement->setType('info');
-			$tempsfonctionnement->setSubType('numeric');
-			$tempsfonctionnement->setLogicalId('tempsfonctionnement');
-			$tempsfonctionnement->setUnite("min");
-			$tempsfonctionnement->setEventOnly(1);
-			$tempsfonctionnement->setIsVisible(0);
-			$tempsfonctionnement->save();
-		}
-        $tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
-        if ( ! is_object($tempsfonctionnementminute) ) {
-            $tempsfonctionnementminute = new ecodevice_compteurCmd();
-			$tempsfonctionnementminute->setName('Temps de fonctionnement par minute');
-			$tempsfonctionnementminute->setEqLogic_id($this->getId());
-			$tempsfonctionnementminute->setType('info');
-			$tempsfonctionnementminute->setSubType('numeric');
-			$tempsfonctionnementminute->setLogicalId('tempsfonctionnementminute');
-			$tempsfonctionnementminute->setUnite("min/min");
-			$tempsfonctionnementminute->setConfiguration('calcul', '#brut#');
-			$tempsfonctionnementminute->setEventOnly(1);
-			$tempsfonctionnementminute->setIsVisible(0);
-			$tempsfonctionnementminute->save();
+		else
+		{
+			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+			if ( is_object($tempsfonctionnement) ) {
+				#$tempsfonctionnement->remove();
+			}
+			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+			if ( is_object($tempsfonctionnementminute) ) {
+				#$tempsfonctionnementminute->remove();
+			}
+			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+			if ( ! is_object($nbimpulsionminute) ) {
+				$nbimpulsionminute = new ecodevice_compteurCmd();
+				$nbimpulsionminute->setName('Nombre d impulsion par minute');
+				$nbimpulsionminute->setEqLogic_id($this->getId());
+				$nbimpulsionminute->setType('info');
+				$nbimpulsionminute->setSubType('numeric');
+				$nbimpulsionminute->setLogicalId('nbimpulsionminute');
+				$nbimpulsionminute->setUnite("Imp/min");
+				$nbimpulsionminute->setConfiguration('calcul', '#brut#');
+				$nbimpulsionminute->setEventOnly(1);
+				$nbimpulsionminute->setDisplay('generic_type','GENERIC_INFO');
+				$nbimpulsionminute->save();
+			}
+			else
+			{
+				if ( $nbimpulsionminute->getDisplay('generic_type') == "" )
+				{
+					$nbimpulsionminute->setDisplay('generic_type','GENERIC_INFO');
+					$nbimpulsionminute->save();
+				}
+			}
+			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+			if ( ! is_object($nbimpulsionjour) ) {
+				$nbimpulsionjour = new ecodevice_compteurCmd();
+				$nbimpulsionjour->setName('Nombre d impulsion jour');
+				$nbimpulsionjour->setEqLogic_id($this->getId());
+				$nbimpulsionjour->setType('info');
+				$nbimpulsionjour->setSubType('numeric');
+				$nbimpulsionjour->setLogicalId('nbimpulsionjour');
+				$nbimpulsionjour->setEventOnly(1);
+				$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
+				$nbimpulsionjour->save();
+			}
+			else
+			{
+				if ( $nbimpulsionjour->getDisplay('generic_type') == "" )
+				{
+					$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
+					$nbimpulsionjour->save();
+				}
+			}
 		}
 	}
 

@@ -48,14 +48,14 @@ function ecodevice_update() {
 		$cron->stop();
 		$cron->remove();
 	}
+	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
+		$eqLogic->save();
+	}
 	foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
 		$SubeqLogic->save();
 	}
 	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
 		$SubeqLogic->save();
-	}
-	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
-		$eqLogic->save();
 	}
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 }

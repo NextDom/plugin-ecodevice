@@ -43,7 +43,20 @@
 					<div class="col-sm-10">
 					<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-label-text="{{Activer}}" data-l1key="isEnable" checked/>Activer</label>
 					<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-label-text="{{Visible}}" data-l1key="isVisible" checked/>Visible</label>
-					</div>
+				</div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" >{{Type}}</label>
+                    <div class="col-lg-3">
+                        <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="typecompteur">
+                            <option value="">{{Sans}}</option>
+                            <?php
+                            foreach (ecodevice_compteur::getTypeCompteur() as $object) {
+                                echo '<option value="' . $object . '">' . $object . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
             </fieldset> 
         </form>
 

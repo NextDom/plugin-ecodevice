@@ -1,4 +1,9 @@
 [panel,primary]
+.Je n'arrive pas a accéder aux sous indicateurs ?
+--
+Il faut dans le menu gauche cliquer sur l'icône suivant pour y avoir accès : image:../images/acces_sous_indicateur.jpg[la]
+--
+
 .Quelle est la fréquence de rafraichissement des informations ?
 --
 Par défaut c'est toutes les minutes.
@@ -19,4 +24,9 @@ link:https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZEPTTM
 .J'aimerai remonter des erreurs/modifications directement dans le code ?
 --
 C'est tout à fait possible via https://github.com/guenneguezt/plugin-ecodevice[github]
+--
+
+.Comment paramétrer le compteur en mode fuel ?
+--
+Il faut d'abord aller voir sur http://forum.gce-electronics.com/t/eco-devices-et-fuel-c-est-pour-quand/1198/10[forum GCE]
 --
