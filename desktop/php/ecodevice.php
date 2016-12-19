@@ -169,7 +169,6 @@ sendVarToJS('eqType', 'ecodevice');
                     <th style="width: 50px;">#</th>
                     <th style="width: 230px;">{{Nom}}</th>
                     <th style="width: 110px;">{{Sous-Type}}</th>
-                    <th>{{Valeur}}</th>
                     <th style="width: 100px;">{{Unité}}</th>
                     <th style="width: 200px;">{{Paramètres}}</th>
                     <th style="width: 100px;"></th>

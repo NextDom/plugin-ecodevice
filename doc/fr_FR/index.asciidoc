@@ -36,9 +36,13 @@ Puis définir :
 image::../images/ecodevice_screenshot1.jpg[]
 
 Vous retrouverez l'ensemble des élements de la carte dans le menu à gauche en clickant sur l'icone de celle-ci.
+
 == Installation/Paramétrage ==
+
 == FAQ ==
+
 include::faq.asciidoc[]
 
 == Changelog ==
+
 include::changelog.asciidoc[]

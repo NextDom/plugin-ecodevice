@@ -48,13 +48,14 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label">{{Tarification :}}</label>
 					<div class="col-sm-5">
-						<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tarification">
+						<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tarification" id="tarification">
 							<option value="">Sans</option>
 							<option value="BASE">Base</option>
 							<option value="HC">Heure creuse/Heure pleine</option>
 							<option value="BBRH">Tempo</option>
 							<option value="EJP">EJP</option>
 						</select>
+						<label>{{Les indicateurs sont regénérés en cas de changement de tarif après sauvegarde.}}</label>
 					</div>
 				</div>
             </fieldset> 
@@ -67,7 +68,6 @@
                     <th style="width: 50px;">#</th>
                     <th style="width: 230px;">{{Nom}}</th>
                     <th style="width: 110px;">{{Sous-Type}}</th>
-                    <th>{{Valeur}}</th>
                     <th style="width: 100px;">{{Unité}}</th>
                     <th style="width: 200px;">{{Paramètres}}</th>
                     <th style="width: 100px;"></th>

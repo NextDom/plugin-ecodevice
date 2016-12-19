@@ -28,7 +28,15 @@ C'est tout à fait possible via https://github.com/guenneguezt/plugin-ecodevice[
 
 .Comment paramétrer le compteur en mode fuel ?
 --
-Il faut d'abord aller voir sur http://forum.gce-electronics.com/t/eco-devices-et-fuel-c-est-pour-quand/1198/10[forum GCE]
+Pour le calcul du débit de fuel en une heure de fonctionnement, il faut connaître le marquage de votre gicleur de fuel. Pour celà vous trouverez les informations dans http://fr.cd.danfoss.com/PCMPDF/DKBDPD060A204.pdf[le doc suivant].
+
+La valeur donné est en USgal/Heure avec la correspondance en Kg/H.
+
+Pour la densité du fuel, on peut prendre 820Kg/M3 et une pression de 7 bar.
+
+Donc si vous avez un gicleur marqué 0.65S : 2.67 kg/h (suivant le tableau Danfoss).
+2.67x0.82=2.1894 Litres a L'heure.
+Cela donne une indication "approximative" de votre consommation.
 --
 
 .Existe-t-il un tuto pour ce plugin ?

@@ -30,112 +30,106 @@ class ecodevice_teleinfo extends eqLogic {
 
 	private function getListeDefaultCommandes()
 	{
-		return array("BASE" => array('Index (base)', 'numeric', 'W', 1, "BASE", "CONSUMPTION", 'badge'),
-		"HCHC" => array('Index (heures creuses)', 'numeric', 'W', 1, "HC", "CONSUMPTION", 'badge'),
-		"HCHP" => array('Index (heures pleines)', 'numeric', 'W', 1, "HC", "CONSUMPTION", 'badge'),
-		"BBRHCJB" => array('Index (heures creuses jours bleus Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
-		"BBRHPJB" => array('Index (heures pleines jours bleus Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
-		"BBRHCJW" => array('Index (heures creuses jours blancs Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
-		"BBRHPJW" => array('Index (heures pleines jours blancs Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
-		"BBRHCJR" => array('Index (heures creuses jours rouges Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
-		"BBRHPJR" => array('Index (heures pleines jours rouges Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge'),
-		"EJPHN" => array('Index (normal EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge'),
-		"EJPHPM" => array('Index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge'),
-		"IINST" => array('Intensité instantanée', 'numeric', 'A', 1, "", "POWER", 'default'),
-		"IINST1" => array('Intensité instantanée 1', 'numeric', 'A', 0, "", "POWER", 'default'),
-		"IINST2" => array('Intensité instantanée 2', 'numeric', 'A', 0, "", "POWER", 'default'),
-		"IINST3" => array('Intensité instantanée 3', 'numeric', 'A', 0, "", "POWER", 'default'),
-		"PPAP" => array('Puissance Apparente', 'numeric', 'W', 1, "", "POWER", 'badge'),
-		"OPTARIF" => array('Option tarif', 'string', '', 1, "", "GENERIC_INFO", 'badge'),
-		"DEMAIN" => array('Couleur demain', 'string', '', 0, "BBRH", "GENERIC_INFO", 'badge'),
-		"PTEC" => array('Tarif en cours', 'string', '', 1, "", "GENERIC_INFO", 'badge'),
-		"BASE_evolution" => array('Evolution index (base)', 'numeric', 'W/min', 1, "BASE", "", 'badge'),
-		"HCHC_evolution" => array('Evolution index (heures creuses)', 'numeric', 'W/min', 1, "HC", "", 'badge'),
-		"HCHP_evolution" => array('Evolution index (heures pleines)', 'numeric', 'W/min', 1, "HC", "", 'badge'),
-		"BBRHCJB_evolution" => array('Evolution index (heures creuses jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
-		"BBRHPJB_evolution" => array('Evolution index (heures pleines jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
-		"BBRHCJW_evolution" => array('Evolution index (heures creuses jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
-		"BBRHPJW_evolution" => array('Evolution index (heures pleines jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
-		"BBRHCJR_evolution" => array('Evolution index (heures creuses jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
-		"BBRHPJR_evolution" => array('Evolution index (heures pleines jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge'),
-		"EJPHN_evolution" => array('Evolution index (normal EJP)', 'numeric', 'W', 0, "EJP", "", 'badge'),
-		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "", 'badge'),
-		"ISOUSC" => array('Intensité souscrite', 'numeric', 'A', 1, "", "", 'badge'),
-		"IMAX" => array('Intensité maximale', 'numeric', 'A', 1, "", "", 'badge'),
-		"IMAX1" => array('Intensité maximale 1', 'numeric', 'A', 0, "", "", 'badge'),
-		"IMAX2" => array('Intensité maximale 2', 'numeric', 'A', 0, "", "", 'badge'),
-		"IMAX3" => array('Intensité maximale 3', 'numeric', 'A', 0, "", "", 'badge')
+		return array("BASE" => array('Index (base)', 'numeric', 'W', 1, "BASE", "CONSUMPTION", 'badge', ''),
+		"HCHC" => array('Index (heures creuses)', 'numeric', 'W', 1, "HC", "CONSUMPTION", 'badge', ''),
+		"HCHP" => array('Index (heures pleines)', 'numeric', 'W', 1, "HC", "CONSUMPTION", 'badge', ''),
+		"BBRHCJB" => array('Index (heures creuses jours bleus Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge', ''),
+		"BBRHPJB" => array('Index (heures pleines jours bleus Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge', ''),
+		"BBRHCJW" => array('Index (heures creuses jours blancs Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge', ''),
+		"BBRHPJW" => array('Index (heures pleines jours blancs Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge', ''),
+		"BBRHCJR" => array('Index (heures creuses jours rouges Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge', ''),
+		"BBRHPJR" => array('Index (heures pleines jours rouges Tempo)', 'numeric', 'W', 0, "BBRH", "CONSUMPTION", 'badge', ''),
+		"EJPHN" => array('Index (normal EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge', ''),
+		"EJPHPM" => array('Index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "CONSUMPTION", 'badge', ''),
+		"IINST" => array('Intensité instantanée', 'numeric', 'A', 1, "", "POWER", 'default', 'Mono'),
+		"IINST1" => array('Intensité instantanée 1', 'numeric', 'A', 0, "", "POWER", 'default', 'Tri'),
+		"IINST2" => array('Intensité instantanée 2', 'numeric', 'A', 0, "", "POWER", 'default', 'Tri'),
+		"IINST3" => array('Intensité instantanée 3', 'numeric', 'A', 0, "", "POWER", 'default', 'Tri'),
+		"PPAP" => array('Puissance Apparente', 'numeric', 'W', 1, "", "POWER", 'badge', ''),
+		"OPTARIF" => array('Option tarif', 'string', '', 1, "", "GENERIC_INFO", 'badge', ''),
+		"DEMAIN" => array('Couleur demain', 'string', '', 0, "BBRH", "GENERIC_INFO", 'badge', ''),
+		"PTEC" => array('Tarif en cours', 'string', '', 1, "", "GENERIC_INFO", 'badge', ''),
+		"BASE_evolution" => array('Evolution index (base)', 'numeric', 'W/min', 1, "BASE", "", 'badge', ''),
+		"HCHC_evolution" => array('Evolution index (heures creuses)', 'numeric', 'W/min', 1, "HC", "", 'badge', ''),
+		"HCHP_evolution" => array('Evolution index (heures pleines)', 'numeric', 'W/min', 1, "HC", "", 'badge', ''),
+		"BBRHCJB_evolution" => array('Evolution index (heures creuses jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge', ''),
+		"BBRHPJB_evolution" => array('Evolution index (heures pleines jours bleus Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge', ''),
+		"BBRHCJW_evolution" => array('Evolution index (heures creuses jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge', ''),
+		"BBRHPJW_evolution" => array('Evolution index (heures pleines jours blancs Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge', ''),
+		"BBRHCJR_evolution" => array('Evolution index (heures creuses jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge', ''),
+		"BBRHPJR_evolution" => array('Evolution index (heures pleines jours rouges Tempo)', 'numeric', 'W/min', 0, "BBRH", "", 'badge', ''),
+		"EJPHN_evolution" => array('Evolution index (normal EJP)', 'numeric', 'W', 0, "EJP", "", 'badge', ''),
+		"EJPHPM_evolution" => array('Evolution index (pointe mobile EJP)', 'numeric', 'W', 0, "EJP", "", 'badge', ''),
+		"ISOUSC" => array('Intensité souscrite', 'numeric', 'A', 1, "", "", 'badge', ''),
+		"IMAX" => array('Intensité maximale', 'numeric', 'A', 1, "", "", 'badge', 'Mono'),
+		"IMAX1" => array('Intensité maximale 1', 'numeric', 'A', 0, "", "", 'badge', 'Tri'),
+		"IMAX2" => array('Intensité maximale 2', 'numeric', 'A', 0, "", "", 'badge', 'Tri'),
+		"IMAX3" => array('Intensité maximale 3', 'numeric', 'A', 0, "", "", 'badge', 'Tri')
 		);
 	}
 
-	public function postInsert()
+	public function preUpdate()
 	{
-		foreach( $this->getListeDefaultCommandes() as $label => $data)
-		{
-			if ( $this->getConfiguration('tarification') == $data[4] || $data[4] == "" ) {
-				$cmd = $this->getCmd(null, $label);
-				if ( ! is_object($cmd) ) {
-					$cmd = new ecodevice_teleinfoCmd();
-					$cmd->setName($data[0]);
-					$cmd->setEqLogic_id($this->getId());
-					$cmd->setType('info');
-					$cmd->setSubType($data[1]);
-					$cmd->setLogicalId($label);
-					$cmd->setUnite($data[2]);
-					$cmd->setIsVisible($data[3]);
-					$cmd->setEventOnly(1);
-					$cmd->setDisplay('generic_type',$data[5]);
-					$cmd->setTemplate('dashboard', $data[6]);
-					$cmd->setTemplate('mobile', $data[6]);  
-					$cmd->save();
+		if ( $this->getIsEnable() ) {
+			foreach (self::byType('ecodevice') as $eqLogic) {
+				if ( substr($this->getLogicalId(), 0, strpos($this->getLogicalId(),"_")) == $eqLogic->getId() ) {
+					$phase = $eqLogic->GetPhase(substr($this->getLogicalId(), strpos($this->getLogicalId(),"_")+2, 1));
+					log::add('ecodevice','debug','Detection phase '.$phase);
 				}
-			} else {
-				$cmd = $this->getCmd(null, $label);
-				if ( is_object($cmd) ) {
-					$cmd->remove();
-				}
+			}
+			if ( $phase == "" )
+			{
+				throw new Exception(__('Le type de compteur est introuvable. Vérifier la communication entre l\'ecodevice et votre compteur.',__FILE__));
 			}
 		}
 	}
 
 	public function postUpdate() {
-		foreach( $this->getListeDefaultCommandes() as $label => $data)
-		{
-			if ( $this->getConfiguration('tarification') == "" || $this->getConfiguration('tarification') == $data[4] || $data[4] == "" ) {
-				$cmd = $this->getCmd(null, $label);
-				if ( ! is_object($cmd) ) {
-					$cmd = new ecodevice_teleinfoCmd();
-					$cmd->setName($data[0]);
-					$cmd->setEqLogic_id($this->getId());
-					$cmd->setType('info');
-					$cmd->setSubType($data[1]);
-					$cmd->setLogicalId($label);
-					$cmd->setUnite($data[2]);
-					$cmd->setIsVisible($data[3]);
-					$cmd->setEventOnly(1);
-					$cmd->setDisplay('generic_type',$data[5]);
-					$cmd->setTemplate('dashboard', $data[6]);
-					$cmd->setTemplate('mobile', $data[6]);  
-					$cmd->save();
+		if ( $this->getIsEnable() ) {
+			foreach (self::byType('ecodevice') as $eqLogic) {
+				if ( substr($this->getLogicalId(), 0, strpos($this->getLogicalId(),"_")) == $eqLogic->getId() ) {
+					$phase = $eqLogic->GetPhase(substr($this->getLogicalId(), strpos($this->getLogicalId(),"_")+2, 1));
+					log::add('ecodevice','debug','Detection phase '.$phase);
 				}
-				else
-				{
-					if ( $cmd->getDisplay('generic_type') == "" )
-					{
+			}
+			foreach( $this->getListeDefaultCommandes() as $label => $data)
+			{
+				if ( ( $this->getConfiguration('tarification') == "" || $this->getConfiguration('tarification') == $data[4] || $data[4] == "" ) && ( $phase == $data[7] || $data[7] == "" ) ) {
+					$cmd = $this->getCmd(null, $label);
+					if ( ! is_object($cmd) ) {
+						$cmd = new ecodevice_teleinfoCmd();
+						$cmd->setName($data[0]);
+						$cmd->setEqLogic_id($this->getId());
+						$cmd->setType('info');
+						$cmd->setSubType($data[1]);
+						$cmd->setLogicalId($label);
+						$cmd->setUnite($data[2]);
+						$cmd->setIsVisible($data[3]);
+						$cmd->setEventOnly(1);
 						$cmd->setDisplay('generic_type',$data[5]);
-						$cmd->save();
-					}
-					if ( $cmd->getTemplate('dashboard') == "" )
-					{
 						$cmd->setTemplate('dashboard', $data[6]);
 						$cmd->setTemplate('mobile', $data[6]);  
 						$cmd->save();
 					}
-				}
-			} else {
-				$cmd = $this->getCmd(null, $label);
-				if ( is_object($cmd) ) {
-					$cmd->remove();
+					else
+					{
+						if ( $cmd->getDisplay('generic_type') == "" )
+						{
+							$cmd->setDisplay('generic_type',$data[5]);
+							$cmd->save();
+						}
+						if ( $cmd->getTemplate('dashboard') == "" )
+						{
+							$cmd->setTemplate('dashboard', $data[6]);
+							$cmd->setTemplate('mobile', $data[6]);  
+							$cmd->save();
+						}
+					}
+				} else {
+					$cmd = $this->getCmd(null, $label);
+					if ( is_object($cmd) ) {
+						$cmd->remove();
+					}
 				}
 			}
 		}

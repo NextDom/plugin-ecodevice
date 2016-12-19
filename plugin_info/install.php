@@ -70,22 +70,27 @@ function ecodevice_update() {
 	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
 		$SubeqLogic->save();
 	}
-	$cron = cron::byClassAndFunction('ecodevice', 'daemon');
-	if (!is_object($cron)) {
-		$cron = new cron();
-		$cron->setClass('ecodevice');
-		$cron->setFunction('daemon');
-		$cron->setEnable(1);
-		$cron->setDeamon(1);
-		$cron->setTimeout(1440);
-		$cron->setSchedule('* * * * *');
-		$cron->save();
+	$daemon = cron::byClassAndFunction('ecodevice', 'daemon');
+	if (!is_object($daemon)) {
+		$daemon = new cron();
+		$daemon->setClass('ecodevice');
+		$daemon->setFunction('daemon');
+		$daemon->setEnable(1);
+		$daemon->setDeamon(1);
+		$daemon->setTimeout(1440);
+		$daemon->setSchedule('* * * * *');
+		$daemon->save();
+		$daemon->start();
+	}
+	else
+	{
+		$daemon->halt();
+		$daemon->start();
 	}
 	if ( config::byKey('temporisation_lecture', 'ecodevice', '') == "" )
 	{
 		config::save('temporisation_lecture', 5, 'ecodevice');
 	}
-	$cron->start();
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 }
 

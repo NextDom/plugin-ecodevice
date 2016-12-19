@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label class="col-lg-2 control-label" >{{Type}}</label>
                     <div class="col-lg-3">
-                        <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="typecompteur">
+                        <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="typecompteur" id="typecompteur">
                             <option value="">{{Sans}}</option>
                             <?php
                             foreach (ecodevice_compteur::getTypeCompteur() as $object) {
@@ -55,6 +55,8 @@
                             }
                             ?>
                         </select>
+						<label class="inline" id="Alerte_Temps_de_fonctionnement">{{Mettre le compteur en mode fuel et 1 dans le débit du gicleur sur l'ecodevice.}}</label>
+						<label class="inline" id="Alerte_Change_Type">{{Les indicateurs sont regénérés après sauvegarde.}}</label>
                     </div>
                 </div>
             </fieldset> 
@@ -67,7 +69,6 @@
                     <th style="width: 50px;">#</th>
                     <th style="width: 230px;">{{Nom}}</th>
                     <th style="width: 110px;">{{Sous-Type}}</th>
-                    <th>{{Valeur}}</th>
                     <th style="width: 100px;">{{Unité}}</th>
                     <th style="width: 200px;">{{Paramètres}}</th>
                     <th style="width: 100px;"></th>

@@ -28,7 +28,8 @@ class ecodevice_compteur extends eqLogic {
 		return array(	__('Eau',__FILE__),
 						__('Fuel',__FILE__),
 						__('Gaz',__FILE__),
-						__('Electricité',__FILE__));
+						__('Electricité',__FILE__),
+						__('Autre',__FILE__));
 	}
 
 	public function getListeName()
@@ -38,55 +39,37 @@ class ecodevice_compteur extends eqLogic {
 
 	public function postInsert()
 	{
-        $nbimpulsion = $this->getCmd(null, 'nbimpulsion');
-        if ( ! is_object($nbimpulsion) ) {
-            $nbimpulsion = new ecodevice_compteurCmd();
-			$nbimpulsion->setName('Nombre d impulsion');
-			$nbimpulsion->setEqLogic_id($this->getId());
-			$nbimpulsion->setType('info');
-			$nbimpulsion->setSubType('numeric');
-			$nbimpulsion->setLogicalId('nbimpulsion');
-			$nbimpulsion->setEventOnly(1);
-			$nbimpulsion->setDisplay('generic_type','GENERIC_INFO');
-			$nbimpulsion->save();
+		$consommationjour = $this->getCmd(null, 'consommationjour');
+		if ( ! is_object($consommationjour) ) {
+			$consommationjour = new ecodevice_compteurCmd();
+			$consommationjour->setName('Consommation journalière');
+			$consommationjour->setEqLogic_id($this->getId());
+			$consommationjour->setType('info');
+			$consommationjour->setSubType('numeric');
+			$consommationjour->setLogicalId('consommationjour');
+			$consommationjour->setEventOnly(1);
+			$consommationjour->setIsVisible(1);
+			$consommationjour->setDisplay('generic_type','GENERIC_INFO');
+			$consommationjour->setTemplate('dashboard', 'badge');
+			$consommationjour->setTemplate('mobile', 'badge');  
+			$consommationjour->setUnite("l");
+			$consommationjour->save();
 		}
-        $nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
-        if ( ! is_object($nbimpulsionminute) ) {
-            $nbimpulsionminute = new ecodevice_compteurCmd();
-			$nbimpulsionminute->setName('Nombre d impulsion par minute');
-			$nbimpulsionminute->setEqLogic_id($this->getId());
-			$nbimpulsionminute->setType('info');
-			$nbimpulsionminute->setSubType('numeric');
-			$nbimpulsionminute->setLogicalId('nbimpulsionminute');
-			$nbimpulsionminute->setUnite("Imp/min");
-			$nbimpulsionminute->setEventOnly(1);
-			$nbimpulsionminute->setConfiguration('calcul', '#brut#');
-			$nbimpulsionminute->setDisplay('generic_type','GENERIC_INFO');
-			$nbimpulsionminute->save();
-		}
-        $nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
-        if ( ! is_object($nbimpulsionjour) ) {
-            $nbimpulsionjour = new ecodevice_compteurCmd();
-			$nbimpulsionjour->setName('Nombre d impulsion jour');
-			$nbimpulsionjour->setEqLogic_id($this->getId());
-			$nbimpulsionjour->setType('info');
-			$nbimpulsionjour->setSubType('numeric');
-			$nbimpulsionjour->setLogicalId('nbimpulsionjour');
-			$nbimpulsionjour->setEventOnly(1);
-			$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
-			$nbimpulsionjour->save();
-		}
-		$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
-		if ( ! is_object($nbimpulsiontotal) ) {
-			$nbimpulsiontotal = new ecodevice_compteurCmd();
-			$nbimpulsiontotal->setName('Nombre d impulsion total');
-			$nbimpulsiontotal->setEqLogic_id($this->getId());
-			$nbimpulsiontotal->setType('info');
-			$nbimpulsiontotal->setSubType('numeric');
-			$nbimpulsiontotal->setLogicalId('nbimpulsiontotal');
-			$nbimpulsiontotal->setEventOnly(1);
-			$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
-			$nbimpulsiontotal->save();
+		$consommationtotal = $this->getCmd(null, 'consommationtotal');
+		if ( ! is_object($consommationtotal) ) {
+			$consommationtotal = new ecodevice_compteurCmd();
+			$consommationtotal->setName('Consommation total');
+			$consommationtotal->setEqLogic_id($this->getId());
+			$consommationtotal->setType('info');
+			$consommationtotal->setSubType('numeric');
+			$consommationtotal->setLogicalId('consommationtotal');
+			$consommationtotal->setEventOnly(1);
+			$consommationtotal->setIsVisible(1);
+			$consommationtotal->setDisplay('generic_type','GENERIC_INFO');
+			$consommationtotal->setTemplate('dashboard', 'badge');
+			$consommationtotal->setTemplate('mobile', 'badge');  
+			$consommationtotal->setUnite("l");
+			$consommationtotal->save();
 		}
 		$debitinstantane = $this->getCmd(null, 'debitinstantane');
 		if ( ! is_object($debitinstantane) ) {
@@ -97,7 +80,9 @@ class ecodevice_compteur extends eqLogic {
 			$debitinstantane->setSubType('numeric');
 			$debitinstantane->setLogicalId('debitinstantane');
 			$debitinstantane->setEventOnly(1);
+			$debitinstantane->setIsVisible(1);
 			$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
+			$consommationtotal->setUnite("l/min");
 			$debitinstantane->save();
 		}
 		$this->setConfiguration('typecompteur', "Eau");
@@ -107,13 +92,13 @@ class ecodevice_compteur extends eqLogic {
 	{
 		if ( $this->getConfiguration('typecompteur') == "" )
 		{
-			throw new Exception(__('Le type de compteur pour '.$this->getName().' doit être définit.',__FILE__));
+			throw new Exception(__('Le type de compteur doit être défini.',__FILE__));
 		}
 	}
 
-	public function postUpdate()
+	public function postAjax()
 	{
- 		if ( $this->getConfiguration('typecompteur') == "Fuel" )
+ 		if ( $this->getConfiguration('typecompteur') == "Autre" )
 		{
 			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
 			if ( ! is_object($tempsfonctionnement) ) {
@@ -125,17 +110,9 @@ class ecodevice_compteur extends eqLogic {
 				$tempsfonctionnement->setLogicalId('tempsfonctionnement');
 				$tempsfonctionnement->setUnite("min");
 				$tempsfonctionnement->setEventOnly(1);
-				$tempsfonctionnement->setIsVisible(0);
+				$tempsfonctionnement->setIsVisible(1);
 				$tempsfonctionnement->setDisplay('generic_type','GENERIC_INFO');
 				$tempsfonctionnement->save();
-			}
-			else
-			{
-				if ( $tempsfonctionnement->getDisplay('generic_type') == "" )
-				{
-					$tempsfonctionnement->setDisplay('generic_type','GENERIC_INFO');
-					$tempsfonctionnement->save();
-				}
 			}
 			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
 			if ( ! is_object($tempsfonctionnementminute) ) {
@@ -146,46 +123,24 @@ class ecodevice_compteur extends eqLogic {
 				$tempsfonctionnementminute->setSubType('numeric');
 				$tempsfonctionnementminute->setLogicalId('tempsfonctionnementminute');
 				$tempsfonctionnementminute->setUnite("min/min");
-				$tempsfonctionnementminute->setConfiguration('calcul', '#brut#');
 				$tempsfonctionnementminute->setEventOnly(1);
-				$tempsfonctionnementminute->setIsVisible(0);
+				$tempsfonctionnementminute->setIsVisible(1);
 				$tempsfonctionnementminute->setDisplay('generic_type','GENERIC_INFO');
 				$tempsfonctionnementminute->save();
 			}
-			else
-			{
-				if ( $tempsfonctionnementminute->getDisplay('generic_type') == "" )
-				{
-					$tempsfonctionnementminute->setDisplay('generic_type','GENERIC_INFO');
-					$tempsfonctionnementminute->save();
-				}
-			}
-			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
-			if ( is_object($nbimpulsionminute) ) {
-				#$nbimpulsionminute->remove();
-			}
-			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
-			if ( is_object($nbimpulsionjour) ) {
-				#$nbimpulsionjour->remove();
-			}
+
 			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
-			if ( is_object($nbimpulsiontotal) ) {
-				#$nbimpulsiontotal->remove();
-			}
-			$debitinstantane = $this->getCmd(null, 'debitinstantane');
-			if ( is_object($debitinstantane) ) {
-				#$debitinstantane->remove();
-			}
-		}
-		else
-		{
-			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
-			if ( is_object($tempsfonctionnement) ) {
-				#$tempsfonctionnement->remove();
-			}
-			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
-			if ( is_object($tempsfonctionnementminute) ) {
-				#$tempsfonctionnementminute->remove();
+			if ( ! is_object($nbimpulsiontotal) ) {
+				$nbimpulsiontotal = new ecodevice_compteurCmd();
+				$nbimpulsiontotal->setName('Nombre d impulsion total');
+				$nbimpulsiontotal->setEqLogic_id($this->getId());
+				$nbimpulsiontotal->setType('info');
+				$nbimpulsiontotal->setSubType('numeric');
+				$nbimpulsiontotal->setLogicalId('nbimpulsiontotal');
+				$nbimpulsiontotal->setEventOnly(1);
+				$nbimpulsiontotal->setIsVisible(1);
+				$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
+				$nbimpulsiontotal->save();
 			}
 			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
 			if ( ! is_object($nbimpulsionminute) ) {
@@ -196,18 +151,10 @@ class ecodevice_compteur extends eqLogic {
 				$nbimpulsionminute->setSubType('numeric');
 				$nbimpulsionminute->setLogicalId('nbimpulsionminute');
 				$nbimpulsionminute->setUnite("Imp/min");
-				$nbimpulsionminute->setConfiguration('calcul', '#brut#');
 				$nbimpulsionminute->setEventOnly(1);
+				$nbimpulsionminute->setIsVisible(1);
 				$nbimpulsionminute->setDisplay('generic_type','GENERIC_INFO');
 				$nbimpulsionminute->save();
-			}
-			else
-			{
-				if ( $nbimpulsionminute->getDisplay('generic_type') == "" )
-				{
-					$nbimpulsionminute->setDisplay('generic_type','GENERIC_INFO');
-					$nbimpulsionminute->save();
-				}
 			}
 			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
 			if ( ! is_object($nbimpulsionjour) ) {
@@ -218,36 +165,93 @@ class ecodevice_compteur extends eqLogic {
 				$nbimpulsionjour->setSubType('numeric');
 				$nbimpulsionjour->setLogicalId('nbimpulsionjour');
 				$nbimpulsionjour->setEventOnly(1);
+				$nbimpulsionjour->setIsVisible(1);
 				$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
 				$nbimpulsionjour->save();
 			}
-			else
-			{
-				if ( $nbimpulsionjour->getDisplay('generic_type') == "" )
-				{
-					$nbimpulsionjour->setDisplay('generic_type','GENERIC_INFO');
-					$nbimpulsionjour->save();
-				}
+		}
+ 		elseif ( $this->getConfiguration('typecompteur') == "Fuel" )
+		{
+			$consommationinstantane = $this->getCmd(null, 'consommationinstantane');
+			if ( ! is_object($consommationinstantane) ) {
+				$consommationinstantane = new ecodevice_compteurCmd();
+				$consommationinstantane->setName('Consommation instantané');
+				$consommationinstantane->setEqLogic_id($this->getId());
+				$consommationinstantane->setType('info');
+				$consommationinstantane->setSubType('numeric');
+				$consommationinstantane->setLogicalId('consommationinstantane');
+				$consommationinstantane->setUnite("ml/h");
+				$consommationinstantane->setEventOnly(1);
+				$consommationinstantane->setIsVisible(1);
+				$consommationinstantane->setDisplay('generic_type','GENERIC_INFO');
+				$consommationinstantane->save();
 			}
-			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
-			if ( ! is_object($nbimpulsiontotal) ) {
-				$nbimpulsiontotal = new ecodevice_compteurCmd();
-				$nbimpulsiontotal->setName('Nombre d impulsion total');
-				$nbimpulsiontotal->setEqLogic_id($this->getId());
-				$nbimpulsiontotal->setType('info');
-				$nbimpulsiontotal->setSubType('numeric');
-				$nbimpulsiontotal->setLogicalId('nbimpulsiontotal');
-				$nbimpulsiontotal->setEventOnly(1);
-				$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
-				$nbimpulsiontotal->save();
+			$consommationtotal = $this->getCmd(null, 'consommationtotal');
+			if ( ! is_object($consommationtotal) ) {
+				$consommationtotal = new ecodevice_compteurCmd();
+				$consommationtotal->setName('Consommation total');
+				$consommationtotal->setEqLogic_id($this->getId());
+				$consommationtotal->setType('info');
+				$consommationtotal->setSubType('numeric');
+				$consommationtotal->setLogicalId('consommationtotal');
+				$consommationtotal->setUnite("ml");
+				$consommationtotal->setEventOnly(1);
+				$consommationtotal->setIsVisible(1);
+				$consommationtotal->setDisplay('generic_type','GENERIC_INFO');
+				$consommationtotal->setTemplate('dashboard', 'badge');
+				$consommationtotal->setTemplate('mobile', 'badge');  
+				$consommationtotal->save();
 			}
-			else
-			{
-				if ( $nbimpulsiontotal->getDisplay('generic_type') == "" )
-				{
-					$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
-					$nbimpulsiontotal->save();
-				}
+			$consommationjour = $this->getCmd(null, 'consommationjour');
+			if ( ! is_object($consommationjour) ) {
+				$consommationjour = new ecodevice_compteurCmd();
+				$consommationjour->setName('Consommation journalière');
+				$consommationjour->setEqLogic_id($this->getId());
+				$consommationjour->setType('info');
+				$consommationjour->setSubType('numeric');
+				$consommationjour->setLogicalId('consommationjour');
+				$consommationjour->setUnite("ml");
+				$consommationjour->setEventOnly(1);
+				$consommationjour->setIsVisible(1);
+				$consommationjour->setDisplay('generic_type','GENERIC_INFO');
+				$consommationjour->setTemplate('dashboard', 'badge');
+				$consommationjour->setTemplate('mobile', 'badge');  
+				$consommationjour->save();
+			}
+		}
+		elseif ( $this->getConfiguration('typecompteur') == "Eau" )
+		{
+			$consommationjour = $this->getCmd(null, 'consommationjour');
+			if ( ! is_object($consommationjour) ) {
+				$consommationjour = new ecodevice_compteurCmd();
+				$consommationjour->setName('Consommation journalière');
+				$consommationjour->setEqLogic_id($this->getId());
+				$consommationjour->setType('info');
+				$consommationjour->setSubType('numeric');
+				$consommationjour->setLogicalId('consommationjour');
+				$consommationjour->setEventOnly(1);
+				$consommationjour->setIsVisible(1);
+				$consommationjour->setDisplay('generic_type','GENERIC_INFO');
+				$consommationjour->setTemplate('dashboard', 'badge');
+				$consommationjour->setTemplate('mobile', 'badge');  
+				$consommationjour->setUnite("l");
+				$consommationjour->save();
+			}
+			$consommationtotal = $this->getCmd(null, 'consommationtotal');
+			if ( ! is_object($consommationtotal) ) {
+				$consommationtotal = new ecodevice_compteurCmd();
+				$consommationtotal->setName('Consommation total');
+				$consommationtotal->setEqLogic_id($this->getId());
+				$consommationtotal->setType('info');
+				$consommationtotal->setSubType('numeric');
+				$consommationtotal->setLogicalId('consommationtotal');
+				$consommationtotal->setEventOnly(1);
+				$consommationtotal->setIsVisible(1);
+				$consommationtotal->setDisplay('generic_type','GENERIC_INFO');
+				$consommationtotal->setTemplate('dashboard', 'badge');
+				$consommationtotal->setTemplate('mobile', 'badge');  
+				$consommationtotal->setUnite("l");
+				$consommationtotal->save();
 			}
 			$debitinstantane = $this->getCmd(null, 'debitinstantane');
 			if ( ! is_object($debitinstantane) ) {
@@ -258,16 +262,108 @@ class ecodevice_compteur extends eqLogic {
 				$debitinstantane->setSubType('numeric');
 				$debitinstantane->setLogicalId('debitinstantane');
 				$debitinstantane->setEventOnly(1);
+				$debitinstantane->setIsVisible(1);
 				$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
+				$consommationtotal->setUnite("l/min");
 				$debitinstantane->save();
 			}
-			else
-			{
-				if ( $nbimpulsiontotal->getDisplay('generic_type') == "" )
-				{
-					$nbimpulsiontotal->setDisplay('generic_type','GENERIC_INFO');
-					$nbimpulsiontotal->save();
-				}
+		}
+		elseif ( $this->getConfiguration('typecompteur') == "Gaz" )
+		{
+			$consommationjour = $this->getCmd(null, 'consommationjour');
+			if ( ! is_object($consommationjour) ) {
+				$consommationjour = new ecodevice_compteurCmd();
+				$consommationjour->setName('Consommation journalière');
+				$consommationjour->setEqLogic_id($this->getId());
+				$consommationjour->setType('info');
+				$consommationjour->setSubType('numeric');
+				$consommationjour->setLogicalId('consommationjour');
+				$consommationjour->setEventOnly(1);
+				$consommationjour->setIsVisible(1);
+				$consommationjour->setDisplay('generic_type','GENERIC_INFO');
+				$consommationjour->setTemplate('dashboard', 'badge');
+				$consommationjour->setTemplate('mobile', 'badge');  
+				$consommationjour->setUnite("dm³");
+				$consommationjour->save();
+			}
+			$consommationtotal = $this->getCmd(null, 'consommationtotal');
+			if ( ! is_object($consommationtotal) ) {
+				$consommationtotal = new ecodevice_compteurCmd();
+				$consommationtotal->setName('Consommation total');
+				$consommationtotal->setEqLogic_id($this->getId());
+				$consommationtotal->setType('info');
+				$consommationtotal->setSubType('numeric');
+				$consommationtotal->setLogicalId('consommationtotal');
+				$consommationtotal->setEventOnly(1);
+				$consommationtotal->setIsVisible(1);
+				$consommationtotal->setDisplay('generic_type','GENERIC_INFO');
+				$consommationtotal->setTemplate('dashboard', 'badge');
+				$consommationtotal->setTemplate('mobile', 'badge');  
+				$consommationtotal->setUnite("dm³");
+				$consommationtotal->save();
+			}
+			$debitinstantane = $this->getCmd(null, 'debitinstantane');
+			if ( ! is_object($debitinstantane) ) {
+				$debitinstantane = new ecodevice_compteurCmd();
+				$debitinstantane->setName('Debit instantané');
+				$debitinstantane->setEqLogic_id($this->getId());
+				$debitinstantane->setType('info');
+				$debitinstantane->setSubType('numeric');
+				$debitinstantane->setLogicalId('debitinstantane');
+				$debitinstantane->setEventOnly(1);
+				$debitinstantane->setIsVisible(1);
+				$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
+				$consommationtotal->setUnite("dm³/min");
+				$debitinstantane->save();
+			}
+		}
+		elseif ( $this->getConfiguration('typecompteur') == "Electricité" )
+		{
+			$consommationjour = $this->getCmd(null, 'consommationjour');
+			if ( ! is_object($consommationjour) ) {
+				$consommationjour = new ecodevice_compteurCmd();
+				$consommationjour->setName('Consommation journalière');
+				$consommationjour->setEqLogic_id($this->getId());
+				$consommationjour->setType('info');
+				$consommationjour->setSubType('numeric');
+				$consommationjour->setLogicalId('consommationjour');
+				$consommationjour->setEventOnly(1);
+				$consommationjour->setIsVisible(1);
+				$consommationjour->setDisplay('generic_type','GENERIC_INFO');
+				$consommationjour->setTemplate('dashboard', 'badge');
+				$consommationjour->setTemplate('mobile', 'badge');  
+				$consommationjour->setUnite("Wh");
+				$consommationjour->save();
+			}
+			$consommationtotal = $this->getCmd(null, 'consommationtotal');
+			if ( ! is_object($consommationtotal) ) {
+				$consommationtotal = new ecodevice_compteurCmd();
+				$consommationtotal->setName('Consommation total');
+				$consommationtotal->setEqLogic_id($this->getId());
+				$consommationtotal->setType('info');
+				$consommationtotal->setSubType('numeric');
+				$consommationtotal->setLogicalId('consommationtotal');
+				$consommationtotal->setEventOnly(1);
+				$consommationtotal->setIsVisible(1);
+				$consommationtotal->setDisplay('generic_type','GENERIC_INFO');
+				$consommationtotal->setTemplate('dashboard', 'badge');
+				$consommationtotal->setTemplate('mobile', 'badge');  
+				$consommationtotal->setUnite("Wh");
+				$consommationtotal->save();
+			}
+			$debitinstantane = $this->getCmd(null, 'debitinstantane');
+			if ( ! is_object($debitinstantane) ) {
+				$debitinstantane = new ecodevice_compteurCmd();
+				$debitinstantane->setName('Consommation instantanée');
+				$debitinstantane->setEqLogic_id($this->getId());
+				$debitinstantane->setType('info');
+				$debitinstantane->setSubType('numeric');
+				$debitinstantane->setLogicalId('debitinstantane');
+				$debitinstantane->setEventOnly(1);
+				$debitinstantane->setIsVisible(1);
+				$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
+				$consommationtotal->setUnite("Wh");
+				$debitinstantane->save();
 			}
 		}
 	}
@@ -291,37 +387,5 @@ class ecodevice_compteur extends eqLogic {
 
 class ecodevice_compteurCmd extends cmd 
 {
-    public function preSave() {
-        if ( $this->getLogicalId() == 'nbimpulsionminute' ) {
-            $calcul = $this->getConfiguration('calcul');
-            if ( ! preg_match("/#brut#/", $calcul) ) {
-				throw new Exception(__('La formule doit contenir une référecence à #brut#.',__FILE__));
-			}
-        }
-        if ( $this->getLogicalId() == 'tempsfonctionnementminute' ) {
-            $calcul = $this->getConfiguration('calcul');
-            if ( ! preg_match("/#brut#/", $calcul) ) {
-				throw new Exception(__('La formule doit contenir une référecence à #brut#.',__FILE__));
-			}
-        }
-    }
-
-    public function event($_value, $_loop = 1) {
-        if ($this->getLogicalId() == 'nbimpulsionminute') {
-			try {
-				$calcul = $this->getConfiguration('calcul');
-				$calcul = preg_replace("/#brut#/", $_value, $calcul);
-				$calcul = scenarioExpression::setTags($calcul);
-				$result = evaluate($calcul);
-				parent::event($result, $_loop);
-			} catch (Exception $e) {
-				$EqLogic = $this->getEqLogic();
-				log::add('ecodevice', 'error', $EqLogic->getName()." error in ".$this->getConfiguration('calcul')." : ".$e->getMessage());
-				return scenarioExpression::setTags(str_replace('"', '', cmd::cmdToValue($this->getConfiguration('calcul'))));
-			}
-		} else {
-			parent::event($_value, $_loop);
-		}
-    }
 }
 ?>

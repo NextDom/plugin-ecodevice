@@ -1,4 +1,6 @@
 [horizontal]
+2.00:: Ajout d'une notion de type de compteur
+
 1.22:: Modification pour recréer les sous commande s'ils n'existent plus.
 +
 Correction de la commande reboot
