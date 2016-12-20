@@ -12,7 +12,6 @@ image::../images/ecodevice_screenshot2.jpg[]
 
 image::../images/ecodevice_screenshot3.jpg[]
 
-
 === Aktualisierungsrate ===
 Die Daten werden vom Plugin jede Minute gesammelt. Es ist nicht möglich, eine höhere Frequenz zu haben.
 
@@ -38,8 +37,12 @@ image::../images/ecodevice_screenshot1.jpg[]
 
 Alle Elemente der Karte finden Sie im Menü auf der linken Seite, durch Klicken auf dieses Symbol.  
 
+== Installation/Einrichtung ==
+
 == FAQ ==
+
 include::faq.asciidoc[]
 
 == Änderungsprotokoll ==
+
 include::changelog.asciidoc[]

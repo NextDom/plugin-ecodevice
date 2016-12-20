@@ -12,7 +12,6 @@ image::../images/ecodevice_screenshot2.jpg[]
 
 image::../images/ecodevice_screenshot3.jpg[]
 
-
 === Fréquence de rafraichissement ===
 Les données sont récupérées par le plugin toutes les minutes. Il n'est pas possible d'avoir une fréquence plus élevée.
 
@@ -38,8 +37,12 @@ image::../images/ecodevice_screenshot1.jpg[]
 
 Vous retrouverez l'ensemble des élements de la carte dans le menu à gauche en clickant sur l'icone de celle-ci.
 
+== Installation/Paramétrage ==
+
 == FAQ ==
+
 include::faq.asciidoc[]
 
 == Changelog ==
+
 include::changelog.asciidoc[]

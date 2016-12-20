@@ -12,7 +12,6 @@ image::../images/ecodevice_screenshot2.jpg[]
 
 image::../images/ecodevice_screenshot3.jpg[]
 
-
 === Refresh rate ===
 The data is retrieved by the plugin every minute. It is not possible to have a higher frequency.
 
@@ -38,8 +37,12 @@ image::../images/ecodevice_screenshot1.jpg[]
 
 You will find all the elements of the map in the menu on the left by clicking on the icon of it.
 
+== Installation / Setup ==
+
 == FAQ ==
+
 include::faq.asciidoc[]
 
 == Changelog ==
+
 include::changelog.asciidoc[]

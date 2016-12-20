@@ -1,4 +1,20 @@
 [horizontal]
+2.00:: Ajout de la génération automatique et intélligente des commandes de téléinfo
++
+Changement unité Ampere en A
++
+Ajout de daemon pour valeur variant rapidement
++
+Commande par type de compteur (eau, gaz, electricité, fuel)
++
+Ajout des max et min pour widget
++
+Widget par defaut
++
+Amélioration de FAQ
++
+Correction commande reboot.
+
 1.22:: Modification pour recréer les sous commande s'ils n'existent plus.
 +
 Correction de la commande reboot
