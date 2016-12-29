@@ -1,5 +1,7 @@
 [horizontal]
-2.00:: Ajout de la génération automatique et intélligente des commandes de téléinfo
+2.01:: Correction du daemon
+
+2.00: addition of the automatic generation of teleinfo commands
 +
 Changement unité Ampere en A
 +
