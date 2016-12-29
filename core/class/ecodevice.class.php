@@ -28,9 +28,11 @@ class ecodevice extends eqLogic {
     /*     * ***********************Methode static*************************** */
 
 	public static function pull() {
+		log::add('ecodevice','debug','start cron');
 		foreach (self::byType('ecodevice') as $eqLogic) {
 			$eqLogic->scan();
 		}
+		log::add('ecodevice','debug','stop cron');
 	}
 
 	public function getUrl() {
@@ -324,6 +326,7 @@ class ecodevice extends eqLogic {
 
 	public function scan() {
 		if ( $this->getIsEnable() ) {
+			log::add('ecodevice','debug',"Scan ".$this->getName());
 			$statuscmd = $this->getCmd(null, 'status');
 			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
 			$count = 0;
@@ -580,6 +583,7 @@ class ecodevice extends eqLogic {
 
 	public function scan_rapide() {
 		if ( $this->getIsEnable() ) {
+			log::add('ecodevice','debug',"Scan rapide ".$this->getName());
 			$statuscmd = $this->getCmd(null, 'status');
 			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
 			$count = 0;
