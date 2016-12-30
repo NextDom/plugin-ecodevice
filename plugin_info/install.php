@@ -68,6 +68,7 @@ function ecodevice_update() {
 		$SubeqLogic->save();
 	}
 	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
+		$SubeqLogic->postAjax();
 		$SubeqLogic->save();
 	}
 	$daemon = cron::byClassAndFunction('ecodevice', 'daemon');

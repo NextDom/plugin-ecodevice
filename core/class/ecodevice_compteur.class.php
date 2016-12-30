@@ -172,6 +172,30 @@ class ecodevice_compteur extends eqLogic {
 		}
  		elseif ( $this->getConfiguration('typecompteur') == "Fuel" )
 		{
+			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+			if ( is_object($tempsfonctionnement) ) {
+				$tempsfonctionnement->remove();
+			}
+			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+			if ( is_object($tempsfonctionnementminute) ) {
+				$tempsfonctionnementminute->remove();
+			}
+			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
+			if ( is_object($nbimpulsiontotal) ) {
+				$nbimpulsiontotal->remove();
+			}
+			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+			if ( is_object($nbimpulsionminute) ) {
+				$nbimpulsionminute->remove();
+			}
+			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+			if ( is_object($nbimpulsionjour) ) {
+				$nbimpulsionjour->remove();
+			}
+			$debitinstantane = $this->getCmd(null, 'debitinstantane');
+			if ( is_object($debitinstantane) ) {
+				$debitinstantane->remove();
+			}
 			$consommationinstantane = $this->getCmd(null, 'consommationinstantane');
 			if ( ! is_object($consommationinstantane) ) {
 				$consommationinstantane = new ecodevice_compteurCmd();
@@ -221,6 +245,30 @@ class ecodevice_compteur extends eqLogic {
 		}
 		elseif ( $this->getConfiguration('typecompteur') == "Eau" )
 		{
+			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+			if ( is_object($tempsfonctionnement) ) {
+				$tempsfonctionnement->remove();
+			}
+			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+			if ( is_object($tempsfonctionnementminute) ) {
+				$tempsfonctionnementminute->remove();
+			}
+			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
+			if ( is_object($nbimpulsiontotal) ) {
+				$nbimpulsiontotal->remove();
+			}
+			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+			if ( is_object($nbimpulsionminute) ) {
+				$nbimpulsionminute->remove();
+			}
+			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+			if ( is_object($nbimpulsionjour) ) {
+				$nbimpulsionjour->remove();
+			}
+			$consommationinstantane = $this->getCmd(null, 'consommationinstantane');
+			if ( is_object($consommationinstantane) ) {
+				$consommationinstantane->remove();
+			}
 			$consommationjour = $this->getCmd(null, 'consommationjour');
 			if ( ! is_object($consommationjour) ) {
 				$consommationjour = new ecodevice_compteurCmd();
@@ -270,6 +318,31 @@ class ecodevice_compteur extends eqLogic {
 		}
 		elseif ( $this->getConfiguration('typecompteur') == "Gaz" )
 		{
+			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+			if ( is_object($tempsfonctionnement) ) {
+				$tempsfonctionnement->remove();
+			}
+			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+			if ( is_object($tempsfonctionnementminute) ) {
+				$tempsfonctionnementminute->remove();
+			}
+			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
+			if ( is_object($nbimpulsiontotal) ) {
+				$nbimpulsiontotal->remove();
+			}
+			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+			if ( is_object($nbimpulsionminute) ) {
+				$nbimpulsionminute->remove();
+			}
+			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+			if ( is_object($nbimpulsionjour) ) {
+				$nbimpulsionjour->remove();
+			}
+
+			$consommationinstantane = $this->getCmd(null, 'consommationinstantane');
+			if ( is_object($consommationinstantane) ) {
+				$consommationinstantane->remove();
+			}
 			$consommationjour = $this->getCmd(null, 'consommationjour');
 			if ( ! is_object($consommationjour) ) {
 				$consommationjour = new ecodevice_compteurCmd();
@@ -319,6 +392,31 @@ class ecodevice_compteur extends eqLogic {
 		}
 		elseif ( $this->getConfiguration('typecompteur') == "Electricité" )
 		{
+			$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
+			if ( is_object($tempsfonctionnement) ) {
+				$tempsfonctionnement->remove();
+			}
+			$tempsfonctionnementminute = $this->getCmd(null, 'tempsfonctionnementminute');
+			if ( is_object($tempsfonctionnementminute) ) {
+				$tempsfonctionnementminute->remove();
+			}
+			$nbimpulsiontotal = $this->getCmd(null, 'nbimpulsiontotal');
+			if ( is_object($nbimpulsiontotal) ) {
+				$nbimpulsiontotal->remove();
+			}
+			$nbimpulsionminute = $this->getCmd(null, 'nbimpulsionminute');
+			if ( is_object($nbimpulsionminute) ) {
+				$nbimpulsionminute->remove();
+			}
+			$nbimpulsionjour = $this->getCmd(null, 'nbimpulsionjour');
+			if ( is_object($nbimpulsionjour) ) {
+				$nbimpulsionjour->remove();
+			}
+
+			$consommationinstantane = $this->getCmd(null, 'consommationinstantane');
+			if ( is_object($consommationinstantane) ) {
+				$consommationinstantane->remove();
+			}
 			$consommationjour = $this->getCmd(null, 'consommationjour');
 			if ( ! is_object($consommationjour) ) {
 				$consommationjour = new ecodevice_compteurCmd();
