@@ -37,7 +37,17 @@ image::../images/ecodevice_screenshot1.jpg[]
 
 Alle Elemente der Karte finden Sie im Menü auf der linken Seite, durch Klicken auf dieses Symbol.  
 
+Voici la page de configuration de compteur. Tant que le type de compteur n'est pas defini, les commandes ne sont pas crées.
+
+image::../images/ecodevice_screenshot4.jpg[]
+
+Voici la page de configuration d'une entrée téléinformation. Tant que le type de contrat n'est pas defini, les commandes ne sont pas crées.
+
+image::../images/ecodevice_screenshot5.jpg[]
+
 == Installation/Einrichtung ==
+
+Ce plugin ne nécessite aucun pre-requis d'installation.
 
 == FAQ ==
 
