@@ -640,23 +640,17 @@ class ecodevice extends eqLogic {
 			foreach (self::byType('ecodevice_teleinfo') as $eqLogicTeleinfo) {
 				if ( $eqLogicTeleinfo->getIsEnable() && substr($eqLogicTeleinfo->getLogicalId(), 0, strpos($eqLogicTeleinfo->getLogicalId(),"_")) == $this->getId() ) {
 					$gceid = substr($eqLogicTeleinfo->getLogicalId(), strpos($eqLogicTeleinfo->getLogicalId(),"_")+2, 1);
-					$xpathModele = '//response';
+					$item = "T".$gceid."_PPAP";
+					$xpathModele = '//'.$item;
 					$status = $this->xmlstatus->xpath($xpathModele);
 					
 					if ( count($status) != 0 )
 					{
-						foreach($status[0] as $item => $data) {
-							$xpathModele = "//T".$gceid."_PPAP";
-							$status = $this->xmlstatus->xpath($xpathModele);
-							if ( count($status) != 0 )
-							{
-								$eqLogic_cmd = $eqLogicTeleinfo->getCmd(null, "PPAP");
-								if ( $eqLogic_cmd->execCmd() != $eqLogic_cmd->formatValue($status[0])) {
-									log::add('ecodevice','debug',"Change PPAP of ".$eqLogicCompteur->getName());
-									$eqLogic_cmd->setCollectDate('');
-									$eqLogic_cmd->event($status[0]);
-								}
-							}
+						$eqLogic_cmd = $eqLogicTeleinfo->getCmd(null, substr($item, 3));
+						if ( is_object($eqLogic_cmd) && $eqLogic_cmd->execCmd() != $eqLogic_cmd->formatValue($status[0])) {
+							log::add('ecodevice','debug',"Change ".$item." of ".$eqLogicTeleinfo->getName());
+							$eqLogic_cmd->setCollectDate('');
+							$eqLogic_cmd->event($status[0]);
 						}
 					}
 				}

@@ -8,6 +8,7 @@ Il faut dans le menu gauche cliquer sur l'icône suivant pour y avoir accès : i
 --
 Par défaut c'est toutes les minutes.
 Il est possible de configurer manuellement du push sur l'ecodevice.
+Pour les débits, consommations instantanés et Puissance Apparente  peuvent être collectée plus fréquement en fonction du daemon.
 --
 
 .Je voie ma carte, mais pas les entrées ni les compteurs.

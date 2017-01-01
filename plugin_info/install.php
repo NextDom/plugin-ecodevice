@@ -40,7 +40,7 @@ function ecodevice_install() {
 		$daemon->setSchedule('* * * * *');
 		$daemon->save();
 	}
-	config::save('temporisation_lecture', 5, 'ecodevice');
+	config::save('temporisation_lecture', 10, 'ecodevice');
 	$daemon->start();
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 }
@@ -61,16 +61,6 @@ function ecodevice_update() {
 		$cron->stop();
 		$cron->remove();
 	}
-	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
-		$eqLogic->save();
-	}
-	foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
-		$SubeqLogic->save();
-	}
-	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
-		$SubeqLogic->postAjax();
-		$SubeqLogic->save();
-	}
 	$daemon = cron::byClassAndFunction('ecodevice', 'daemon');
 	if (!is_object($daemon)) {
 		$daemon = new cron();
@@ -89,9 +79,22 @@ function ecodevice_update() {
 	}
 	if ( config::byKey('temporisation_lecture', 'ecodevice', '') == "" )
 	{
-		config::save('temporisation_lecture', 5, 'ecodevice');
+		config::save('temporisation_lecture', 10, 'ecodevice');
 	}
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
+	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
+		$eqLogic->save();
+	}
+	foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
+		$SubeqLogic->save();
+	}
+	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
+ 		if ( $SubeqLogic->getIsEnable() )
+		{
+			$SubeqLogic->postAjax();
+			$SubeqLogic->save();
+		}
+	}
 }
 
 function ecodevice_remove() {
