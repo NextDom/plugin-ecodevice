@@ -468,7 +468,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_aktualisierungsrate">1.2. Aktualisierungsrate</h3>
 <div class="paragraph">
-<p>Die Daten werden vom Plugin jede Minute gesammelt. Es ist nicht möglich, eine höhere Frequenz zu haben.</p>
+<p>Le plugin met à jour ces données de 2 façons :</p>
+</div>
+<div class="paragraph">
+<p>Les données sont récupérées par le plugin toutes les minutes pour tous les compteurs. Il n&#8217;est pas possible d&#8217;avoir une fréquence plus élevée.</p>
+</div>
+<div class="paragraph">
+<p>Pour les débits, consommations instantanés et Puissance Apparente une collecte est fait par un daemon en fonction de la fréquence paramétrée au niveau du plugin. Attention, une forte diminution engendre une forte surcharge de votre serveur jeedom.</p>
 </div>
 </div>
 </div>
@@ -564,7 +570,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Quelle est la fréquence de rafraichissement des informations ?</div><div class="content">
 <div class="paragraph">
 <p>Par défaut c&#8217;est toutes les minutes.
-Il est possible de configurer manuellement du push sur l&#8217;ecodevice.</p>
+Il est possible de configurer manuellement du push sur l&#8217;ecodevice.
+Pour les débits, consommations instantanés et Puissance Apparente  peuvent être collectée plus fréquement en fonction du daemon.</p>
 </div>
 </div>
 </div>
