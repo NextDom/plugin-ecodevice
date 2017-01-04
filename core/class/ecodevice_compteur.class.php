@@ -82,7 +82,7 @@ class ecodevice_compteur extends eqLogic {
 			$debitinstantane->setEventOnly(1);
 			$debitinstantane->setIsVisible(1);
 			$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
-			$consommationtotal->setUnite("l/min");
+			$debitinstantane->setUnite("l/min");
 			$debitinstantane->save();
 		}
 		$this->setConfiguration('typecompteur', "Eau");
@@ -102,7 +102,14 @@ class ecodevice_compteur extends eqLogic {
 	public function postAjax()
 	{
  		if ( $this->getIsEnable() )
-		{
+		{					
+			foreach($this->getCmd() as $cmd)
+			{	
+				if ( ! in_array($cmd->getLogicId(), array("consommationinstantane", "consommationjour", "consommationtotal", "debitinstantane", "tempsfonctionnement", "tempsfonctionnementminute", "nbimpulsiontotal", "nbimpulsionminute", "nbimpulsionjour", ))
+				{
+					$cmd->remove();				
+				}
+			}			
 			if ( $this->getConfiguration('typecompteur') == "Autre" )
 			{
 				$tempsfonctionnement = $this->getCmd(null, 'tempsfonctionnement');
@@ -317,7 +324,7 @@ class ecodevice_compteur extends eqLogic {
 					$debitinstantane->setEventOnly(1);
 					$debitinstantane->setIsVisible(1);
 					$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
-					$consommationtotal->setUnite("l/min");
+					$debitinstantane->setUnite("l/min");
 					$debitinstantane->save();
 				}
 			}
@@ -391,7 +398,7 @@ class ecodevice_compteur extends eqLogic {
 					$debitinstantane->setEventOnly(1);
 					$debitinstantane->setIsVisible(1);
 					$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
-					$consommationtotal->setUnite("dm³/min");
+					$debitinstantane->setUnite("dm³/min");
 					$debitinstantane->save();
 				}
 			}
@@ -465,7 +472,7 @@ class ecodevice_compteur extends eqLogic {
 					$debitinstantane->setEventOnly(1);
 					$debitinstantane->setIsVisible(1);
 					$debitinstantane->setDisplay('generic_type','GENERIC_INFO');
-					$consommationtotal->setUnite("Wh");
+					$debitinstantane->setUnite("Wh");
 					$debitinstantane->save();
 				}
 			}
