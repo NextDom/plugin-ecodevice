@@ -105,7 +105,7 @@ class ecodevice_compteur extends eqLogic {
 		{					
 			foreach($this->getCmd() as $cmd)
 			{	
-				if ( ! in_array($cmd->getLogicId(), array("consommationinstantane", "consommationjour", "consommationtotal", "debitinstantane", "tempsfonctionnement", "tempsfonctionnementminute", "nbimpulsiontotal", "nbimpulsionminute", "nbimpulsionjour", ))
+				if ( ! in_array($cmd->getLogicalId(), array("consommationinstantane", "consommationjour", "consommationtotal", "debitinstantane", "tempsfonctionnement", "tempsfonctionnementminute", "nbimpulsiontotal", "nbimpulsionminute", "nbimpulsionjour") ) )
 				{
 					$cmd->remove();				
 				}
