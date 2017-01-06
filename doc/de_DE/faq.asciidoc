@@ -24,7 +24,7 @@ link:https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZEPTTM
 
 .J'aimerai remonter des erreurs/modifications directement dans le code ?
 --
-C'est tout à fait possible via https://github.com/guenneguezt/plugin-ecodevice[github]
+Es ist ganz möglich über https://github.com/guenneguezt/plugin-ecodevice[github]
 --
 
 .Comment paramétrer le compteur en mode fuel ?

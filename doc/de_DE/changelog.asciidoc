@@ -13,7 +13,7 @@ Ajout des max et min pour widget
 +
 Widget par defaut
 +
-Amélioration de FAQ
+Verbesserte FAQ
 +
 Correction commande reboot.
 
@@ -63,4 +63,4 @@ Redéclenchement jusqu'à 3 fois en cas d'indisponibilité de l'ecodevice.
 
 1.1:: Problème de ZIP.
 
-1.0:: Initialisation.
+1.0:: Initialisierung.
