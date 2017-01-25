@@ -6,7 +6,7 @@ Il faut dans le menu gauche cliquer sur l'icône suivant pour y avoir accès : i
 
 .Quelle est la fréquence de rafraichissement des informations ?
 --
-Par défaut c'est toutes les minutes.
+Der Standardwert ist jede Minute.
 Il est possible de configurer manuellement du push sur l'ecodevice.
 Pour les débits, consommations instantanés et Puissance Apparente  peuvent être collectée plus fréquement en fonction du daemon.
 --

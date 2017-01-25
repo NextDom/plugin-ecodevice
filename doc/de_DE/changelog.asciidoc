@@ -11,7 +11,7 @@ Commande par type de compteur (eau, gaz, electricité, fuel)
 +
 Ajout des max et min pour widget
 +
-Widget par defaut
+Standard-Widget
 +
 Verbesserte FAQ
 +
@@ -61,6 +61,6 @@ Redéclenchement jusqu'à 3 fois en cas d'indisponibilité de l'ecodevice.
 
 1.8:: Ne pas mettre a jour les données si elles ne changent pas.
 
-1.1:: Problème de ZIP.
+1.1: ZIP Problem.
 
 1.0:: Initialisierung.
