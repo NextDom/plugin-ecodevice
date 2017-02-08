@@ -68,16 +68,6 @@ class ecodevice extends eqLogic {
 			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
 			if ( $this->xmlstatus === false )
 				throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
-			$xpathModele = '//T'.$gceid.'_IMAX';
-			$status = $this->xmlstatus->xpath($xpathModele);
-
-			if ( count($status) != 0 )
-			{
-				if ( $status[0] != "0" )
-				{
-					return "Mono";
-				}
-			}
 			$xpathModele = '//T'.$gceid.'_IMAX2';
 			$status = $this->xmlstatus->xpath($xpathModele);
 
@@ -86,6 +76,16 @@ class ecodevice extends eqLogic {
 				if ( $status[0] != "0" )
 				{
 					return "Tri";
+				}
+			}
+			$xpathModele = '//T'.$gceid.'_IMAX';
+			$status = $this->xmlstatus->xpath($xpathModele);
+
+			if ( count($status) != 0 )
+			{
+				if ( $status[0] != "0" )
+				{
+					return "Mono";
 				}
 			}
 		}
