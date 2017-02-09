@@ -1,4 +1,6 @@
 [horizontal]
+2.02:: Correction du triphase
+
 2.01:: Correction du daemon
 
 2.00:: Ajout de la génération automatique et intélligente des commandes de téléinfo
