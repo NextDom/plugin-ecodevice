@@ -6,9 +6,9 @@
     <icon>fa fa-sitemap</icon>
     <licence>AGPL</licence>
     <author>Thomas Guenneguez</author>
-    <installation>Nécessite firmware 1.05.06 minimum</installation>
+    <installation>Nécessite firmware 1.04.82 minimum</installation>
     <require>2.0</require>
-    <version>2.02</version>
+    <version>2.03</version>
     <category>automation protocol</category>
     <hasOwnDeamon>1</hasOwnDeamon>
 </info>

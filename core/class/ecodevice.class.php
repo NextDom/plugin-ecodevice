@@ -64,8 +64,8 @@ class ecodevice extends eqLogic {
 	{
 		if ( $this->getIsEnable() )
 		{
-			log::add('ecodevice','debug','get '.$this->getUrl(). 'status.xml');
-			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
+			log::add('ecodevice','debug','get '.$this->getUrl(). 'protect/settings/teleinfo'.$gceid.'.xml');
+			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'protect/settings/teleinfo'.$gceid.'.xml');
 			if ( $this->xmlstatus === false )
 				throw new Exception(__('L\'ecodevice ne repond pas.',__FILE__)." ".$this->getName());
 			$xpathModele = '//T'.$gceid.'_IMAX2';
