@@ -1,4 +1,6 @@
 [horizontal]
+2.03:: Correction pour firmware 1.04.82
+
 2.02:: Correction du triphase
 
 2.01:: Correction du daemon
