@@ -1,5 +1,5 @@
 [panel,primary]
-.Je n'arrive pas a accéder aux sous indicateurs ?
+.Ich schaffe es nicht auf die Unter-Indikatoren zuzugreifen?
 --
 Il faut dans le menu gauche cliquer sur l'icône suivant pour y avoir accès : image:../images/acces_sous_indicateur.jpg[la]
 --
