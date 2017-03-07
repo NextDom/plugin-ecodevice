@@ -23,7 +23,7 @@ Correction commande reboot.
 
 1.22:: Modification pour recréer les sous commande s'ils n'existent plus.
 +
-Correction de la commande reboot
+Korrektur des reboot Befehls
 
 1.21:: Ajout de commande pour reboot
 
