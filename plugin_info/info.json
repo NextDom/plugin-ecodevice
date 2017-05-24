@@ -1,0 +1,10 @@
+{
+	"id" : "ecodevice",
+	"name" : "Eco-device",
+	"licence" : "AGPL",
+	"author" : "Thomas Guenneguez",
+	"require" : "2.0",
+	"category" : "automation protocol",
+	"installation" : "Nécessite firmware 1.04.82 minimum",
+	"hasOwnDeamon" : true
+}
