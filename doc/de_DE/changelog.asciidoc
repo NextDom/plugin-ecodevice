@@ -1,70 +1,45 @@
 [horizontal]
-2.03:: Korrektur für Firmware 1.04.82
+WARNING: Detail complet des mises à jour sur https://github.com/guenneguezt/plugin-ecodevice/commits/master[Historique Commit]
 
-2.02:: Correction du triphase
+Liste des évolutions majeures de la version courante :
 
-2.01:: Correction du daemon
+- Modification pour compatibilité Jeedom V3
+- Plus de suivi de version
 
-2.00:: Ajout de la génération automatique et intélligente des commandes de téléinfo
-+
-Changement unité Ampere en A
-+
-Ajout de daemon pour valeur variant rapidement
-+
-Commande par type de compteur (eau, gaz, electricité, fuel)
-+
-Ajout des max et min pour widget
-+
-Standard-Widget
-+
-Verbesserte FAQ
-+
-Correction commande reboot.
+Anciennes évolutions :
 
-1.22:: Modification pour recréer les sous commande s'ils n'existent plus.
-+
-Korrektur des reboot Befehls
-
-1.21:: Ajout de commande pour reboot
-
-1.20:: Detection des xml corrompu.
-
-1.19:: Mise a jour des entrées analogiques, même si la valeur ne change pas pour les graphiques.
-
-1.18:: Ajout de Intensité souscrite.
-+
-Intensité maximale.
-
-1.17::Ajout du compteur journalier en monde non fuel.
-
-1.16::Modification de cron pour plus d'autonomie.
-+
-Modification de l'extension du logo.
-+
-Compatibilité Imperihome
-+
-Retrait de la suppression des équipements lors de la désactivation du plugin
-
-1.15:: Correction par rapport au nouveau core.
-
-1.14:: Suppression de l'info `updatetime`.
-
-1.13:: Ajout de données évolution (variation par minute).
-+
-Ajout d'un choix de tarification pour ne présenter que les commandes correspondantes à celle-ci.
-
-1.12:: Ajout de lien vers les options d'affichage.
-
-1.11:: Correction de double cron.
-
-1.10:: Ajout du nombre d'impulsions par minute.
-+
-Redéclenchement jusqu'à 3 fois en cas d'indisponibilité de l'ecodevice.
-
-1.9:: Ajout d'une information `status`.
-
-1.8:: Ne pas mettre a jour les données si elles ne changent pas.
-
-1.1: ZIP Problem.
-
-1.0:: Initialisierung.
+- Correction pour firmware 1.04.82
+- Correction du triphase
+- Correction du daemon
+- Ajout de la génération automatique et intélligente des commandes de téléinfo
+- Changement unité Ampere en A
+- Ajout de daemon pour valeur variant rapidement
+- Commande par type de compteur (eau, gaz, electricité, fuel)
+- Ajout des max et min pour widget
+- Widget par defaut
+- Amélioration de FAQ
+- Correction commande reboot.
+- Modification pour recréer les sous commande s'ils n'existent plus.
+- Correction de la commande reboot
+- Ajout de commande pour reboot
+- Detection des xml corrompu.
+- Mise a jour des entrées analogiques, même si la valeur ne change pas pour les graphiques.
+- Ajout de Intensité souscrite.
+- Intensité maximale.
+- Ajout du compteur journalier en monde non fuel.
+- Modification de cron pour plus d'autonomie.
+- Modification de l'extension du logo.
+- Compatibilité Imperihome
+- Retrait de la suppression des équipements lors de la désactivation du plugin
+- Correction par rapport au nouveau core.
+- Suppression de l'info `updatetime`.
+- Ajout de données évolution (variation par minute).
+- Ajout d'un choix de tarification pour ne présenter que les commandes correspondantes à celle-ci.
+- Ajout de lien vers les options d'affichage.
+- Correction de double cron.
+- Ajout du nombre d'impulsions par minute.
+- Redéclenchement jusqu'à 3 fois en cas d'indisponibilité de l'ecodevice.
+- Ajout d'une information `status`.
+- Ne pas mettre a jour les données si elles ne changent pas.
+- Problème de ZIP.
+- Initialisation.
