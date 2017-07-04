@@ -22,5 +22,5 @@ if (!isConnect('admin')) {
 ?>
 <br/>
 <legend>Appel API</legend>
-{{URL : #IP_JEEDOM#/core/api/jeeApi.php?apikey=<?php echo config::byKey('api') ?>&type=script&id=#id#&value=#value# }}
+{{URL : #IP_JEEDOM#/core/api/jeeApi.php?apikey=<?php echo jeedom::getApiKey('ecodevice'); ?>&type=script&id=#id#&value=#value# }}
 

@@ -43,6 +43,10 @@ function ecodevice_install() {
 	config::save('temporisation_lecture', 10, 'ecodevice');
 	$daemon->start();
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
+	jeedom::getApiKey('ecodevice');
+	if (config::byKey('api::ecodevice::mode') == '') {
+		config::save('api::ecodevice::mode', 'enable');
+	}
 }
 
 function ecodevice_update() {
@@ -94,6 +98,10 @@ function ecodevice_update() {
 			$SubeqLogic->postAjax();
 			$SubeqLogic->save();
 		}
+	}
+	jeedom::getApiKey('ecodevice');
+	if (config::byKey('api::ecodevice::mode') == '') {
+		config::save('api::ecodevice::mode', 'enable');
 	}
 }
 
