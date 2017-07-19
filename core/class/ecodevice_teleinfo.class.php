@@ -152,7 +152,7 @@ class ecodevice_teleinfo extends eqLogic {
 					'act' => $compteur+3,
 					'serv' => config::byKey('internalAddr'),
 					'port' => 80,
-					'url' => '/jeedom/core/api/jeeApi.php?api='.jeedom::getApiKey('ecodevice').'&type=ecodevice&id='.substr($this->getLogicalId(), 0, strpos($this->getLogicalId(),"_")).'&message=data_change');
+					'url' => '/jeedom/core/api/jeeApi.php?api='.jeedom::getApiKey('ecodevice').'&type=ecodevice&plugin=ecodevice&id='.substr($this->getLogicalId(), 0, strpos($this->getLogicalId(),"_")).'&message=data_change');
 //					'url' => '/jeedom/core/api/jeeApi.php?api='.jeedom::getApiKey('ecodevice').'&type=ecodevice_teleinfo&id='.$this->getId().'&message=data_change');
 			
 			$options = array(

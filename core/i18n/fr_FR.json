@@ -14,7 +14,11 @@
         "Valeur": "Valeur",
         "Unité": "Unité",
         "Paramètres": "Paramètres",
-        "Sauvegarder": "Sauvegarder"
+        "Sauvegarder": "Sauvegarder",
+        "Type": "Type",
+        "Sans": "Sans",
+        "Mettre le compteur en mode fuel et 1 dans le débit du gicleur sur l'ecodevice.": "Mettre le compteur en mode fuel et 1 dans le débit du gicleur sur l'ecodevice.",
+        "Les indicateurs sont regénérés après sauvegarde.": "Les indicateurs sont regénérés après sauvegarde."
     },
     "plugins\/ecodevice\/desktop\/php\/ecodevice_teleinfo.php": {
         "Général": "Général",
@@ -32,7 +36,8 @@
         "Valeur": "Valeur",
         "Unité": "Unité",
         "Paramètres": "Paramètres",
-        "Sauvegarder": "Sauvegarder"
+        "Sauvegarder": "Sauvegarder",
+        "Les indicateurs sont regénérés en cas de changement de tarif après sauvegarde.": "Les indicateurs sont regénérés en cas de changement de tarif après sauvegarde."
     },
     "plugins\/ecodevice\/desktop\/php\/ecodevice.php": {
         "Ajouter un Ecodev": "Ajouter un Ecodev",
@@ -60,6 +65,39 @@
         "Supprimer": "Supprimer",
         "Sauvegarder": "Sauvegarder",
         "Sauvegarde effectuée avec succès": "Sauvegarde effectuée avec succès",
-        "Utilisez sur l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>": "Utilisez sur l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>"
+        "Utilisez sur l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>": "Utilisez sur l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>",
+        "Gestion": "Gestion",
+        "Configuration": "Configuration",
+        "Accéder à la carte": "Accéder à la carte",
+        "Utilisez l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>": "Utilisez l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>"
+    },
+    "plugins\/ecodevice\/plugin_info\/info.json": {
+        "Nécessite firmware 1.04.82 minimum": "Nécessite firmware 1.04.82 minimum"
+    },
+    "plugins\/ecodevice\/core\/class\/ecodevice.class.php": {
+        "L'ecodevice ne repond pas.": "L'ecodevice ne repond pas."
+    },
+    "plugins\/ecodevice\/core\/class\/ecodevice_compteur.class.php": {
+        "Eau": "Eau",
+        "Fuel": "Fuel",
+        "Gaz": "Gaz",
+        "Electricité": "Electricité",
+        "Autre": "Autre"
+    },
+    "plugins\/ecodevice\/desktop\/js\/ecodevice.js": {
+        "Nom": "Nom",
+        "Unite": "Unite",
+        "Min": "Min",
+        "Max": "Max",
+        "Historiser": "Historiser",
+        "Afficher": "Afficher",
+        "Tester": "Tester",
+        "Accèder à l'interface de l'Ecodevice": "Accèder à l'interface de l'Ecodevice"
+    },
+    "plugins\/ecodevice\/plugin_info\/configuration.php": {
+        "Temporisation minumum entre deux lectures en secondes pour les débits et consommations instantanées": "Temporisation minumum entre deux lectures en secondes pour les débits et consommations instantanées",
+        "Trop diminuer cette valeur peut rendre instable votre serveur": "Trop diminuer cette valeur peut rendre instable votre serveur",
+        "Faire un don au développeur": "Faire un don au développeur",
+        "Faire un don via Paypal au développeur": "Faire un don via Paypal au développeur"
     }
 }
