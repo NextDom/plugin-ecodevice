@@ -208,66 +208,74 @@ class ecodevice extends eqLogic {
 			$ecodeviceCmd->remove();		
 		}
 
-		for ($compteurId = 0; $compteurId <= 1; $compteurId++) {
-			if ( ! is_object(self::byLogicalId($this->getId()."_C".$compteurId, 'ecodevice_compteur')) ) {
-				log::add('ecodevice','debug','Creation compteur : '.$this->getId().'_C'.$compteurId);
-				$eqLogic = new ecodevice_compteur();
-				$eqLogic->setEqType_name('ecodevice_compteur');
-				$eqLogic->setIsEnable(0);
-				$eqLogic->setName('Compteur ' . $compteurId);
-				$eqLogic->setLogicalId($this->getId().'_C'.$compteurId);
-				$eqLogic->setIsVisible(0);
-				$eqLogic->save();
-			}
-			else
-			{
-				$eqLogic = self::byLogicalId($this->getId()."_C".$compteurId, 'ecodevice_compteur');
-				# Verifie la configuration des compteurs fuel
-				$xpathModele = '//c'.$compteurId.'_fuel';
-				$status = $this->xmlstatus->xpath($xpathModele);
-
-				if ( count($status) != 0 )
+		$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
+		$count = 0;
+		while ( $this->xmlstatus === false && $count < 3 ) {
+			$this->xmlstatus = @simplexml_load_file($this->getUrl(). 'status.xml');
+			$count++;
+		}
+		if ( $this->xmlstatus !== false ) {
+			for ($compteurId = 0; $compteurId <= 1; $compteurId++) {
+				if ( ! is_object(self::byLogicalId($this->getId()."_C".$compteurId, 'ecodevice_compteur')) ) {
+					log::add('ecodevice','debug','Creation compteur : '.$this->getId().'_C'.$compteurId);
+					$eqLogic = new ecodevice_compteur();
+					$eqLogic->setEqType_name('ecodevice_compteur');
+					$eqLogic->setIsEnable(0);
+					$eqLogic->setName('Compteur ' . $compteurId);
+					$eqLogic->setLogicalId($this->getId().'_C'.$compteurId);
+					$eqLogic->setIsVisible(0);
+					$eqLogic->save();
+				}
+				else
 				{
-					if ( $status[0] != "selected" )
+					$eqLogic = self::byLogicalId($this->getId()."_C".$compteurId, 'ecodevice_compteur');
+					# Verifie la configuration des compteurs fuel
+					$xpathModele = '//c'.$compteurId.'_fuel';
+					$status = $this->xmlstatus->xpath($xpathModele);
+
+					if ( count($status) != 0 )
 					{
-						if ( $eqLogic->getConfiguration('typecompteur') == "Fuel" || $eqLogic->getConfiguration('typecompteur') == "Temps de fonctionnement" )
+						if ( $status[0] != "selected" )
 						{
-							throw new Exception(__('Le compteur '.$eqLogic->getName().' ne doit pas être configuré en mode fuel dans l\'ecodevice.',__FILE__));
+							if ( $eqLogic->getConfiguration('typecompteur') == "Fuel" || $eqLogic->getConfiguration('typecompteur') == "Temps de fonctionnement" )
+							{
+								throw new Exception(__('Le compteur '.$eqLogic->getName().' ne doit pas être configuré en mode fuel dans l\'ecodevice.',__FILE__));
+							}
+							elseif ( $eqLogic->getConfiguration('typecompteur') == "" )
+							{
+								$eqLogic->setConfiguration('typecompteur', "Eau");
+								$eqLogic->save();
+							}
 						}
-						elseif ( $eqLogic->getConfiguration('typecompteur') == "" )
+						else
 						{
-							$eqLogic->setConfiguration('typecompteur', "Eau");
+							$eqLogic->setConfiguration('typecompteur', "Fuel");
 							$eqLogic->save();
 						}
 					}
-					else
+					elseif ( $eqLogic->getConfiguration('typecompteur') == "Fuel" || $eqLogic->getConfiguration('typecompteur') == "Temps de fonctionnement" )
 					{
-						$eqLogic->setConfiguration('typecompteur', "Fuel");
+						throw new Exception(__('Le compteur '.$eqLogic->getName().' ne doit pas être configuré en mode fuel dans l\'ecodevice.',__FILE__));
+					}
+					elseif ( $eqLogic->getConfiguration('typecompteur') == "" )
+					{
+						$eqLogic->setConfiguration('typecompteur', "Eau");
 						$eqLogic->save();
 					}
 				}
-				elseif ( $eqLogic->getConfiguration('typecompteur') == "Fuel" || $eqLogic->getConfiguration('typecompteur') == "Temps de fonctionnement" )
-				{
-					throw new Exception(__('Le compteur '.$eqLogic->getName().' ne doit pas être configuré en mode fuel dans l\'ecodevice.',__FILE__));
-				}
-				elseif ( $eqLogic->getConfiguration('typecompteur') == "" )
-				{
-					$eqLogic->setConfiguration('typecompteur', "Eau");
+			}
+			for ($compteurId = 1; $compteurId <= 2; $compteurId++) {
+				if ( ! is_object(self::byLogicalId($this->getId()."_T".$compteurId, 'ecodevice_teleinfo')) ) {
+					log::add('ecodevice','debug','Creation teleinfo : '.$this->getId().'_T'.$compteurId);
+					$eqLogic = new ecodevice_teleinfo();
+					$eqLogic->setEqType_name('ecodevice_teleinfo');
+					$eqLogic->setIsEnable(0);
+					$eqLogic->setName('Teleinfo ' . $compteurId);
+					$eqLogic->setLogicalId($this->getId().'_T'.$compteurId);
+					$eqLogic->setIsVisible(0);
+					$eqLogic->setCategory("energy", "Energie");
 					$eqLogic->save();
 				}
-			}
-		}
-		for ($compteurId = 1; $compteurId <= 2; $compteurId++) {
-			if ( ! is_object(self::byLogicalId($this->getId()."_T".$compteurId, 'ecodevice_teleinfo')) ) {
-				log::add('ecodevice','debug','Creation teleinfo : '.$this->getId().'_T'.$compteurId);
-				$eqLogic = new ecodevice_teleinfo();
-				$eqLogic->setEqType_name('ecodevice_teleinfo');
-				$eqLogic->setIsEnable(0);
-				$eqLogic->setName('Teleinfo ' . $compteurId);
-				$eqLogic->setLogicalId($this->getId().'_T'.$compteurId);
-				$eqLogic->setIsVisible(0);
-				$eqLogic->setCategory("energy", "Energie");
-				$eqLogic->save();
 			}
 		}
 	}

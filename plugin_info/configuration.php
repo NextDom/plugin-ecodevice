@@ -32,15 +32,4 @@ if (!isConnect()) {
 			<label class="col-lg-4 alert-label">{{Trop diminuer cette valeur peut rendre instable votre serveur}}</label>
 		</div>
     </fieldset>
-    <fieldset>
-   		<div class="form-group">
-			<label class="col-lg-4 control-label">{{Faire un don au développeur}}</label>
-			<div class="col-lg-5">
-				Ce plugin est gratuit pour que chacun puisse en profiter simplement. Si vous souhaitez tout de même faire un don au développeur du plugin, utilisez le lien suivant.<br>
-				<a class="btn" id="bt_paypal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZEPTTMEDP79PL" target="_new" >
-					<img src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donate_LG.gif" border="0" alt="{{Faire un don via Paypal au développeur}}">
-				</a>
-			</div>
-		</div>
-    </fieldset>
 </form>
