@@ -18,8 +18,7 @@ Il faut cliquer sur l'icone à gauche du nom de la carte dans la liste de gauche
 
 .Pourquoi le plugin est gratuit ?
 --
-Ce plugin est gratuit pour que chacun puisse en profiter simplement. Si vous souhaitez tout de même faire un don au développeur du plugin, utilisez le lien suivant.
-link:https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZEPTTMEDP79PL[Faire un don au développeur du plugin]
+Ce plugin est gratuit pour que chacun puisse en profiter simplement. Si vous souhaitez tout de même faire un don au développeur du plugin, merci de me faire un message par MP sur le forum.
 --
 
 .J'aimerai remonter des erreurs/modifications directement dans le code ?

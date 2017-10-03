@@ -96,8 +96,6 @@
     },
     "plugins\/ecodevice\/plugin_info\/configuration.php": {
         "Temporisation minumum entre deux lectures en secondes pour les débits et consommations instantanées": "Temporisation minumum entre deux lectures en secondes pour les débits et consommations instantanées",
-        "Trop diminuer cette valeur peut rendre instable votre serveur": "Trop diminuer cette valeur peut rendre instable votre serveur",
-        "Faire un don au développeur": "Faire un don au développeur",
-        "Faire un don via Paypal au développeur": "Faire un don via Paypal au développeur"
+        "Trop diminuer cette valeur peut rendre instable votre serveur": "Trop diminuer cette valeur peut rendre instable votre serveur"
     }
 }
