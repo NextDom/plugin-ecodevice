@@ -65,11 +65,11 @@
         "Supprimer": "Delete",
         "Sauvegarder": "Save",
         "Sauvegarde effectuée avec succès": "Success saving",
-        "Utilisez sur l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>": "Use this icon to see details <i class=\\\"fa fa-sitemap\\\"><\\\\/i>",
+        "Utilisez sur l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>": "Cliquez sur l\\icône suivante pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>",
         "Gestion": "Gestion",
         "Configuration": "Configuration",
         "Accéder à la carte": "Accéder à la carte",
-        "Utilisez l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>": "Utilisez l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>"
+        "Utilisez l\\icône suivant pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>": "Cliquez l\\icône suivante pour voir le détail de l\\'élément <i class=\"fa fa-sitemap\"><\/i>"
     },
     "plugins\/ecodevice\/plugin_info\/info.json": {
         "Nécessite firmware 1.04.82 minimum": "Nécessite firmware 1.04.82 minimum"
@@ -86,13 +86,13 @@
     },
     "plugins\/ecodevice\/desktop\/js\/ecodevice.js": {
         "Nom": "Nom",
-        "Unite": "Unite",
+        "Unite": "Unité",
         "Min": "Min",
         "Max": "Max",
         "Historiser": "Historiser",
         "Afficher": "Afficher",
         "Tester": "Tester",
-        "Accèder à l'interface de l'Ecodevice": "Accèder à l'interface de l'Ecodevice"
+        "Accèder à l'interface de l'Ecodevice": "Accéder à l'interface de l'Ecodevice"
     },
     "plugins\/ecodevice\/plugin_info\/configuration.php": {
         "Temporisation minumum entre deux lectures en secondes pour les débits et consommations instantanées": "Temporisation minumum entre deux lectures en secondes pour les débits et consommations instantanées",
