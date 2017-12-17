@@ -46,7 +46,7 @@ Voici la page de configuration de compteur. Tant que le type de compteur n'est p
 
 image::../images/ecodevice_screenshot4.jpg[]
 
-Voici la page de configuration d'une entrée téléinformation. Tant que le type de contrat n'est pas defini, les commandes ne sont pas crées.
+Dies ist die Konfigurationsseite für einen Teleinformationseintrag. Solange der Vertragstyp nicht definiert ist, werden die Aufträge nicht angelegt.
 
 image::../images/ecodevice_screenshot5.jpg[]
 
