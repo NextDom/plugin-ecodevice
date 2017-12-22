@@ -65,6 +65,74 @@ function ecodevice_update() {
 		$cron->stop();
 		$cron->remove();
 	}
+	if ( config::byKey('temporisation_lecture', 'ecodevice', '') == "" )
+	{
+		config::save('temporisation_lecture', 10, 'ecodevice');
+	}
+	config::remove('listChildren', 'ecodevice');
+	config::remove('subClass', 'ecodevice');
+	$FlagBasculeClass = false;
+	foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
+		$SubeqLogic->setConfiguration('type', 'teleinfo');
+		$SubeqLogic->setEqType_name('ecodevice');
+		$SubeqLogic->save();
+		foreach (cmd::byEqLogicId($SubeqLogic->getId()) as $cmd) {
+			$cmd->setEqType('ecodevice');
+			$cmd->save();
+		}
+		$FlagBasculeClass = true;
+	}
+	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
+		$SubeqLogic->setConfiguration('type', 'compteur');
+		$SubeqLogic->setEqType_name('ecodevice');
+		$SubeqLogic->save();
+		foreach (cmd::byEqLogicId($SubeqLogic->getId()) as $cmd) {
+			$cmd->setEqType('ecodevice');
+			$cmd->save();
+		}
+		$FlagBasculeClass = true;
+	}
+	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
+		if ( $eqLogic->getConfiguration('type', '') == '' )
+		{
+			$eqLogic->setConfiguration('type', 'carte');
+			$eqLogic->save();
+			$FlagBasculeClass = true;
+		}
+		foreach (cmd::byEqLogicId($eqLogic->getId()) as $cmd) {
+			if ( $cmd->getEqType() != 'ecodevice')
+			{
+				$cmd->setEqType('ecodevice');
+				$cmd->save();
+				$FlagBasculeClass = true;
+			}
+		}
+	}
+	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
+		if ( $eqLogic->getConfiguration('type', '') == 'compteur' )
+		{
+			if ( $eqLogic->getIsEnable() )
+			{
+				$eqLogic->postAjax();
+				$eqLogic->save();
+			}
+		}
+	}
+	if ( $FlagBasculeClass )
+	{
+		log::add('ecodevice','error',__('Les Urls de push ont changer. Pensez à les reconfigurer pour chaque carte.',__FILE__));
+	}
+	jeedom::getApiKey('ecodevice');
+	if (config::byKey('api::ecodevice::mode') == '') {
+		config::save('api::ecodevice::mode', 'enable');
+	}
+	foreach (array("compteur", "teleinfo") as $type)
+	{
+		if (file_exists (dirname(__FILE__) . '/../core/class/ecodevice_'.$type.'.class.php'))
+			unlink(dirname(__FILE__) . '/../core/class/ecodevice_'.$type.'.class.php');
+		if (file_exists (dirname(__FILE__) . '/../desktop/php/ecodevice_'.$type.'.php'))
+			unlink(dirname(__FILE__) . '/../desktop/php/ecodevice_'.$type.'.php');
+	}
 	$daemon = cron::byClassAndFunction('ecodevice', 'daemon');
 	if (!is_object($daemon)) {
 		$daemon = new cron();
@@ -81,28 +149,6 @@ function ecodevice_update() {
 	{
 		ecodevice::deamon_start();
 	}
-	if ( config::byKey('temporisation_lecture', 'ecodevice', '') == "" )
-	{
-		config::save('temporisation_lecture', 10, 'ecodevice');
-	}
-	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
-	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
-		$eqLogic->save();
-	}
-	foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
-		$SubeqLogic->save();
-	}
-	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
- 		if ( $SubeqLogic->getIsEnable() )
-		{
-			$SubeqLogic->postAjax();
-			$SubeqLogic->save();
-		}
-	}
-	jeedom::getApiKey('ecodevice');
-	if (config::byKey('api::ecodevice::mode') == '') {
-		config::save('api::ecodevice::mode', 'enable');
-	}
 }
 
 function ecodevice_remove() {
@@ -115,6 +161,7 @@ function ecodevice_remove() {
         $cron->remove();
     }
 	config::remove('subClass', 'ecodevice');
+	config::remove('listChildren', 'ecodevice');
 	config::remove('temporisation_lecture', 'ecodevice');
 }
 ?>

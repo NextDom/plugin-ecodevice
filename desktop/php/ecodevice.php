@@ -11,7 +11,7 @@ sendVarToJS('eqType', 'ecodevice');
             <ul id="ul_eqLogic" class="nav nav-list bs-sidenav">
                 <a class="btn btn-default eqLogicAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter un Ecodev}}</a>
                 <?php
-				$eqLogics = eqLogic::byType('ecodevice');
+				$eqLogics = eqLogic::byTypeAndSearhConfiguration('ecodevice', '"type":"carte"');
                 foreach ($eqLogics as $eqLogic) {
                        echo '<li>';
 						echo '<i class="fa fa-sitemap cursor eqLogicAction" data-action="hide" data-eqLogic_id="' . $eqLogic->getId() . '"></i>';
@@ -21,9 +21,9 @@ sendVarToJS('eqType', 'ecodevice');
 								echo '<i class="fa fa-calculator cursor eqLogicAction" data-action="hide" data-eqLogic_id="compteur_' . $eqLogic->getId() . '"></i>';
 								echo '<a class="cursor eqLogicAction" data-action="hide" style="display: inline;" data-eqLogic_id="compteur_' . $eqLogic->getId() . '" data-eqLogic_type="ecodevice">{{Compteur}}</a>';
 								echo '<ul id="ul_eqLogic" class="nav nav-list bs-sidenav sub-nav-list" data-eqLogic_id="compteur_' . $eqLogic->getId() . '" style="display: none;">';
-									foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
+									foreach (eqLogic::byTypeAndSearhConfiguration('ecodevice', '"type":"compteur"') as $SubeqLogic) {
 										if ( substr ($SubeqLogic->getLogicalId(), 0, strpos($SubeqLogic->getLogicalId(),"_")) == $eqLogic->getId() ) {
-											echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $SubeqLogic->getId() . '" data-eqLogic_type="ecodevice_compteur"><a>' . $SubeqLogic->getListeName() . '</a></li>';
+											echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $SubeqLogic->getId() . '" data-eqLogic_type="ecodevice"><a>' . $SubeqLogic->getListeName() . '</a></li>';
 										}
 									}
 								echo '</ul>';
@@ -32,9 +32,9 @@ sendVarToJS('eqType', 'ecodevice');
 								echo '<i class="fa fa-bolt cursor eqLogicAction" data-action="hide" data-eqLogic_id="teleinfo_' . $eqLogic->getId() . '"></i>';
 								echo '<a class="cursor eqLogicAction" data-action="hide" style="display: inline;" data-eqLogic_id="teleinfo_' . $eqLogic->getId() . '" data-eqLogic_type="ecodevice">{{Téléinfo}}</a>';
 								echo '<ul id="ul_eqLogic" class="nav nav-list bs-sidenav sub-nav-list" data-eqLogic_id="teleinfo_' . $eqLogic->getId() . '" style="display: none;">';
-									foreach (eqLogic::byType('ecodevice_teleinfo') as $SubeqLogic) {
+									foreach (eqLogic::byTypeAndSearhConfiguration('ecodevice', '"type":"teleinfo"') as $SubeqLogic) {
 										if ( substr ($SubeqLogic->getLogicalId(), 0, strpos($SubeqLogic->getLogicalId(),"_")) == $eqLogic->getId() ) {
-											echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $SubeqLogic->getId() . '" data-eqLogic_type="ecodevice_teleinfo"><a>' . $SubeqLogic->getListeName() . '</a></li>';
+											echo '<li class="cursor li_eqLogic" data-eqLogic_id="' . $SubeqLogic->getId() . '" data-eqLogic_type="ecodevice"><a>' . $SubeqLogic->getListeName() . '</a></li>';
 										}
 									}
 								echo '</ul>';
@@ -78,7 +78,7 @@ sendVarToJS('eqType', 'ecodevice');
                 foreach ($eqLogics as $eqLogic) {
                     echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >';
                     echo "<center>";
-                    echo '<img src="plugins/ecodevice/doc/images/ecodevice_icon.png" height="105" width="95" />';
+                    echo '<img src="plugins/ecodevice/plugin_info/ecodevice_icon.png" height="105" width="95" />';
                     echo "</center>";
                     echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
                     echo '</div>';
@@ -135,30 +135,58 @@ sendVarToJS('eqType', 'ecodevice');
 					<a class="btn btn-default" id="bt_goCarte" title='{{Accéder à la carte}}'><i class="fa fa-cogs"></i></a>
 					</div>
                 </div>
-                <div class="form-group">
+                <div class="form-group carte_only">
                     <label class="col-lg-2 control-label">{{IP de l'ecodevice}}</label>
                     <div class="col-lg-3">
                         <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="ip"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group carte_only">
                     <label class="col-lg-2 control-label">{{Port de l'ecodevice}}</label>
                     <div class="col-lg-3">
                         <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="port"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group carte_only">
                     <label class="col-lg-2 control-label">{{Compte de l'ecodevice}}</label>
                     <div class="col-lg-3">
                         <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="username"/>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group carte_only">
                     <label class="col-lg-2 control-label">{{Password de l'ecodevice}}</label>
                     <div class="col-lg-3">
                         <input type="password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="password"/>
                     </div>
                 </div>
+                <div class="form-group compteur_only">
+                    <label class="col-lg-2 control-label" >{{Type}}</label>
+                    <div class="col-lg-3">
+                        <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="typecompteur" id="typecompteur">
+                            <option value="">{{Sans}}</option>
+                            <?php
+                            foreach (ecodevice::getTypeCompteur() as $object) {
+                                echo '<option value="' . $object . '">' . $object . '</option>';
+                            }
+                            ?>
+                        </select>
+						<label class="inline" id="Alerte_Temps_de_fonctionnement">{{Mettre le compteur en mode fuel et 1 dans le débit du gicleur sur l'ecodevice.}}</label>
+						<label class="inline" id="Alerte_Change_Type">{{Les indicateurs sont regénérés après sauvegarde.}}</label>
+                    </div>
+                </div>
+				<div class="form-group teleinfo_only">
+					<label class="col-sm-3 control-label">{{Tarification :}}</label>
+					<div class="col-sm-5">
+						<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tarification" id="tarification">
+							<option value="">Sans</option>
+							<option value="BASE">Base</option>
+							<option value="HC">Heure creuse/Heure pleine</option>
+							<option value="BBRH">Tempo</option>
+							<option value="EJP">EJP</option>
+						</select>
+						<label>{{Les indicateurs sont regénérés en cas de changement de tarif après sauvegarde.}}</label>
+					</div>
+				</div>
             </fieldset> 
         </form>
 
@@ -189,8 +217,6 @@ sendVarToJS('eqType', 'ecodevice');
         </form>
 
     </div>
-	<?php include_file('desktop', 'ecodevice_compteur', 'php', 'ecodevice'); ?>
-	<?php include_file('desktop', 'ecodevice_teleinfo', 'php', 'ecodevice'); ?>
 </div>
 
 <?php include_file('core', 'plugin.template', 'js'); ?>

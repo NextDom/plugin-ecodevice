@@ -80,7 +80,6 @@ function addCmdToTable(_cmd) {
         tr += '</td>';
         tr += '<td>';
         tr += '</td>';
-        tr += '<td></td>';
         tr += '<td>';
         tr += '<span><input type="checkbox" class="cmdAttr" data-l1key="isVisible" checked/> {{Afficher}}<br/></span>';
         tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min}}" title="{{Min}}" style="width : 40%;display : none;">';
@@ -131,6 +130,18 @@ $('#bt_configPush').on('click', function() {
     });
 });
 
-$("#table_cmd_ecodevice_compteur").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
-$("#table_cmd_ecodevice_teleinfo").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+function printEqLogic(_eqLogic) {
+	var listType = ['carte', 'compteur', 'teleinfo'];
+	for (var currentType in listType){
+		if ( _eqLogic.configuration.type == listType[currentType] )
+		{
+			$('.' + listType[currentType] + '_only').show();
+		}
+		else
+		{
+			$('.' + listType[currentType] + '_only').hide();
+		}
+	}
+}
+
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
