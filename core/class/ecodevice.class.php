@@ -1373,7 +1373,24 @@ class ecodevice extends eqLogic {
  
 	public function getListeName()
 	{
-		return (substr($this->getLogicalId(), strpos($this->getLogicalId(),"_")+2, 1)+1)." - ".parent::getName();
+		switch ($this->getConfiguration('type', '')) {
+			case "carte":
+				break;
+			case "teleinfo":
+				return (substr($this->getLogicalId(), strpos($this->getLogicalId(),"_")+2, 1))." - ".parent::getName();
+				break;
+			case "compteur":
+				return (substr($this->getLogicalId(), strpos($this->getLogicalId(),"_")+2, 1)+1)." - ".parent::getName();
+				break;
+		}
+	}
+	
+	public function getImage()
+	{
+		if (file_exists(dirname(__FILE__) . '/../../plugin_info/' . $this->getConfiguration('type', '') . '_icon.png')) {
+			return 'plugins/' . $this->getEqType_name() . '/plugin_info/' . $this->getConfiguration('type', '') . '_icon.png';
+		}
+		return parent::getImage();
 	}
 	/*     * **********************Getteur Setteur*************************** */
 }
