@@ -29,7 +29,7 @@ try {
         if (!is_object($eqLogic)) {
             throw new Exception(__('ecodevice eqLogic non trouvé : ', __FILE__) . init('id'));
         }
-		$eqLogic->configPush();
+        $eqLogic->configPush();
         ajax::success(__('Url de push sur ecodevice configuré', __FILE__));
     }
 
@@ -38,4 +38,4 @@ try {
 } catch (Exception $e) {
     ajax::error(displayExeption($e), $e->getCode());
 }
-?>
+ 
