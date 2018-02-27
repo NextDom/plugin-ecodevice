@@ -80,7 +80,6 @@ function ecodevice_update() {
 			$cmd->setEqType('ecodevice');
 			$cmd->save();
 		}
-		$FlagBasculeClass = true;
 	}
 	foreach (eqLogic::byType('ecodevice_compteur') as $SubeqLogic) {
 		$SubeqLogic->setConfiguration('type', 'compteur');
@@ -90,21 +89,18 @@ function ecodevice_update() {
 			$cmd->setEqType('ecodevice');
 			$cmd->save();
 		}
-		$FlagBasculeClass = true;
 	}
 	foreach (eqLogic::byType('ecodevice') as $eqLogic) {
 		if ( $eqLogic->getConfiguration('type', '') == '' )
 		{
 			$eqLogic->setConfiguration('type', 'carte');
 			$eqLogic->save();
-			$FlagBasculeClass = true;
 		}
 		foreach (cmd::byEqLogicId($eqLogic->getId()) as $cmd) {
 			if ( $cmd->getEqType() != 'ecodevice')
 			{
 				$cmd->setEqType('ecodevice');
 				$cmd->save();
-				$FlagBasculeClass = true;
 			}
 		}
 	}
@@ -114,13 +110,9 @@ function ecodevice_update() {
 			if ( $eqLogic->getIsEnable() )
 			{
 				$eqLogic->postAjax();
-				$eqLogic->save();
 			}
 		}
-	}
-	if ( $FlagBasculeClass )
-	{
-		log::add('ecodevice','error',__('Les Urls de push ont changer. Pensez à les reconfigurer pour chaque carte.',__FILE__));
+		$eqLogic->save();
 	}
 	jeedom::getApiKey('ecodevice');
 	if (config::byKey('api::ecodevice::mode') == '') {
