@@ -40,7 +40,7 @@ function ecodevice_install() {
 		$daemon->setSchedule('* * * * *');
 		$daemon->save();
 	}
-	config::save('temporisation_lecture', 10, 'ecodevice');
+	config::save('temporisationLecture', 10, 'ecodevice');
 	$daemon->start();
 	config::save('subClass', 'ecodevice_compteur;ecodevice_teleinfo', 'ecodevice');
 	jeedom::getApiKey('ecodevice');
@@ -65,9 +65,14 @@ function ecodevice_update() {
 		$cron->stop();
 		$cron->remove();
 	}
-	if ( config::byKey('temporisation_lecture', 'ecodevice', '') == "" )
+    if ( config::byKey('temporisation_lecture', 'ecodevice', '') != "" )
 	{
-		config::save('temporisation_lecture', 10, 'ecodevice');
+		config::save('temporisationLecture', config::byKey('temporisation_lecture', 'ecodevice', ''), 'ecodevice');
+        config::remove('temporisation_lecture', 'ecodevice');
+	}
+	if ( config::byKey('temporisationLecture', 'ecodevice', '') == "" )
+	{
+		config::save('temporisationLecture', 10, 'ecodevice');
 	}
 	config::remove('listChildren', 'ecodevice');
 	config::remove('subClass', 'ecodevice');
@@ -154,6 +159,6 @@ function ecodevice_remove() {
     }
 	config::remove('subClass', 'ecodevice');
 	config::remove('listChildren', 'ecodevice');
-	config::remove('temporisation_lecture', 'ecodevice');
+	config::remove('temporisationLecture', 'ecodevice');
 }
 ?>

@@ -27,7 +27,7 @@ if (!isConnect()) {
 		<div class="form-group">
 			<label class="col-lg-4 control-label">{{Temporisation minumum entre deux lectures en secondes pour les débits et consommations instantanées}}</label>
 			<div class="col-lg-3">
-				<input class="configKey form-control" data-l1key="temporisation_lecture" value="5" />
+				<input class="configKey form-control" data-l1key="temporisationLecture" value="5" />
 			</div>
 			<label class="col-lg-4 alert-label">{{Trop diminuer cette valeur peut rendre instable votre serveur}}</label>
 		</div>
