@@ -1438,4 +1438,3 @@ class ecodeviceCmd extends cmd
 		return true;
 	}
 }
-?>
