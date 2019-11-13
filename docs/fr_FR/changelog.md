@@ -72,7 +72,7 @@ Anciennes évolutions :
 
 -   Correction par rapport au nouveau core.
 
--   Suppression de l’info `updatetime`.
+-   Suppression de l’information `updatetime`.
 
 -   Ajout de données évolution (variation par minute).
 

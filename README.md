@@ -54,17 +54,17 @@ Infos :
   * Option tarif
   * Couleur demain
   * Tarif en cours
-  * Evolution index (base)
-  * Evolution index (heures creuses)
-  * Evolution index (heures pleines)
-  * Evolution index (heures creuses jours bleus Tempo)
-  * Evolution index (heures pleines jours bleus Tempo)
-  * Evolution index (heures creuses jours blancs Tempo)
-  * Evolution index (heures pleines jours blancs Tempo)
-  * Evolution index (heures creuses jours rouges Tempo)
-  * Evolution index (heures pleines jours rouges Tempo)
-  * Evolution index (normal EJP)
-  * Evolution index (pointe mobile EJP)
+  * Évolution index (base)
+  * Évolution index (heures creuses)
+  * Évolution index (heures pleines)
+  * Évolution index (heures creuses jours bleus Tempo)
+  * Évolution index (heures pleines jours bleus Tempo)
+  * Évolution index (heures creuses jours blancs Tempo)
+  * Évolution index (heures pleines jours blancs Tempo)
+  * Évolution index (heures creuses jours rouges Tempo)
+  * Évolution index (heures pleines jours rouges Tempo)
+  * Évolution index (normal EJP)
+  * Évolution index (pointe mobile EJP)
   * Intensité souscrite
   * Intensité maximale
   * Intensité maximale Phase 1
