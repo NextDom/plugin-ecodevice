@@ -1,5 +1,5 @@
 #!/bin/bash
-mkdir tmp
+CODE=0;
 for file in *.md docs/fr_FR/*.md;
 do
   if [ $file = "docs/fr_FR/index-ExtraTemplate.md" ] || [ $file = "docs/fr_FR/index.md" ]
@@ -7,15 +7,11 @@ do
     echo "skip "$file
   else
     echo "process "$file
-    cat $file | aspell --personal=./tests/tools/.aspell.fr.pws --lang=fr --encoding=utf-8 list | sort -u;
-    cat $file | aspell --personal=./tests/tools/.aspell.fr.pws --lang=fr --encoding=utf-8 list >>tmp/list_mot.txt
+    cat $file | aspell --personal=./tests/tools/.aspell.fr.pws --lang=fr --encoding=utf-8 list
+    CODE=`expr $? + $CODE`
   fi
-done
-if [ -e tmp/list_mot.txt ]
-then
-  rm tmp/list_mot.txt
-  echo ------------------------
-  echo Vocabulaire non Francais voir au dessus
-  echo Ajout les mots a exclure du controle dans tests/tools/.aspell.fr.pws
-  exit 1
-fi
+done | sort -u
+echo ------------------------
+echo Vocabulaire non Francais voir au dessus
+echo Ajout les mots a exclure du controle dans tests/tools/.aspell.fr.pws
+exit $CODE
