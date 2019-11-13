@@ -1,12 +1,14 @@
 #!/bin/bash
-for file in *.md docs/fr_FR/*.md; 
-  do 
-  echo $files
-  if [ $file = "docs/fr_FR/index-ExtraTemplate.md" ] || [ $file = "docs/fr_FR/index.md" ]
-  then
-    echo "skip "$file
-  else
-    echo "process "$file
-    cat $file | aspell --personal=./tests/tools/.aspell.fr.pws --lang=fr --encoding=utf-8 list;
-  fi
-done 
+mkdir tmp
+for file in *.md docs/fr_FR/*.md;
+  do
+  echo "process "$file
+  cat $file | aspell --personal=./tests/tools/.aspell.fr.pws --lang=fr --encoding=utf-8 list | sort -u;
+  cat $file | aspell --personal=./tests/tools/.aspell.fr.pws --lang=fr --encoding=utf-8 list >>tmp/list_mot.txt
+done
+if [ -e tmp/list_mot.txt ]
+then
+  rm tmp/list_mot.txt
+  echo Vocabulaire non Francais
+  exit 1
+fi
