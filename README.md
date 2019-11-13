@@ -10,12 +10,12 @@
 Plugin permettant de gérer les [ecodevices](http://gce-electronics.com/fr/carte-relais-ethernet-module-rail-din/409-teleinformation-ethernet-ecodevices.html) de [GCE electronics](http://gce-electronics.com/)
 
 # Documentation du plugin:
+
 [![Read the Docs](https://img.shields.io/readthedocs/pip.svg)](docs/fr_FR/presentation.md)
 [présentation](docs/fr_FR/presentation.md) [configuration](docs/fr_FR/configuration.md) [faq](docs/fr_FR/faq.md) [changelog](docs/fr_FR/changelog.md)
 
 # Documentation complète:
 
 [![Read the Docs](plugin_info/ExtraTemplate_icon.png)](https://NextDom.github.io/plugin-ecodevice)
-
 
 [![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/TGUENNEGUEZ/)
