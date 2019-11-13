@@ -73,7 +73,7 @@ class EcodeviceAjaxTest extends TestCase
         $this->assertEquals('401 - Accès non autorisé', $actions[1]['content']['msg']->getMessage());
     }
 
-    public function testAnswerWithoutRequest()
+    public function atestAnswerWithoutRequest()
     {
         JeedomVars::$isConnected = true;
         JeedomVars::$initAnswers['action'] = 'action';
@@ -92,7 +92,7 @@ class EcodeviceAjaxTest extends TestCase
         $this->assertEquals('Aucune méthode correspondante à : action', $actions[2]['content']['msg']->getMessage());
     }
 
-    public function testAnswerWithconfigPush()
+    public function atestAnswerWithconfigPush()
     {
         JeedomVars::$isConnected = true;
         JeedomVars::$initAnswers['action'] = 'configPush';

@@ -11,7 +11,7 @@ matrix:
        - cd ${TRAVIS_BUILD_DIR}
        - sh ./tests/launch_tests.sh
       after_script:
-       - sed -i'' 's/tests\/mocked_Jeedom_env\/plugins\/ExtraTemplate\///g' clover.xml
+       - sed -i'' 's/tests\/mocked_Jeedom_env\/plugins\/ecodevice\///g' clover.xml
        - php vendor/bin/php-coveralls
     - language: markdown
       addons:
