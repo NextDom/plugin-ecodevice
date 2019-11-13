@@ -7,6 +7,7 @@ fi
 echo Version de PHP
 php --version
 
+ls -ltr
 MOCKED_ENV=tests/mocked_Jeedom_env
 PLUGIN_NAME=eco-device
 

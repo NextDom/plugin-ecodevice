@@ -112,7 +112,7 @@ class EcodeviceAjaxTest extends TestCase
 
 class EcodeviceClassTest extends TestCase
 {
-    require_once '../core/class/ecodevice.class.php' ;
+    require_once '../../core/class/ecodevice.class.php' ;
 
     $instanceEcodevice = new ecodevice;
     $instanceEcodevice->setConfiguration('mock_date',"2018-03-07");
