@@ -163,3 +163,11 @@ class eqLogic
 {
 
 }
+
+/**
+ * Mock de la class cmd
+ */
+class cmd
+{
+
+}
