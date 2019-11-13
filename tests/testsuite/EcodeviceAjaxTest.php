@@ -113,9 +113,12 @@ class EcodeviceAjaxTest extends TestCase
 
 class EcodeviceClassTest extends TestCase
 {
-    $instanceEcodevice = new ecodevice;
-    $instanceEcodevice->setConfiguration('mock_date',"2018-03-07");
-    $instanceEcodevice->setConfiguration('mock_file',"veolia_sudest_data/veolia_html_3March.htm");
-    $instanceEcodevice->displayConfig();
-    $instanceEcodevice->getConso(2);
+    public function atestInstanciation()
+    {
+        $instanceEcodevice = new ecodevice;
+        $instanceEcodevice->setConfiguration('mock_date',"2018-03-07");
+        $instanceEcodevice->setConfiguration('mock_file',"veolia_sudest_data/veolia_html_3March.htm");
+        $instanceEcodevice->displayConfig();
+        $instanceEcodevice->getConso(2);
+    }
 }
