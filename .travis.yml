@@ -23,5 +23,4 @@ matrix:
         - gem install mdl
         - cd ${TRAVIS_BUILD_DIR}
         - sh ./tests/tools/setCustomMDWarnings.sh
-        - mdl -r $MDLWAR *.md docs/fr_FR/*.md
         - sh ./tests/tools/spellCheckMD.sh
