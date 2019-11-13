@@ -8,11 +8,11 @@ Initialement, ce plugin a été créé pour connecter les Ecodevices de GCE.
 Données visibles sur le Dashboard :
 -----------------------------------
 
--   *''les compteurs de Téléinformation '*'
+- *''les compteurs de Téléinformation '*'
 
 ![](../images/ecodevice_screenshot2.jpg)
 
--   *''les compteurs d’impulsions*''
+- *''les compteurs d’impulsions*''
 
 ![](../images/ecodevice_screenshot3.jpg)
 

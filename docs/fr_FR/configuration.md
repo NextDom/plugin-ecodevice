@@ -11,14 +11,14 @@ Puis saisir le nom de l'équipement (ex. Ecodevice 1).
 
 Puis définir :
 
--   *''Objet parent*''
--   *''Catégorie '*'(optionnelle)
--   *''Activer '*'(à cocher, sinon l’équipement ne sera pas utilisable)
--   *''Visible '*'(optionnel si vous ne désirez pas le rendre visible sur le Dashboard)
--   *''Adresse IP*''
--   *''Port*''
--   *''Compte*''
--   *''Mot de passe*''
+- *''Objet parent*''
+- *''Catégorie '*'(optionnelle)
+- *''Activer '*'(à cocher, sinon l’équipement ne sera pas utilisable)
+- *''Visible '*'(optionnel si vous ne désirez pas le rendre visible sur le Dashboard)
+- *''Adresse IP*''
+- *''Port*''
+- *''Compte*''
+- *''Mot de passe*''
 
 ![](../images/ecodevice_screenshot1.jpg)
 

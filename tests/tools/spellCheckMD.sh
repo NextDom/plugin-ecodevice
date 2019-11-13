@@ -4,9 +4,9 @@ for file in *.md docs/fr_FR/*.md;
 do
   if [ $file = "docs/fr_FR/index-ExtraTemplate.md" ] || [ $file = "docs/fr_FR/index.md" ]
   then
-    echo "skip "$file
+    echo "skip "$file >&2
   else
-    echo "process "$file
+    echo "process "$file >&2
     cat $file | aspell --personal=./tests/tools/.aspell.fr.pws --lang=fr --encoding=utf-8 list
     CODE=`expr $? + $CODE`
   fi
