@@ -4,33 +4,25 @@
 
 Plugin permettant de gérer les ecodevices
 
-
-
-
 ### Market
 
 Retrouvez le sur le Market Jeedom [ici](https://www.jeedom.com/market/index.php?v=d&p=market&type=plugin&name=ecodevice)
-
 
 ### Documentation
 
 Vous trouverez la documentation [ici](https://github.com/Jeedom-Plugins-Extra/ecodevice/blob/stable/docs/fr_FR/index.md)
 
-
 ### Prévisualisation
 
 <img src="docs/images/ecodevice_screenshot1.jpg" align="center">
-
 
 ### Forum
 
 Lien vers le forum [ici](https://www.jeedom.com/forum/viewtopic.php?f=149&t=2033)
 
-
 ### Chatroom
 
-Lien vers le chat [ici](https://gitter.im/Jeedom-Plugins-Extra/plugin-ecodevice)
-
+Lien vers le chat [ici](https://discord.gg/eC3G2x9)
 
 ### Fonctions disponibles
 
@@ -40,7 +32,7 @@ Infos :
 + Compteur :
   * Consommation journalière
   * Consommation total
-  * Debit instantané
+  * Débit instantané
 
 + Téléinfo (certains indicateurs ne sont disponibles que pour certains type d'abonnements):
   * Index (base)

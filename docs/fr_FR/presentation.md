@@ -16,7 +16,7 @@ Données visibles sur le Dashboard :
 
 ![](../images/ecodevice_screenshot3.jpg)
 
-Fréquence de rafraichissement
+Fréquence de rafraîchissement
 -----------------------------
 
 Le plugin met à jour ces données de 2 façons :

@@ -7,7 +7,7 @@ accès : ![la](../images/acces_sous_indicateur.jpg)
 Par défaut c’est toutes les minutes. Il est possible de configurer
 manuellement du push sur l’ecodevice. Pour les débits, consommations
 instantanées et puissance apparente peuvent être collectées plus
-fréquement en fonction du démon.
+fréquemment en fonction du démon.
 
 Il faut cliquer sur l’icône à gauche du nom de la carte dans la liste de
 gauche.
@@ -23,8 +23,7 @@ C’est tout à fait possible via
 
 Pour le calcul du débit de fuel en une heure de fonctionnement, il faut
 connaître le marquage de votre gicleur de fuel. Pour cela, vous
-trouverez les informations dans [le doc
-suivant](http://fr.cd.danfoss.com/PCMPDF/DKBDPD060A204.pdf).
+trouverez les informations dans [le document suivant](http://fr.cd.danfoss.com/PCMPDF/DKBDPD060A204.pdf).
 
 La valeur donnée est en USgal/Heure avec la correspondance en Kg/H.
 
