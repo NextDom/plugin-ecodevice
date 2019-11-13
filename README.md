@@ -28,7 +28,7 @@ Lien vers le chat [ici](https://discord.gg/eC3G2x9)
 
 Infos :
 + Carte ecodevice :
-  * Status
+  * Statut
 + Compteur :
   * Consommation journalière
   * Consommation total

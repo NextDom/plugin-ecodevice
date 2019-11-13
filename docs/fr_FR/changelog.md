@@ -3,7 +3,7 @@ Changelog
 
 > **Warning**
 >
-> Detail complet des mises à jour sur [Historique
+> Détail complet des mises à jour sur [Historique
 > Commit](https://github.com/guenneguezt/plugin-ecodevice/commits/master)
 
 Liste des évolutions majeures de la version courante :
@@ -22,18 +22,18 @@ Anciennes évolutions :
 
 -   Correction pour firmware 1.04.82
 
--   Correction du triphase
+-   Correction du triphasé
 
 -   Correction du démon
 
--   Ajout de la génération automatique et intélligente des commandes de
+-   Ajout de la génération automatique et intelligente des commandes de
     téléinfo
 
 -   Changement unité Ampère en A
 
 -   Ajout de démon pour valeur variant rapidement
 
--   Commande par type de compteur (eau, gaz, electricité, fuel)
+-   Commande par type de compteur (eau, gaz, électricité, fuel)
 
 -   Ajout des max et min pour widget
 
@@ -50,7 +50,7 @@ Anciennes évolutions :
 
 -   Ajout de commande pour reboot
 
--   Detection des xml corrompu.
+-   Détection des xml corrompu.
 
 -   Mise à jour des entrées analogiques, même si la valeur ne change pas
     pour les graphiques.

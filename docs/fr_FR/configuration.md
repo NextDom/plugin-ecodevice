@@ -17,7 +17,7 @@ Puis définir :
 
 -   *''Activer '*'(à cocher, sinon l’équipement ne sera pas utilisable)
 
--   *''Visible '*'(optionel si vous ne désirez pas le rendre visible sur
+-   *''Visible '*'(optionnel si vous ne désirez pas le rendre visible sur
     le Dashboard)
 
 -   *''Adresse IP*''
@@ -30,20 +30,20 @@ Puis définir :
 
 ![](../images/ecodevice_screenshot1.jpg)
 
-Vous retrouverez l’ensemble des élements de la carte dans le menu à
-gauche en clickant sur l’icone de celle-ci.
+Vous retrouverez l’ensemble des éléments de la carte dans le menu à
+gauche en cliquant sur l’icône de celle-ci.
 
 Voici la page de configuration de compteur. Tant que le type de compteur
-n’est pas defini, les commandes ne sont pas crées.
+n’est pas défini, les commandes ne sont pas crées.
 
 ![](../images/ecodevice_screenshot4.jpg)
 
 Voici la page de configuration d’une entrée téléinformation. Tant que le
-type de contrat n’est pas defini, les commandes ne sont pas crées.
+type de contrat n’est pas défini, les commandes ne sont pas crées.
 
 ![](../images/ecodevice_screenshot5.jpg)
 
 Installation/Paramétrage
 ========================
 
-Ce plugin ne nécessite aucun pre-requis d’installation.
+Ce plugin ne nécessite aucun pré-requis d’installation.
