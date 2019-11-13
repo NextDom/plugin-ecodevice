@@ -19,10 +19,18 @@
 use PHPUnit\Framework\TestCase;
 
 require_once('../../core/php/core.inc.php');
-require_once('../../core/class/ecodevice.class.php');
+require_once('core/class/ecodevice.class.php');
 
 class EcodeviceClassTest extends TestCase
 {
+    public function additionProvider()
+    {
+        return [
+            'mono'  => ['mono'],
+            'tri' => ['tri']
+        ];
+    }
+
     public function atestInstanciation()
     {
         $instanceEcodevice = new ecodevice;

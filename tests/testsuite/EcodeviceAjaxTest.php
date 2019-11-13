@@ -19,7 +19,6 @@
 use PHPUnit\Framework\TestCase;
 
 require_once('../../core/php/core.inc.php');
-require_once('../../core/class/ecodevice.class.php');
 
 class EcodeviceAjaxTest extends TestCase
 {
@@ -49,14 +48,6 @@ class EcodeviceAjaxTest extends TestCase
         return ob_get_clean();
     }
 
-    public function additionProvider()
-    {
-        return [
-            'mono'  => ['mono'],
-            'tri' => ['tri']
-        ];
-    }
-
     public function testWithoutUserConnected()
     {
         JeedomVars::$isConnected = false;
@@ -73,7 +64,7 @@ class EcodeviceAjaxTest extends TestCase
         $this->assertEquals('401 - Accès non autorisé', $actions[1]['content']['msg']->getMessage());
     }
 
-    public function atestAnswerWithoutRequest()
+    public function testAnswerWithoutRequest()
     {
         JeedomVars::$isConnected = true;
         JeedomVars::$initAnswers['action'] = 'action';
@@ -92,7 +83,7 @@ class EcodeviceAjaxTest extends TestCase
         $this->assertEquals('Aucune méthode correspondante à : action', $actions[2]['content']['msg']->getMessage());
     }
 
-    public function atestAnswerWithconfigPush()
+    public function testAnswerWithconfigPush()
     {
         JeedomVars::$isConnected = true;
         JeedomVars::$initAnswers['action'] = 'configPush';
@@ -100,6 +91,8 @@ class EcodeviceAjaxTest extends TestCase
         $result = $this->getTestRender();
         $actions = MockedActions::get();
 
+        print_r($actions);
+        print_r($result);
         $this->assertEquals('', $result);
 
         $this->assertCount(3, $actions);
@@ -108,17 +101,5 @@ class EcodeviceAjaxTest extends TestCase
         $this->assertEquals('ajax_init', $actions[1]['action']);
         $this->assertEquals('ajax_error', $actions[2]['action']);
         $this->assertEquals('Aucune méthode correspondante à : action', $actions[2]['content']['msg']->getMessage());
-    }
-}
-
-class EcodeviceClassTest extends TestCase
-{
-    public function atestInstanciation()
-    {
-        $instanceEcodevice = new ecodevice;
-        $instanceEcodevice->setConfiguration('mock_date',"2018-03-07");
-        $instanceEcodevice->setConfiguration('mock_file',"veolia_sudest_data/veolia_html_3March.htm");
-        $instanceEcodevice->displayConfig();
-        $instanceEcodevice->getConso(2);
     }
 }
