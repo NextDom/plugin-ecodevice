@@ -21,6 +21,7 @@ cp -fr tests/phpunit.xml $MOCKED_ENV/plugins/$PLUGIN_NAME/phpunit.xml
 cp -fr tests/testsuite/* $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
 cp -fr vendor $MOCKED_ENV/plugins/$PLUGIN_NAME
 
+echo ls
 ls -lR
 
 cd $MOCKED_ENV/plugins/$PLUGIN_NAME
