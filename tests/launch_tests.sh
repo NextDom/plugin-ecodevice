@@ -22,7 +22,7 @@ PLUGIN_NAME=ecodevice
 #cp -fr vendor $MOCKED_ENV/plugins/$PLUGIN_NAME
 
 #cd $MOCKED_ENV/plugins/$PLUGIN_NAME
-cd test/testsuite
+cd tests/testsuite
 pwd
 ls -l
 ls -l ../..
