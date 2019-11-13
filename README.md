@@ -28,57 +28,59 @@ Lien vers le chat [ici](https://discord.gg/eC3G2x9)
 
 Infos :
 * Carte ecodevice :
-  + Statut
+  * Statut
+
 
 * Compteur :
-  + Consommation journalière
-  + Consommation total
-  + Débit instantané
+  * Consommation journalière
+  * Consommation total
+  * Débit instantané
+
 
 * Téléinfo (certains indicateurs ne sont disponibles que pour certains type d'abonnements):
-  + Index (base)
-  + Index (heures creuses)
-  + Index (heures pleines)
-  + Index (heures creuses jours bleus Tempo)
-  + Index (heures pleines jours bleus Tempo)
-  + Index (heures creuses jours blancs Tempo)
-  + Index (heures pleines jours blancs Tempo)
-  + Index (heures creuses jours rouges Tempo)
-  + Index (heures pleines jours rouges Tempo)
-  + Index (normal EJP)
-  + Index (pointe mobile EJP)
-  + Intensité instantanée
-  + Intensité instantanée Phase 1
-  + Intensité instantanée Phase 2
-  + Intensité instantanée Phase 3
-  + Puissance Apparente
-  + Option tarif
-  + Couleur demain
-  + Tarif en cours
-  + Évolution index (base)
-  + Évolution index (heures creuses)
-  + Évolution index (heures pleines)
-  + Évolution index (heures creuses jours bleus Tempo)
-  + Évolution index (heures pleines jours bleus Tempo)
-  + Évolution index (heures creuses jours blancs Tempo)
-  + Évolution index (heures pleines jours blancs Tempo)
-  + Évolution index (heures creuses jours rouges Tempo)
-  + Évolution index (heures pleines jours rouges Tempo)
-  + Évolution index (normal EJP)
-  + Évolution index (pointe mobile EJP)
-  + Intensité souscrite
-  + Intensité maximale
-  + Intensité maximale Phase 1
-  + Intensité maximale Phase 2
-  + Intensité maximale Phase 3
+  * Index (base)
+  * Index (heures creuses)
+  * Index (heures pleines)
+  * Index (heures creuses jours bleus Tempo)
+  * Index (heures pleines jours bleus Tempo)
+  * Index (heures creuses jours blancs Tempo)
+  * Index (heures pleines jours blancs Tempo)
+  * Index (heures creuses jours rouges Tempo)
+  * Index (heures pleines jours rouges Tempo)
+  * Index (normal EJP)
+  * Index (pointe mobile EJP)
+  * Intensité instantanée
+  * Intensité instantanée Phase 1
+  * Intensité instantanée Phase 2
+  * Intensité instantanée Phase 3
+  * Puissance Apparente
+  * Option tarif
+  * Couleur demain
+  * Tarif en cours
+  * Évolution index (base)
+  * Évolution index (heures creuses)
+  * Évolution index (heures pleines)
+  * Évolution index (heures creuses jours bleus Tempo)
+  * Évolution index (heures pleines jours bleus Tempo)
+  * Évolution index (heures creuses jours blancs Tempo)
+  * Évolution index (heures pleines jours blancs Tempo)
+  * Évolution index (heures creuses jours rouges Tempo)
+  * Évolution index (heures pleines jours rouges Tempo)
+  * Évolution index (normal EJP)
+  * Évolution index (pointe mobile EJP)
+  * Intensité souscrite
+  * Intensité maximale
+  * Intensité maximale Phase 1
+  * Intensité maximale Phase 2
+  * Intensité maximale Phase 3
 
 Actions :
 * Carte ecodevice :
-  + Reboot
+  * Reboot
 * Compteur :
-  + Aucune
+  * Aucune
 * Téléinfo :
-  + Aucune
+  * Aucune
 
 Scénarios possible (ceux que j'ai chez moi) :
 * Sortir des statistiques sur les consommations.
