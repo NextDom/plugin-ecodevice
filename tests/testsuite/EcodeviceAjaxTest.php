@@ -19,6 +19,7 @@
 use PHPUnit\Framework\TestCase;
 
 require_once('../../core/php/core.inc.php');
+require_once('../../core/class/ecodevice.class.php');
 
 class EcodeviceAjaxTest extends TestCase
 {
@@ -112,8 +113,6 @@ class EcodeviceAjaxTest extends TestCase
 
 class EcodeviceClassTest extends TestCase
 {
-    require_once '../../core/class/ecodevice.class.php' ;
-
     $instanceEcodevice = new ecodevice;
     $instanceEcodevice->setConfiguration('mock_date',"2018-03-07");
     $instanceEcodevice->setConfiguration('mock_file',"veolia_sudest_data/veolia_html_3March.htm");

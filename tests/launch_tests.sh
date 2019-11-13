@@ -7,7 +7,6 @@ fi
 echo Version de PHP
 php --version
 
-ls -ltr
 MOCKED_ENV=tests/mocked_Jeedom_env
 PLUGIN_NAME=eco-device
 
@@ -21,6 +20,8 @@ cp -fr plugin_info $MOCKED_ENV/plugins/$PLUGIN_NAME
 cp -fr tests/phpunit.xml $MOCKED_ENV/plugins/$PLUGIN_NAME/phpunit.xml
 cp -fr tests/testsuite/* $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
 cp -fr vendor $MOCKED_ENV/plugins/$PLUGIN_NAME
+
+ls -lR
 
 cd $MOCKED_ENV/plugins/$PLUGIN_NAME
 
