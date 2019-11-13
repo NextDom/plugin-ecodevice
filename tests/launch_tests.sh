@@ -24,4 +24,3 @@ PLUGIN_NAME=ecodevice
 #cd $MOCKED_ENV/plugins/$PLUGIN_NAME
 cd tests/testsuite
 $PHP_FOR_TESTS ../  ../vendor/phpunit/phpunit/phpunit --configuration ../tools/phpunit.xml
-ls -l
