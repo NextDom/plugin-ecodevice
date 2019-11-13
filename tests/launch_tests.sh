@@ -10,17 +10,20 @@ php --version
 MOCKED_ENV=tests/mocked_Jeedom_env
 PLUGIN_NAME=ecodevice
 
-mkdir -p $MOCKED_ENV/plugins
-rm -fr $MOCKED_ENV/plugins/*
-mkdir $MOCKED_ENV/plugins/$PLUGIN_NAME
-mkdir $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
-cp -fr core $MOCKED_ENV/plugins/$PLUGIN_NAME
-cp -fr desktop $MOCKED_ENV/plugins/$PLUGIN_NAME
-cp -fr plugin_info $MOCKED_ENV/plugins/$PLUGIN_NAME
-cp -fr tests/phpunit.xml $MOCKED_ENV/plugins/$PLUGIN_NAME/phpunit.xml
-cp -fr tests/testsuite/* $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
-cp -fr vendor $MOCKED_ENV/plugins/$PLUGIN_NAME
+#mkdir -p $MOCKED_ENV/plugins
+#rm -fr $MOCKED_ENV/plugins/*
+#mkdir $MOCKED_ENV/plugins/$PLUGIN_NAME
+#mkdir $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
+#cp -fr core $MOCKED_ENV/plugins/$PLUGIN_NAME
+#cp -fr desktop $MOCKED_ENV/plugins/$PLUGIN_NAME
+#cp -fr plugin_info $MOCKED_ENV/plugins/$PLUGIN_NAME
+#cp -fr tests/phpunit.xml $MOCKED_ENV/plugins/$PLUGIN_NAME/phpunit.xml
+#cp -fr tests/testsuite/* $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
+#cp -fr vendor $MOCKED_ENV/plugins/$PLUGIN_NAME
 
-cd $MOCKED_ENV/plugins/$PLUGIN_NAME
-
+#cd $MOCKED_ENV/plugins/$PLUGIN_NAME
+cd test/testsuite
+pwd
+ls -l
+ls -l ../..
 $PHP_FOR_TESTS ./vendor/phpunit/phpunit/phpunit --configuration phpunit.xml
