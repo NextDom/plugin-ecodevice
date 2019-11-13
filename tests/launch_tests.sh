@@ -17,8 +17,8 @@ mkdir $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
 cp -fr core $MOCKED_ENV/plugins/$PLUGIN_NAME
 cp -fr desktop $MOCKED_ENV/plugins/$PLUGIN_NAME
 cp -fr plugin_info $MOCKED_ENV/plugins/$PLUGIN_NAME
-cp -fr tests/testsuite/* $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
 cp -fr tests/phpunit.xml $MOCKED_ENV/plugins/$PLUGIN_NAME/phpunit.xml
+cp -fr tests/testsuite/* $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
 cp -fr vendor $MOCKED_ENV/plugins/$PLUGIN_NAME
 
 cd $MOCKED_ENV/plugins/$PLUGIN_NAME
