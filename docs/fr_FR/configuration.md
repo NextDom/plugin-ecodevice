@@ -12,20 +12,12 @@ Puis saisir le nom de l'équipement (ex. Ecodevice 1).
 Puis définir :
 
 -   *''Objet parent*''
-
 -   *''Catégorie '*'(optionnelle)
-
 -   *''Activer '*'(à cocher, sinon l’équipement ne sera pas utilisable)
-
--   *''Visible '*'(optionnel si vous ne désirez pas le rendre visible sur
-    le Dashboard)
-
+-   *''Visible '*'(optionnel si vous ne désirez pas le rendre visible sur le Dashboard)
 -   *''Adresse IP*''
-
 -   *''Port*''
-
 -   *''Compte*''
-
 -   *''Mot de passe*''
 
 ![](../images/ecodevice_screenshot1.jpg)
@@ -43,7 +35,7 @@ type de contrat n’est pas défini, les commandes ne sont pas crées.
 
 ![](../images/ecodevice_screenshot5.jpg)
 
-Installation/Paramétrage
+Pré-requis
 ========================
 
 Ce plugin ne nécessite aucun pré-requis d’installation.
