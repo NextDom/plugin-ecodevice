@@ -26,4 +26,4 @@ cd tests/testsuite
 pwd
 ls -l
 ls -l ../..
-$PHP_FOR_TESTS ./vendor/phpunit/phpunit/phpunit --configuration phpunit.xml
+$PHP_FOR_TESTS ../../vendor/phpunit/phpunit/phpunit --configuration phpunit.xml
