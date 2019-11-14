@@ -31,7 +31,7 @@ class eqLogic
     public function getConfiguration($_key) {
         return $this->_attributesMocked[$_key];
     }
-    public function byId($_id) {
+    public static function byId($_id) {
         if ( file_exists("data/eqLogic".$_id.".json") )
         {
             $string = file_get_contents("data/eqLogic".$_id.".json");
