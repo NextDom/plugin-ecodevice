@@ -10,13 +10,14 @@ php --version
 MOCKED_ENV=tests/mocked_Jeedom_env
 PLUGIN_NAME=ecodevice
 
+rm -fr $MOCKED_ENV/plugins
 mkdir -p $MOCKED_ENV/plugins
-rm -fr $MOCKED_ENV/plugins/*
 mkdir $MOCKED_ENV/plugins/$PLUGIN_NAME
 mkdir $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
 cp -fr core $MOCKED_ENV/plugins/$PLUGIN_NAME
 cp -fr desktop $MOCKED_ENV/plugins/$PLUGIN_NAME
 cp -fr plugin_info $MOCKED_ENV/plugins/$PLUGIN_NAME
+cp -fr tests/data $MOCKED_ENV/plugins/$PLUGIN_NAME/
 cp -fr tests/testsuite/* $MOCKED_ENV/plugins/$PLUGIN_NAME/tests
 cp -fr tests/phpunit.xml $MOCKED_ENV/plugins/$PLUGIN_NAME/phpunit.xml
 cp -fr vendor $MOCKED_ENV/plugins/$PLUGIN_NAME

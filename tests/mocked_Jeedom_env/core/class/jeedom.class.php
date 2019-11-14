@@ -36,4 +36,25 @@ class jeedom
     {
         return self::$isCapableAnswer;
     }
+
+    public static function getApiKey($_plugin = 'core') {
+		if ($_plugin == 'apipro') {
+			if (config::byKey('apipro') == '') {
+				config::save('apipro', config::genKey());
+			}
+			return config::byKey('apipro');
+		}
+
+		if ($_plugin == 'apimarket') {
+			if (config::byKey('apimarket') == '') {
+				config::save('apimarket', config::genKey());
+			}
+			return config::byKey('apimarket');
+		}
+
+		if (config::byKey('api', $_plugin) == '') {
+			config::save('api', config::genKey(), $_plugin);
+		}
+		return config::byKey('api', $_plugin);
+	}
 }

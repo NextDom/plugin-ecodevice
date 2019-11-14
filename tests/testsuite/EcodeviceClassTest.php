@@ -23,6 +23,11 @@ require_once('core/class/ecodevice.class.php');
 
 class EcodeviceClassTest extends TestCase
 {
+    protected function setUp()
+    {
+        MockedActions::clear();
+    }
+
     public function additionProvider()
     {
         return [
@@ -31,12 +36,15 @@ class EcodeviceClassTest extends TestCase
         ];
     }
 
-    public function atestInstanciation()
+    public function testInstanciation()
     {
         $instanceEcodevice = new ecodevice;
-        $instanceEcodevice->setConfiguration('mock_date',"2018-03-07");
-        $instanceEcodevice->setConfiguration('mock_file',"veolia_sudest_data/veolia_html_3March.htm");
-        $instanceEcodevice->displayConfig();
-        $instanceEcodevice->getConso(2);
+        $instanceEcodevice->setConfiguration('type', 'carte');
+        $instanceEcodevice->setConfiguration('username', 'username');
+        $instanceEcodevice->setConfiguration('password', 'password');
+        $instanceEcodevice->setConfiguration('ip', '127.0.0.1');
+        $instanceEcodevice->setConfiguration('port', '80');
+        $result = $instanceEcodevice->getUrl();
+        $this->assertRegExp('!http://[a-zA-Z0-9\.:@]*/!', $result);
     }
 }

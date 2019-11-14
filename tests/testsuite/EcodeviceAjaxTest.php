@@ -72,34 +72,35 @@ class EcodeviceAjaxTest extends TestCase
         $result = $this->getTestRender();
         $actions = MockedActions::get();
 
-        print_r($actions);
-        print_r($result);
         $this->assertEquals('', $result);
-        $this->assertCount(3, $actions);
+        $this->assertCount(2, $actions);
         $this->assertEquals('include_file', $actions[0]['action']);
         $this->assertEquals('authentification', $actions[0]['content']['name']);
-        $this->assertEquals('ajax_init', $actions[1]['action']);
-        $this->assertEquals('ajax_error', $actions[2]['action']);
-        $this->assertEquals('Aucune méthode correspondante à : action', $actions[2]['content']['msg']->getMessage());
+        $this->assertEquals('ajax_error', $actions[1]['action']);
+        $this->assertEquals('Aucune methode correspondante à : action', $actions[1]['content']['msg']->getMessage());
     }
 
     public function testAnswerWithconfigPush()
     {
         JeedomVars::$isConnected = true;
         JeedomVars::$initAnswers['action'] = 'configPush';
+        JeedomVars::$initAnswers['id'] = '1';
 
         $result = $this->getTestRender();
         $actions = MockedActions::get();
-
-        print_r($actions);
-        print_r($result);
+#        print($actions[1]['content']['msg']->getMessage());
+# print_r($actions);
         $this->assertEquals('', $result);
 
         $this->assertCount(3, $actions);
         $this->assertEquals('include_file', $actions[0]['action']);
         $this->assertEquals('authentification', $actions[0]['content']['name']);
-        $this->assertEquals('ajax_init', $actions[1]['action']);
+        $this->assertEquals('save', $actions[1]['action']);
+        $this->assertEquals('api', $actions[1]['content']['key']);
+        $this->assertEquals('thisisanewkey', $actions[1]['content']['data']);
+        $this->assertEquals('ecodevice', $actions[1]['content']['plugin']);
+        $this->assertEquals('save', $actions[1]['action']);
         $this->assertEquals('ajax_error', $actions[2]['action']);
-        $this->assertEquals('Aucune méthode correspondante à : action', $actions[2]['content']['msg']->getMessage());
+        $this->assertEquals("Configurer l'URL suivante pour un rafraichissement plus rapide dans l'ecodevice : page index=>notification :<br>http://192.168.1.1/jeedom/core/api/jeeApi.php?api=&type=ecodevice&id=&message=data_change<br>Attention surcharge possible importante.", $actions[2]['content']['msg']->getMessage());
     }
 }

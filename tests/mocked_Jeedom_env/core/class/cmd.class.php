@@ -16,7 +16,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+ require_once('../../mocked_core.php');
+
 /* * ***************************Includes********************************* */
-require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-require_once dirname(__FILE__) . '/ecodeviceCmd.class.php';
-require_once dirname(__FILE__) . '/ecodevice_process.class.php';
+/**
+ * Mock de la class cmd
+ */
+class cmd
+{
+
+}

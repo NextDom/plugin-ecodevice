@@ -29,4 +29,6 @@ require_once(dirname(__FILE__) . '/../class/scenario.class.php');
 require_once(dirname(__FILE__) . '/../class/system.class.php');
 require_once(dirname(__FILE__) . '/../class/update.class.php');
 require_once(dirname(__FILE__) . '/../class/DB.class.php');
+require_once(dirname(__FILE__) . '/../class/cmd.class.php');
+require_once(dirname(__FILE__) . '/../class/eqLogic.class.php');
 require_once(dirname(__FILE__) . '/../../mocked_core.php');

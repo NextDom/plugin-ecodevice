@@ -137,10 +137,24 @@ class config
     {
         $result = false;
         if ($plugin == 'core') {
-            $result = config::$byKeyData[$key];
+            if ( file_exists(dirname(__FILE__) . "/../../data/config.json") )
+            {
+                $string = file_get_contents(dirname(__FILE__) . "/../../data/config.json");
+                $json_a = json_decode($string, true);
+                if (isset($json_a[$key]) )
+                {
+                    $result = $json_a[$key];
+                }
+            }
         } else {
-            if (isset(config::$byKeyPluginData[$plugin])) {
-                $result = config::$byKeyPluginData[$plugin][$key];
+            if ( file_exists(dirname(__FILE__) . "/../../data/config_".$plugin.".json") )
+            {
+                $string = file_get_contents(dirname(__FILE__) . "/../../data/config_".$plugin.".json");
+                $json_a = json_decode($string, true);
+                if (isset($json_a[$key]) )
+                {
+                    $result = $json_a[$key];
+                }
             }
         }
         return $result;
@@ -162,4 +176,10 @@ class config
     {
         MockedActions::add('remove', array('key' => $key, 'plugin' => $plugin));
     }
+
+    public static function genKey($_car = 32) {
+		$key = 'thisisanewkey';
+
+		return $key;
+	}
 }
