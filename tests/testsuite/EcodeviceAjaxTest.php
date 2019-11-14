@@ -89,7 +89,7 @@ class EcodeviceAjaxTest extends TestCase
         $result = $this->getTestRender();
         $actions = MockedActions::get();
 #        print($actions[1]['content']['msg']->getMessage());
-# print_r($actions);
+print_r($actions);
         $this->assertEquals('', $result);
 
         $this->assertCount(3, $actions);
